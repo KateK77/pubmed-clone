@@ -1,0 +1,16 @@
+{
+  "round": 1,
+  "date": "2026-11-13",
+  "timezone": "America/Chicago",
+  "model": "GPT-6 Codex",
+  "commit_sha": "a856dfa4bfb88a78bd049e160d5f5cd091a358ba",
+  "git_tag": "v0.1.0-r1",
+  "validation": {
+    "pytest": 28,
+    "vitest": 2,
+    "playwright": 4,
+    "live_smoke": "passed",
+    "live_filtered_http": "passed",
+    "database": "SQLite"
+  }
+}
