@@ -6,6 +6,22 @@ GitHub stores the source, runs the automated checks and can link visitors to the
 
 ## Prepare the service
 
+### Prepared Render + Neon showcase
+
+The owner requested that the existing GitHub repository and its full history become public. The repository is now public. Hosting is prepared but has not been provisioned: Render and Neon account authorization is still required.
+
+`render.yaml` creates one **Free** Docker web service and obtains its own hostname from `RENDER_EXTERNAL_HOSTNAME`. It generates a Django secret, checks `/api/health/`, and deploys linked-repository changes after CI passes. No paid service or temporary Render database is declared.
+
+Create a Neon project on its Free plan, then provide the PostgreSQL connection string as Render's secret `DATABASE_URL`. Also set an operator contact in `NCBI_EMAIL`. The startup command runs migrations against that database before starting one Gunicorn worker on the assigned `PORT`. It refuses SQLite so a host restart cannot silently erase accounts or collections. There is no demo-account seed in the public startup path. Local accounts and private research data are not uploaded.
+
+The showcase configuration explicitly uses `EMAIL_VERIFICATION_REQUIRED=0`, matching the current locally accepted experience. Visitors can register and have private accounts, but their email addresses are not marked verified. Render's Free web services block common SMTP ports (25, 465 and 587), so ordinary SMTP verification cannot be promised on that plan. Enabling real mail requires a supported delivery path and provider configuration first.
+
+Render's Free web service may sleep when idle and has usage limits. Neon Free also has storage/compute quotas. Render's separate Free Postgres expires after 30 days, so this blueprint uses external Neon storage instead. These limits mean a free showcase has availability constraints; they do not create an unlimited production service. See [Render Free](https://render.com/docs/free) and [Neon plans](https://neon.com/docs/introduction/plans).
+
+Once the host returns a successful public deployment URL, test anonymous search, registration and account isolation. Then replace the README's pending status with an **Open MedResearch** link and set GitHub's About → Website to that exact URL. Do not invent a hostname before the host assigns it.
+
+### Other hosts
+
 1. Choose a host supporting Docker, HTTPS and a persistent PostgreSQL connection. Create a database and retain its connection credentials in the host's secret settings. Pricing and free-tier limits depend on the provider.
 2. Connect the repository or build `docker build -t medresearch:3.0 .` from its root. The image listens on port `8000` and runs one Gunicorn worker with four threads. Configure the host's internal service port accordingly.
 3. Set the environment variables below. Use your actual hostname and credentials. These placeholders are not working account credentials.
@@ -52,7 +68,7 @@ Automated tests use a temporary local mailbox. They verify the code workflow but
 
 ## Link from GitHub
 
-After the deployment has a working HTTPS URL, set the repository's **About → Website** field to that URL and add an **Open MedResearch** link near the top of the README. Visitors can then open the website and create their own accounts without installing Python or Node.js. A private repository is visible only to collaborators; the deployed website's access is a separate hosting setting.
+After the deployment has a working HTTPS URL, set the repository's **About → Website** field to that URL and add an **Open MedResearch** link near the top of the README. Visitors can then open the website and create their own accounts without installing Python or Node.js. This repository is now public; the deployed website's access is a separate hosting setting.
 
 Do not advertise a localhost address, a GitHub source URL or an unconfigured Pages URL as the public application. This release intentionally contains no invented live URL.
 

@@ -13,6 +13,7 @@ os.environ.update({
     "DJANGO_ALLOWED_HOSTS": "localhost,127.0.0.1",
     "DJANGO_SQLITE_PATH": str(state / "browser.sqlite3"),
     "POSTGRES_DB": "",
+    "DATABASE_URL": "",
     "EMAIL_VERIFICATION_REQUIRED": "1",
     "EMAIL_BACKEND": "django.core.mail.backends.filebased.EmailBackend",
     "EMAIL_FILE_PATH": str(state / "mail"),

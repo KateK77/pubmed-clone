@@ -10,6 +10,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY") or (
     "local-only-medresearch-development-key" if DEBUG else ""
 )
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+RENDER_HOST = os.getenv("RENDER_EXTERNAL_HOSTNAME", "").strip()
+if RENDER_HOST:
+    ALLOWED_HOSTS.append(RENDER_HOST)
 INSTALLED_APPS = [
     "django.contrib.auth", "django.contrib.contenttypes", "django.contrib.sessions",
     "rest_framework", "drf_spectacular", "literature",
@@ -44,6 +47,9 @@ if os.getenv("POSTGRES_DB"):
         "CONN_MAX_AGE": 60,
         "OPTIONS": {"sslmode": os.getenv("POSTGRES_SSLMODE", "prefer")},
     }
+if os.getenv("DATABASE_URL"):
+    from .hosting import postgres_url
+    DATABASES["default"] = postgres_url(os.environ["DATABASE_URL"])
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 if os.getenv("DJANGO_CACHE_TABLE"):
     CACHES["default"] = {
@@ -56,7 +62,10 @@ CSRF_COOKIE_NAME = "medresearch_csrftoken"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_TRUSTED_ORIGINS = list(filter(None, os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")))
+if RENDER_HOST:
+    CSRF_TRUSTED_ORIGINS.append("https://" + RENDER_HOST)
 SECURE_SSL_REDIRECT = not DEBUG
+SECURE_REDIRECT_EXEMPT = [r"^api/health/$"]
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https") if os.getenv("DJANGO_TRUST_PROXY") == "1" else None
 AUTH_PASSWORD_VALIDATORS = [{
     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",

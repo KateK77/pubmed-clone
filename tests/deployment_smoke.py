@@ -16,6 +16,7 @@ def main():
             "DJANGO_SETTINGS_MODULE": "medresearch.settings", "DJANGO_DEBUG": "0",
             "DJANGO_SECRET_KEY": secrets.token_urlsafe(48), "DJANGO_ALLOWED_HOSTS": "research.example.org",
             "DJANGO_TRUST_PROXY": "0", "DJANGO_HSTS_SECONDS": "3600", "POSTGRES_DB": "",
+            "DATABASE_URL": "",
             "DJANGO_SQLITE_PATH": str(Path(temporary) / "production-smoke.sqlite3"),
         })
         import django

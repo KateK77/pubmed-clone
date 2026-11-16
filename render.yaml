@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: medresearch
+    runtime: docker
+    plan: free
+    region: ohio
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    dockerCommand: python backend/hosted_start.py
+    healthCheckPath: /api/health/
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "0"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_TRUST_PROXY
+        value: "1"
+      - key: DJANGO_HSTS_SECONDS
+        value: "3600"
+      - key: DATABASE_URL
+        sync: false
+      - key: NCBI_EMAIL
+        sync: false
+      # Public showcase permits normal accounts without claiming email ownership.
+      # Real verification requires a configured mail provider.
+      - key: EMAIL_VERIFICATION_REQUIRED
+        value: "0"

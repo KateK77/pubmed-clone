@@ -1,10 +1,23 @@
 # MedResearch 3.0
 
+[![Tests](https://github.com/KateK77/pubmed-clone/actions/workflows/ci.yml/badge.svg)](https://github.com/KateK77/pubmed-clone/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/badge/version-3.0.0-137566)](https://github.com/KateK77/pubmed-clone/tree/v3.0.0-r3)
+
+**Search biomedical literature. Keep your research organized. Export citations.**
+
 MedResearch searches live biomedical literature from PubMed and gives researchers a personal library for bookmarks, collections, saved searches, and citation exports. It is an independent educational prototype with no affiliation with PubMed, NCBI, NIH, or the National Library of Medicine.
+
+![MedResearch search interface](docs/images/search.png)
+
+Built with React, TypeScript and Django. Research records come from the official NCBI E-utilities API. Visitors can search without an account; personal accounts add private bookmarks, collections and saved searches.
 
 Version 3.0 combines the [original specification and all revised requirements](experiments/round-03/description.md) with the owner's [manual testing feedback](experiments/round-03/manual-feedback.json). It simplifies registration, explains the password rule, adds password confirmation and removes unnecessary name fields. It preserves the session fixes, verified email workflow, author suffixes and deployment support from Version 2.0.
 
 **Deployment status:** this repository contains the software. A public website URL has not been provisioned. Publishing the code to GitHub does not start the Django server. See [deployment instructions](docs/deployment.md) to host the application and add its public URL to the GitHub repository's About section.
+
+The repository and its version history are public. A free-tier Render + Neon deployment configuration is prepared in [`render.yaml`](render.yaml). **Hosting authorization is still pending; there is no live demo URL yet.** This button creates your own deployment and requires provider accounts:
+
+[![Deploy your own instance on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/KateK77/pubmed-clone)
 
 ## Features
 
@@ -89,6 +102,7 @@ Back up the database, install the updated dependencies, run `python backend/mana
 | `NCBI_CACHE_SECONDS` | E-utilities cache TTL. Default 900. |
 | `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_HOST`, `POSTGRES_PORT` | PostgreSQL connection settings. Setting the database name enables PostgreSQL. |
 | `POSTGRES_SSLMODE` | PostgreSQL TLS mode. Use the value required by the database provider. |
+| `DATABASE_URL` | Hosted PostgreSQL URL, such as Neon's connection string. Overrides `POSTGRES_*`. TLS defaults to `require`. Keep this in hosting secrets. |
 | `EMAIL_VERIFICATION_REQUIRED` | Default `1`. The development example sets `0`. |
 | `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `DEFAULT_FROM_EMAIL` | SMTP server, authentication and verified sender settings. |
 | `EMAIL_USE_TLS`, `EMAIL_USE_SSL` | Enable the transport required by the email provider. Do not enable both. |

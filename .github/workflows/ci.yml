@@ -58,3 +58,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t medresearch:ci .
+      - run: python3 tests/container_smoke.py
