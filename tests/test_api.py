@@ -8,19 +8,20 @@ from literature.citations import FORMATS, citation
 pytestmark = pytest.mark.django_db
 
 
-def test_session_csrf_registration_and_login():
+def test_session_csrf_registration_and_login(settings):
+    settings.EMAIL_VERIFICATION_REQUIRED = False
     client = APIClient(enforce_csrf_checks=True)
     body = {"username": "researcher", "password": "UnusualDemo!987"}
     assert client.post("/api/auth/register/", body, format="json").status_code == 403
     client.get("/api/session/")
-    token = client.cookies["csrftoken"].value
+    token = client.cookies["medresearch_csrftoken"].value
     response = client.post("/api/auth/register/", body, format="json", HTTP_X_CSRFTOKEN=token)
     assert response.status_code == 200
     assert get_user_model().objects.get(username="researcher").check_password(body["password"])
-    token = client.cookies["csrftoken"].value
+    token = client.cookies["medresearch_csrftoken"].value
     assert client.post("/api/auth/logout/", HTTP_X_CSRFTOKEN=token).status_code == 200
     assert client.get("/api/session/").json()["user"] is None
-    token = client.cookies["csrftoken"].value
+    token = client.cookies["medresearch_csrftoken"].value
     assert client.post("/api/auth/login/", body, format="json", HTTP_X_CSRFTOKEN=token).status_code == 200
 
 

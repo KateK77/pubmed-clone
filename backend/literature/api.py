@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError as DjangoValidationError
@@ -6,20 +7,22 @@ from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.cache import never_cache
+from django.utils import timezone
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, extend_schema, extend_schema_view
 from rest_framework import serializers
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import api_view, permission_classes, throttle_classes
-from rest_framework.exceptions import ValidationError
+from rest_framework.exceptions import NotAuthenticated, ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import SimpleRateThrottle
 from rest_framework.views import APIView
 
-from . import ncbi
+from . import email_verification, ncbi
 from .citations import FORMATS, citation
-from .models import Bookmark, Collection, CollectionPublication, Publication, SavedSearch, SearchHistory
+from .models import AccountEmail, Bookmark, Collection, CollectionPublication, Publication, SavedSearch, SearchHistory
 from .query import FILTERS, PMID, build_query, search_options
 
 User = get_user_model()
@@ -36,14 +39,21 @@ class AccountInput(serializers.Serializer):
     username = serializers.RegexField(r"^[\w.@+-]+\Z", max_length=150)
     password = serializers.CharField(max_length=128, trim_whitespace=False)
     email = serializers.EmailField(required=False, allow_blank=True)
+    code = serializers.RegexField(r"^[0-9]{6}$", required=False)
+
+
+class EmailCodeInput(serializers.Serializer):
+    email = serializers.EmailField()
+    purpose = serializers.ChoiceField(choices=["register", "profile"])
 
 
 class ProfileInput(serializers.Serializer):
     email = serializers.EmailField(required=False, allow_blank=True)
     first_name = serializers.CharField(required=False, max_length=150, allow_blank=True)
     last_name = serializers.CharField(required=False, max_length=150, allow_blank=True)
-    password = serializers.CharField(required=False, max_length=128, trim_whitespace=False)
-    current_password = serializers.CharField(required=False, max_length=128, trim_whitespace=False)
+    password = serializers.CharField(required=False, max_length=128, trim_whitespace=False, allow_blank=True)
+    current_password = serializers.CharField(required=False, max_length=128, trim_whitespace=False, allow_blank=True)
+    code = serializers.RegexField(r"^[0-9]{6}$", required=False)
 
 
 class RowsInput(serializers.Serializer):
@@ -111,7 +121,13 @@ class SearchInput(serializers.Serializer):
 
 
 def person(user):
-    return {field: getattr(user, field) for field in ("id", "username", "email", "first_name", "last_name")} if user.is_authenticated else None
+    if not user.is_authenticated:
+        return None
+    data = {field: getattr(user, field) for field in ("id", "username", "email", "first_name", "last_name")}
+    data["email_verified"] = AccountEmail.objects.filter(
+        user=user, address=user.email.lower(), verified_at__isnull=False,
+    ).exists()
+    return data
 
 
 def password_check(password, user):
@@ -122,10 +138,27 @@ def password_check(password, user):
 
 
 @extend_schema(responses={200: OpenApiTypes.OBJECT})
+@never_cache
 @ensure_csrf_cookie
 @api_view(["GET"])
 def session(request):
-    return Response({"user": person(request.user)})
+    return Response({"user": person(request.user), "email_verification_required": settings.EMAIL_VERIFICATION_REQUIRED,
+                     "email_delivery_available": email_verification.available()})
+
+
+@extend_schema(request=EmailCodeInput, responses={200: OpenApiTypes.OBJECT})
+@api_view(["POST"])
+@throttle_classes([AccountThrottle])
+def email_code(request):
+    SessionAuthentication().enforce_csrf(request)
+    data = clean(EmailCodeInput, request.data)
+    user = None
+    if data["purpose"] == "profile":
+        if not request.user.is_authenticated:
+            raise NotAuthenticated()
+        user = request.user
+    email_verification.send_code(data["email"], data["purpose"], user)
+    return Response({"detail": "A verification code has been sent. It expires in 10 minutes.", "resend_after": 60})
 
 
 @extend_schema(request=AccountInput, responses={200: OpenApiTypes.OBJECT})
@@ -138,13 +171,27 @@ def account(request, action):
         return Response({"user": None})
     data = clean(AccountInput, request.data)
     if action == "register":
-        candidate = User(username=data["username"], email=data.get("email", ""))
+        email = data.get("email", "").strip().lower()
+        if settings.EMAIL_VERIFICATION_REQUIRED and not email:
+            raise ValidationError({"email": "Enter your email address to verify your account."})
+        if email:
+            email_verification.check_address(email)
+        if User.objects.filter(username=data["username"]).exists():
+            raise ValidationError({"username": "This username is already registered."})
+        candidate = User(username=data["username"], email=email)
         password_check(data["password"], candidate)
+        challenge = None
+        if settings.EMAIL_VERIFICATION_REQUIRED:
+            challenge = email_verification.verify_code(email, data.get("code", ""), "register")
         try:
             with transaction.atomic():
-                user = User.objects.create_user(**data)
+                if challenge:
+                    email_verification.consume_code(challenge)
+                user = User.objects.create_user(username=data["username"], password=data["password"], email=email)
+                if email:
+                    AccountEmail.objects.create(user=user, address=email, verified_at=timezone.now() if challenge else None)
         except IntegrityError as exc:
-            raise ValidationError("This username is already registered.") from exc
+            raise ValidationError("This username or email is already registered.") from exc
     else:
         user = authenticate(request, username=data["username"], password=data["password"])
         if user is None:
@@ -161,16 +208,42 @@ def profile(request):
     data = clean(ProfileInput, request.data)
     current = data.pop("current_password", "")
     password = data.pop("password", "")
+    code = data.pop("code", "")
+    challenge = None
+    email_changed = "email" in data and data["email"].strip().lower() != user.email.lower()
+    if "email" in data:
+        data["email"] = data["email"].strip().lower()
+    if email_changed or code:
+        address = data.get("email", user.email.lower())
+        if not address and settings.EMAIL_VERIFICATION_REQUIRED:
+            raise ValidationError({"email": "Enter and verify a replacement email address."})
+        if address:
+            email_verification.check_address(address, user)
+            if settings.EMAIL_VERIFICATION_REQUIRED or code:
+                challenge = email_verification.verify_code(address, code, "profile", user)
     fields = list(data)
     for key, value in data.items():
         setattr(user, key, value)
     if password:
         if not user.check_password(current):
-            raise ValidationError("The current password is incorrect.")
+            raise ValidationError({"current_password": "The current password is incorrect."})
         password_check(password, user)
         user.set_password(password)
         fields.append("password")
-    user.save(update_fields=fields)
+    try:
+        with transaction.atomic():
+            if challenge:
+                email_verification.consume_code(challenge)
+            user.save(update_fields=fields)
+            if email_changed or challenge:
+                if user.email:
+                    AccountEmail.objects.update_or_create(user=user, defaults={
+                        "address": user.email, "verified_at": timezone.now() if challenge else None,
+                    })
+                else:
+                    AccountEmail.objects.filter(user=user).delete()
+    except IntegrityError as exc:
+        raise ValidationError({"email": "This email is already associated with an account."}) from exc
     if password:
         update_session_auth_hash(request, user)
     return Response({"user": person(user)})
@@ -224,6 +297,7 @@ def relationships(request, pmid, kind):
 def stored_article(pmid):
     article = Publication.objects.filter(pk=valid_pmid(pmid)).first()
     if article:
+        saved_metadata([article])
         return article
     data = ncbi.detail(pmid)
     article, _ = Publication.objects.get_or_create(
@@ -234,6 +308,29 @@ def stored_article(pmid):
     return article
 
 
+def saved_metadata(articles):
+    """Upgrade Round 1 snapshots from PubMed before displaying or exporting them."""
+    articles = list(articles)
+    outdated = [item for item in articles if item.metadata.get("metadata_version", 0) < 2]
+    for start in range(0, len(outdated), 50):
+        batch = outdated[start:start + 50]
+        records = {record["pmid"]: record for record in ncbi.fetch([item.pmid for item in batch])}
+        if len(records) != len(batch):
+            raise ncbi.UpstreamError("Some saved article metadata could not be refreshed. Try again shortly.")
+        with transaction.atomic():
+            for item in batch:
+                record = records[item.pmid]
+                item.metadata = record
+                item.title = record["title"]
+                item.journal = record["journal"]
+                item.doi = record["doi"]
+                item.pmcid = record["pmcid"]
+                item.publication_date = record["date"]
+                item.abstract = "\n".join(section["text"] for section in record["abstract"])
+                item.save()
+    return [item.metadata for item in articles]
+
+
 def article_list(queryset, params):
     search_term = params.get("q", "").strip()
     if search_term:
@@ -242,7 +339,7 @@ def article_list(queryset, params):
     order = {"title": "title", "date": "-publication_date"}
     if sort in order:
         queryset = queryset.order_by(order[sort], "pmid")
-    return [item.metadata for item in queryset]
+    return saved_metadata(queryset)
 
 
 @extend_schema_view(get=extend_schema(responses={200: OpenApiTypes.OBJECT}),
@@ -373,7 +470,7 @@ def export(request):
         raise ValidationError("Choose articles, a collection, or bookmarks.")
     if data.get("ids"):
         ids = list(dict.fromkeys(valid_pmid(pmid) for pmid in data["ids"]))
-        records = {item.pmid: item.metadata for item in Publication.objects.filter(pk__in=ids)}
+        records = {item["pmid"]: item for item in saved_metadata(Publication.objects.filter(pk__in=ids))}
         missing = [pmid for pmid in ids if pmid not in records]
         for start in range(0, len(missing), 50):
             records.update((item["pmid"], item) for item in ncbi.fetch(missing[start:start + 50]))
@@ -388,7 +485,7 @@ def export(request):
             articles = get_object_or_404(Collection, user=request.user, pk=data["collection"]).publications.all()
         else:
             articles = Publication.objects.filter(bookmark__user=request.user)
-        articles = [item.metadata for item in articles]
+        articles = saved_metadata(articles)
     style = data["format"]
     response = HttpResponse("\n\n".join(citation(item, style) for item in articles) + "\n", content_type="text/plain; charset=utf-8")
     response["Content-Disposition"] = f'attachment; filename="medresearch.{FORMATS[style]}"'

@@ -94,9 +94,11 @@ def normalize(record):
         family = author.findtext("LastName", "")
         given = author.findtext("ForeName") or author.findtext("Initials", "")
         collective = author.findtext("CollectiveName", "")
-        name = collective or " ".join(filter(None, (given, family)))
+        suffix = author.findtext("Suffix", "")
+        name = collective or " ".join(filter(None, (given, family, suffix)))
         if name:
             authors.append({"name": name, "family": family, "given": given,
+                            "suffix": suffix,
                             "initials": author.findtext("Initials", ""),
                             "affiliations": [content(item) for item in author.findall("AffiliationInfo/Affiliation")]})
     issue = article.find("Journal/JournalIssue")
@@ -121,6 +123,7 @@ def normalize(record):
         for item in record.findall(".//Reference")
     ]
     return {
+        "metadata_version": 2,
         "pmid": pmid, "pmcid": ids.get("pmc", ""), "doi": ids.get("doi") or article.findtext("ELocationID[@EIdType='doi']", ""),
         "title": title, "authors": authors, "abstract": abstract,
         "journal": article.findtext("Journal/Title") or content(article.find("Book/BookTitle")),

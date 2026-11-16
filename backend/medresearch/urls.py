@@ -2,11 +2,13 @@ from django.urls import path, re_path
 from drf_spectacular.views import SpectacularAPIView
 
 from literature import api
+from .frontend import index
 
 urlpatterns = [
     path("api/health/", api.health),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/session/", api.session),
+    path("api/auth/email-code/", api.email_code),
     re_path(r"^api/auth/(?P<action>register|login|logout)/$", api.account),
     path("api/profile/", api.profile),
     path("api/search/", api.search),
@@ -25,4 +27,5 @@ urlpatterns = [
     path("api/saved-searches/", api.saved_searches),
     path("api/saved-searches/<int:pk>/", api.saved_search_item),
     path("api/citations/", api.export),
+    re_path(r"^(?!api(?:/|$)|assets(?:/|$)).*$", index),
 ]

@@ -1,0 +1,133 @@
+[
+  {
+    "id": "MANUAL-001",
+    "date": "2026-11-15",
+    "area": "Profile and authentication",
+    "source": "User screenshot and read-only source/log inspection",
+    "observed": "Profile displays username and editable fields alongside Authentication credentials were not provided.",
+    "expected": "An expired or missing session should prompt sign-in and explain how to recover, while preserving unsaved input where practical.",
+    "evidence": [
+      "Screenshot provided by user",
+      "Backend log records PATCH /api/profile/ returning 403 and subsequent GET /api/session/ returning a 13-byte response.",
+      "Earlier profile PATCH requests returned 400. Response details were not recorded in the log.",
+      "Frontend API error handler throws the error without refreshing the cached session."
+    ],
+    "diagnosis": "The profile request was treated as unauthenticated while the UI retained cached user data. The cause of the missing or invalid session is unconfirmed.",
+    "next_check": "Continue with public PMID search for 31452104 and check the count and title.",
+    "status": "Repeated manual failure recorded for version 2.0; root cause pending.",
+    "confirmed_trigger": "User confirms the authentication error appeared after clicking Save profile.",
+    "retest": {
+      "observed": "Follow-up screenshot shows First name set to test and the same Authentication credentials were not provided error above the profile form.",
+      "outcome": "Profile saving remains unsuccessful in the manual retest.",
+      "uncertainty": "The screenshot alone does not establish whether a fresh sign-in succeeded before saving."
+    }
+  },
+  {
+    "id": "MANUAL-002",
+    "area": "Demo account login and profile",
+    "observed": "After demo login, the screenshot shows Profile for medresearch-demo without an error banner. First name and Last name are empty. Email contains medresearch-demo.",
+    "outcome": "Login reaches the profile screen. Session persistence and profile saving remain unverified.",
+    "possible_cause": "Browser autofill may explain the username in the email field; this is unconfirmed.",
+    "next_check": "Clear the invalid email value, enter Test as First name, leave password fields untouched, and save.",
+    "status": "Profile save produced conflicting messages; see MANUAL-004. Persistence check pending."
+  },
+  {
+    "id": "MANUAL-003",
+    "area": "Public website access and independent verified accounts",
+    "user_feedback": "并且我最后是想让其他人都能在我的Github上点开这个网站，都能自己注册，邮箱，发验证码什么的，有自己的账号。你这里有问题，记录一下",
+    "requirements": [
+      "Provide a publicly reachable deployed website with a working entry link on the user GitHub repository or profile.",
+      "Visitors can register their own accounts using an email address.",
+      "Send real verification codes to the supplied email and validate them during registration.",
+      "Each account has its own persistent profile, bookmarks, collections, saved searches, and history with user isolation."
+    ],
+    "current_gap": "The delivered application runs locally. Public deployment and email verification code delivery were not implemented.",
+    "acceptance": [
+      "A visitor on another computer can open the GitHub website link and use the deployed application.",
+      "A new visitor can receive an email verification code, complete registration, sign out, and sign back in.",
+      "Accounts retain their own research data across sessions and cannot access another user private records."
+    ],
+    "unresolved": "Public website access is requested. Repository visibility remains private per the original requirement unless the user changes it; the GitHub entry location must accommodate external visitors.",
+    "status": "Recorded for version 2.0 synthesis with the original requirements."
+  },
+  {
+    "id": "MANUAL-004",
+    "area": "Profile validation and save status",
+    "user_feedback": "This field may not be blank. / medresearch-demo / First name Last name Email Change password / Save profile / Profile saved.",
+    "observed": "User reports both This field may not be blank. and Profile saved. on the demo profile page after the guided save test.",
+    "expected": "The displayed status should accurately reflect the most recent save attempt. Validation errors should identify the affected field and explain what must be entered.",
+    "uncertainty": "The user did not specify whether the page remained Profile or returned to Sign in. The underlying cause of the lost displayed value remains unconfirmed.",
+    "next_check": "Continue with PMID search for 31452104; expect one result titled Molegro Virtual Docker for Docking.",
+    "status": "Manual persistence failure confirmed; include in version 2.0 fixes.",
+    "persistence_feedback": "用户反馈：刷新之后first不见了。根据上一项检验问题，记录为刷新后 First name 填写内容消失。",
+    "persistence_result": "Manual persistence check failed: entered First name did not remain visible after refresh despite the prior Profile saved. message."
+  },
+  {
+    "id": "MANUAL-005",
+    "area": "PMID exact search",
+    "steps": "Search for PMID 31452104 in the literature search box.",
+    "expected": "One result titled Molegro Virtual Docker for Docking.",
+    "user_feedback": "是的",
+    "outcome": "User confirms the expected result count and title. Manual exact-search check passed.",
+    "next_check": "Open the title and inspect the detail page PMID, metadata, and abstract or explicit missing-abstract message.",
+    "status": "Passed by user confirmation."
+  },
+  {
+    "id": "MANUAL-006",
+    "area": "Publication detail display",
+    "evidence": "User screenshot of the detail page for PMID 31452104.",
+    "observed": "Displays Molegro Virtual Docker for Docking.; Gabriela Bitencourt-Ferreira and Walter Filgueira de Azevedo; Methods in molecular biology (Clifton, N.J.); 2019; volume 2053; pages 149-167; PMID 31452104; DOI 10.1007/978-1-4939-9752-7_10.",
+    "outcome": "Detail navigation, visible bibliographic metadata, matching PMID, and nonempty abstract display passed by user evidence.",
+    "uncertainty": "Full abstract and all metadata fields have not been exhaustively compared with the official record.",
+    "next_check": "Return to MedResearch, copy the APA citation, and paste the result into the chat.",
+    "status": "Basic detail display, abstract display and PubMed source link passed; author suffix discrepancy recorded separately.",
+    "abstract_feedback": "User pasted the displayed Abstract for Molegro Virtual Docker for Docking., describing MVD docking simulations and integration with SAnDReS.",
+    "source_link_feedback": "User supplied https://pubmed.ncbi.nlm.nih.gov/31452104/ and an official PubMed screenshot. Title, PMID, DOI, year, volume and pages match the application screenshot, allowing title terminal punctuation differences."
+  },
+  {
+    "id": "MANUAL-007",
+    "area": "Author metadata fidelity",
+    "evidence": "Comparison of user-provided MedResearch and official PubMed screenshots for PMID 31452104.",
+    "observed": "PubMed displays Walter Filgueira de Azevedo Jr. MedResearch displays Walter Filgueira de Azevedo without Jr.",
+    "expected": "Preserve and display author name suffixes supplied by PubMed; preserve them in citation generation where required by the selected format.",
+    "status": "Visible metadata discrepancy recorded for version 2.0.",
+    "uncertainty": "Other citation formats and full citation style conformance remain unverified.",
+    "citation_feedback": "The user-pasted APA citation also omits the second author suffix Jr.",
+    "ris_feedback": "User-pasted RIS also omits Jr from AU - de Azevedo, Walter Filgueira."
+  },
+  {
+    "id": "MANUAL-008",
+    "area": "Copy APA citation",
+    "user_output": "Bitencourt-Ferreira, G. & de Azevedo, W. F. (2019). Molegro Virtual Docker for Docking. Methods in molecular biology (Clifton, N.J.), 2053, 149-167. https://doi.org/10.1007/978-1-4939-9752-7_10",
+    "outcome": "Clipboard copy passed. Pasted citation includes the expected title, year, volume, pages and DOI.",
+    "limitations": "Author suffix omission is tracked in MANUAL-007. Full APA style conformance has not been established by this copy test.",
+    "next_check": "Choose RIS and Export citation. Confirm a .ris file downloads, then inspect its contents in a text editor.",
+    "status": "Copy interaction passed; citation metadata issue remains."
+  },
+  {
+    "id": "MANUAL-009",
+    "area": "Single citation RIS export",
+    "user_output": "TY  - JOUR\nTI  - Molegro Virtual Docker for Docking.\nAU  - Bitencourt-Ferreira, Gabriela\nAU  - de Azevedo, Walter Filgueira\nJO  - Methods in molecular biology (Clifton, N.J.)\nPY  - 2019\nVL  - 2053\nSP  - 149\nEP  - 167\nDO  - 10.1007/978-1-4939-9752-7_10\nAN  - 31452104\nER  -",
+    "outcome": "User supplied readable RIS after the export instruction. Expected bibliographic fields and record terminator are present.",
+    "limitations": "Author suffix omission tracked in MANUAL-007. Import into a reference manager and publication-type classification have not been verified.",
+    "next_check": "Click Save article on the MedResearch detail page and check Saved Articles for the same publication.",
+    "status": "Manual export content check passed, with the existing author metadata issue."
+  },
+  {
+    "id": "MANUAL-010",
+    "area": "Keyword search",
+    "evidence": "User screenshot of the asthma search results page.",
+    "observed": "Query asthma displays 247,009 results, Best match selected, unchecked visible date presets, a first-10,000-matches notice, and the beginning of a JOURNAL ARTICLE result card.",
+    "outcome": "Keyword search returned a result count and began rendering the result list.",
+    "uncertainty": "Article titles are outside the screenshot. Relevance, sorting changes, pagination, filtering and complete result-card display remain unverified. Screenshot cropping does not establish layout overflow.",
+    "status": "Keyword search response/display check passed; remaining checklist items pending."
+  },
+  {
+    "id": "MANUAL-011",
+    "area": "Remaining manual acceptance checks",
+    "user_feedback": "🆗，剩下功能都通过",
+    "outcome": "User reports all remaining items in the 15-item manual checklist passed, including bookmarking, collections, filtering, pagination, advanced search, exports, history, account isolation and responsive interactions.",
+    "limitations": "Aggregate user report. Earlier documented defects remain open. Separate evidence for each remaining item was not supplied.",
+    "status": "User-reported pass"
+  }
+]

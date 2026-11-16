@@ -7,14 +7,18 @@ def names(article, style):
     values = []
     for author in article["authors"]:
         family, initials = author.get("family"), author.get("initials", "")
+        suffix = author.get("suffix", "")
         if not family:
             values.append(author["name"])
         elif style == "apa":
-            values.append(f"{family}, {' '.join(letter + '.' for letter in initials)}".rstrip(", "))
+            name = f"{family}, {' '.join(letter + '.' for letter in initials)}".rstrip(", ")
+            values.append(name + (f", {suffix}" if suffix else ""))
         elif style == "vancouver":
-            values.append(f"{family} {initials}".strip())
+            values.append(" ".join(filter(None, (family, initials, suffix))))
+        elif style == "bibtex":
+            values.append(", ".join(filter(None, (family, suffix, author.get("given")))))
         else:
-            values.append(", ".join(filter(None, (family, author.get("given")))))
+            values.append(", ".join(filter(None, (family, author.get("given"), suffix))))
     return values
 
 
@@ -31,7 +35,7 @@ def citation(article, style):
         if len(authors) > 20:
             author_text = ", ".join(authors[:19]) + ", … " + authors[-1]
         else:
-            author_text = ", ".join(authors[:-1]) + (", & " if len(authors) > 2 else " & ") + authors[-1] if len(authors) > 1 else "".join(authors)
+            author_text = ", ".join(authors[:-1]) + ", & " + authors[-1] if len(authors) > 1 else "".join(authors)
         periodical = ", ".join(filter(None, (journal, volume + (f"({issue})" if issue else ""), pages)))
         return " ".join(filter(None, (sentence(author_text), f"({year or 'n.d.'}).", sentence(title), sentence(periodical), doi_url)))
     if style == "mla":

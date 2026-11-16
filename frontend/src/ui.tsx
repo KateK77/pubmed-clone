@@ -2,10 +2,10 @@ import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'rea
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ArrowUpRight, Bookmark, BookOpen, ChevronDown, Clipboard, Download, FolderPlus, Search, X } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
-import { api, searchLink, styles, type Article, type Collection, type Style, type User } from './api'
+import { api, searchLink, styles, type Article, type Collection, type Style, type Session } from './api'
 
 export function useSession() {
-  return useQuery({ queryKey: ['session'], queryFn: ({ signal }) => api<{ user: User | null }>('/session/', 'GET', undefined, signal), staleTime: 60_000 })
+  return useQuery({ queryKey: ['session'], queryFn: ({ signal }) => api<Session>('/session/', 'GET', undefined, signal), staleTime: 0, refetchOnWindowFocus: true })
 }
 
 export function ErrorNote({ error }: { error: unknown }) {

@@ -17,3 +17,15 @@ React SPA -> /api/ -> Django REST Framework -> NCBI E-utilities
 Django’s User owns Bookmark, Collection, SearchHistory, and SavedSearch records. Publication uses PMID as its primary key and stores normalized metadata and a retrieval timestamp. CollectionPublication and Bookmark enforce uniqueness in the database. Article metadata is saved on demand when a user bookmarks or files it. User-owned queries always filter by the authenticated user, including collection citation exports.
 
 References: [E-utilities parameters](https://www.ncbi.nlm.nih.gov/sites/books/NBK25499/) and [PubMed Help](https://pubmed.ncbi.nlm.nih.gov/help/).
+
+## Version 2.0 accounts and metadata
+
+The cookies are named `medresearch_sessionid` and `medresearch_csrftoken`, avoiding collisions with other local Django applications on different ports. Session responses are never cached. The client rechecks the session on focus and clears user-specific library cache entries when the account changes. Authentication failures carry a machine-readable code and restore the sign-in form. Unsaved profile edits remain in component memory while the profile page stays open and are restored only for the same user ID.
+
+Profile changes and password changes use separate forms. Blank password fields from older clients do not invoke password validation. Errors name their fields, and success state is cleared when the user edits again. Successful profile responses update the session cache, while a reload obtains the persisted user record from Django.
+
+`AccountEmail` reserves normalized email addresses with a unique database constraint and records verification time. `EmailChallenge` stores a purpose/user/address key, random nonce, keyed code digest, expiration, attempt count and delivery state. Delivery runs outside the database transaction. The code is only usable after the email backend reports success. Verification attempt increments persist even if account validation fails. Code consumption and account creation or email changes are atomic. Existing users are not forced through registration again.
+
+NCBI author suffixes are preserved in normalized metadata and all five export formats. Versioned metadata identifies Round 1 saved records. Opening or exporting those records refreshes them in bounded PubMed batches before returning them, without external HTTP calls in database migrations. Unavailable refreshes return an upstream error rather than silently claiming the old metadata was corrected.
+
+WhiteNoise serves built Vite assets through the WSGI entry point, and Django provides the SPA fallback outside `/api/` and `/assets/`. Docker builds React first, copies only the distribution into the Python image and starts Gunicorn as an unprivileged user. PostgreSQL is required for the documented public deployment.

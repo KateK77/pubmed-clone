@@ -2,56 +2,12 @@ import { useState, type FormEvent } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { FolderClosed, Plus } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { api, searchLink, type Article, type Collection, type HistoryEntry, type User } from './api'
+import { api, searchLink, type Article, type Collection, type HistoryEntry } from './api'
 import { ArticleCard, AuthGate, Busy, CitationTools, Confirm, Dialog, Empty, ErrorNote, PageTitle, SelectField, useSession } from './ui'
 
 function values(event: FormEvent<HTMLFormElement>) {
   event.preventDefault()
   return Object.fromEntries(new FormData(event.currentTarget))
-}
-
-export function Profile() {
-  const session=useSession()
-  const client=useQueryClient()
-  const [register,setRegister]=useState(false)
-  const [updated,setUpdated]=useState(false)
-  const mutation=useMutation({mutationFn:({path,method,data}:{path:string;method:string;data?:unknown})=>api<{user:User|null}>(path,method,data),
-    onSuccess:data=>{
-      for (const key of ['bookmarks','collections','history','saved-searches']) client.removeQueries({queryKey:[key]})
-      client.setQueryData(['session'],data)
-      setUpdated(true)
-    }})
-  const user=session.data?.user
-  return <main className="shell page narrow"><PageTitle title={user?'Profile':register?'Create an account':'Sign in'}/>
-    <ErrorNote error={session.error||mutation.error}/>
-    {session.isPending?<Busy/>:user?<div className="panel stack">
-      <h2>{user.username}</h2>
-      <form className="stack" key={user.id} onSubmit={event=>{
-        const form=event.currentTarget
-        mutation.mutate({path:'/profile/',method:'PATCH',data:values(event)},{onSuccess:()=>{
-          const current=form.elements.namedItem('current_password') as HTMLInputElement
-          const password=form.elements.namedItem('password') as HTMLInputElement
-          current.value='';password.value=''
-        }})
-      }}>
-        <label>First name<input name="first_name" defaultValue={user.first_name} autoComplete="given-name" maxLength={150}/></label>
-        <label>Last name<input name="last_name" defaultValue={user.last_name} autoComplete="family-name" maxLength={150}/></label>
-        <label>Email<input name="email" type="email" defaultValue={user.email} autoComplete="email"/></label>
-        <details><summary>Change password</summary><div className="stack">
-          <label>Current password<input name="current_password" type="password" autoComplete="current-password" maxLength={128}/></label>
-          <label>New password<input name="password" type="password" autoComplete="new-password" maxLength={128}/></label>
-        </div></details>
-        <button className="button primary align-start" disabled={mutation.isPending}>Save profile</button>
-      </form>{updated&&mutation.variables?.path==='/profile/'&&<p role="status">Profile saved.</p>}
-      <button className="button secondary align-start" disabled={mutation.isPending} onClick={()=>mutation.mutate({path:'/auth/logout/',method:'POST'})}>Sign out</button>
-    </div>:<form className="panel stack" onSubmit={event=>mutation.mutate({path:register?'/auth/register/':'/auth/login/',method:'POST',data:values(event)})}>
-      <label>Username<input name="username" autoComplete="username" required maxLength={150}/></label>
-      {register&&<label>Email<input name="email" type="email" autoComplete="email"/></label>}
-      <label>Password<input name="password" type="password" required maxLength={128} autoComplete={register?'new-password':'current-password'}/></label>
-      <div className="actions"><button className="button primary" disabled={mutation.isPending}>{register?'Create account':'Sign in'}</button>
-        <button type="button" className="link-button" onClick={()=>{setRegister(!register);mutation.reset()}}>{register?'Use an existing account':'Create an account'}</button></div>
-    </form>}
-  </main>
 }
 
 function LibraryItems({collection}:{collection?:number}) {

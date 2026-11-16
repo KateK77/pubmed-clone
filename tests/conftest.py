@@ -12,6 +12,7 @@ def clear_cache():
 @pytest.fixture
 def article():
     return {
+        "metadata_version": 2,
         "pmid": "31452104", "title": "Fixture title", "journal": "Fixture journal",
         "journal_abbr": "", "date": "2019 Aug 29", "year": "2019", "pmcid": "", "doi": "",
         "volume": "", "issue": "", "pages": "", "abstract": [], "authors": [],

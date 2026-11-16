@@ -66,3 +66,19 @@ class SavedSearch(models.Model):
 
     class Meta:
         ordering = ["-created", "-id"]
+
+
+class AccountEmail(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    address = models.EmailField(unique=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
+
+
+class EmailChallenge(models.Model):
+    key = models.CharField(primary_key=True, max_length=64)
+    nonce = models.CharField(max_length=64)
+    digest = models.CharField(max_length=64)
+    sent_at = models.DateTimeField()
+    expires_at = models.DateTimeField(db_index=True)
+    attempts = models.PositiveSmallIntegerField(default=0)
+    delivered = models.BooleanField(default=False)
