@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0-r3 — 2026-11-15
+
+- Replaced hidden password complexity/common-password checks with a visible 8–128-character rule.
+- Added Confirm password to registration and password changes, with matching browser/API validation and actionable mismatch errors.
+- Removed First name and Last name from the account UI without deleting existing user data.
+- Sent successful sign-in/registration directly to Search, or back to the internal research page requesting authentication.
+- Preserved email draft recovery, verification, session controls and private libraries.
+- Merged the latest feedback with the full prior prompts and added regression coverage for the revised account flow.
+
 ## 2.0.0-r2 — 2026-11-15
 
 - Fixed profile persistence, blank password validation, stale success messages and expired-session recovery.

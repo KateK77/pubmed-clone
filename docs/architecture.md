@@ -29,3 +29,11 @@ Profile changes and password changes use separate forms. Blank password fields f
 NCBI author suffixes are preserved in normalized metadata and all five export formats. Versioned metadata identifies Round 1 saved records. Opening or exporting those records refreshes them in bounded PubMed batches before returning them, without external HTTP calls in database migrations. Unavailable refreshes return an upstream error rather than silently claiming the old metadata was corrected.
 
 WhiteNoise serves built Vite assets through the WSGI entry point, and Django provides the SPA fallback outside `/api/` and `/assets/`. Docker builds React first, copies only the distribution into the Python image and starts Gunicorn as an unprivileged user. PostgreSQL is required for the documented public deployment.
+
+## Version 3.0 account simplification
+
+Password policy is a minimum of eight characters through Django's validator and a maximum of 128 through API serializers. The browser displays this policy on registration and password change. It does not enforce composition, common-password or similarity checks. Confirmation is validated before registration or password persistence; login keeps its existing authentication behavior. Password hashing, CSRF, verification-code limits and the production account throttle remain in place.
+
+The Account UI retains only username, email, password change and sign out. Legacy name columns and compatible API fields remain to avoid deleting existing data. Successful authentication navigates to Search unless a permitted internal research URL requested authentication. A central destination parser allows known frontend paths and preserves query/hash values, while rejecting external, API and account destinations. An interrupted same-user email draft takes precedence over the ordinary redirect.
+
+Browser tests run independent real accounts against a temporary database and mailbox. Because all parallel scenarios share one IP, only that disposable test server uses a higher global account throttle. A backend regression test checks the unchanged production limit of twenty attempts per minute. Per-address verification cooldowns remain active in browser tests.

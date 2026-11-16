@@ -7,7 +7,7 @@ GitHub stores the source, runs the automated checks and can link visitors to the
 ## Prepare the service
 
 1. Choose a host supporting Docker, HTTPS and a persistent PostgreSQL connection. Create a database and retain its connection credentials in the host's secret settings. Pricing and free-tier limits depend on the provider.
-2. Connect the repository or build `docker build -t medresearch:2.0 .` from its root. The image listens on port `8000` and runs one Gunicorn worker with four threads. Configure the host's internal service port accordingly.
+2. Connect the repository or build `docker build -t medresearch:3.0 .` from its root. The image listens on port `8000` and runs one Gunicorn worker with four threads. Configure the host's internal service port accordingly.
 3. Set the environment variables below. Use your actual hostname and credentials. These placeholders are not working account credentials.
 4. Before the first start and each schema upgrade, run `python backend/manage.py migrate --noinput` as a release command using the same image and database. Back up an existing database before upgrading.
 5. Start the image and enable the host's HTTPS endpoint. Check `/api/health/`, `/profile` and a direct article URL. Verify that refreshing an article or profile URL returns the application.
@@ -59,8 +59,8 @@ Do not advertise a localhost address, a GitHub source URL or an unconfigured Pag
 ## Release acceptance
 
 - Open the public URL in a private browser window and search PubMed without signing in.
-- Register with a real email, enter its code, change First name, save and reload.
-- Sign out and sign back in, and check the name and saved library.
+- Register with a real email, a password meeting the visible 8–128-character rule and matching confirmation. Enter the email code and verify that Search opens.
+- Change the account email with a new code, save, reload and verify persistence. Sign out and sign back in to check the email and saved library.
 - Use a different account and confirm it cannot access the first account's collection URL.
 - Search PMID `31452104`, verify the `Jr` suffix and download RIS.
 - Confirm HTTPS, database persistence across service restarts and an email provider delivery record.

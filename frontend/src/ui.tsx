@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ArrowUpRight, Bookmark, BookOpen, ChevronDown, Clipboard, Download, FolderPlus, Search, X } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { signInLink } from './auth-navigation'
 import { api, searchLink, styles, type Article, type Collection, type Style, type Session } from './api'
 
 export function useSession() {
@@ -36,10 +37,11 @@ export function SearchBox({ initial = '', large = false }: { initial?: string; l
 }
 
 export function AuthGate({ children }: { children: ReactNode }) {
+  const location = useLocation()
   const session = useSession()
   if (session.isPending) return <Busy />
   if (session.error) return <ErrorNote error={session.error} />
-  return session.data?.user ? children : <Empty>Sign in to use your research library. <Link to="/profile">Go to sign in</Link></Empty>
+  return session.data?.user ? children : <Empty>Sign in to use your research library. <Link to={signInLink(location)}>Go to sign in</Link></Empty>
 }
 
 export function Dialog({ title, children, onClose }: { title: string; children: ReactNode; onClose: () => void }) {
@@ -93,6 +95,7 @@ export function CitationTools({ source, copy = false }: { source: { ids?: string
 }
 
 export function SaveArticle({ pmid }: { pmid: string }) {
+  const location = useLocation()
   const user = useSession().data?.user
   const client = useQueryClient()
   const bookmarks = useQuery({ queryKey: ['bookmarks', user?.id, ''], enabled: !!user,
@@ -100,7 +103,7 @@ export function SaveArticle({ pmid }: { pmid: string }) {
   const saved = bookmarks.data?.results.some(article => article.pmid === pmid)
   const mutation = useMutation({ mutationFn: () => saved ? api('/bookmarks/' + pmid + '/', 'DELETE') : api('/bookmarks/', 'POST', { pmid }),
     onSuccess: () => client.invalidateQueries({ queryKey: ['bookmarks'] }) })
-  if (!user) return <Link className="button secondary" to="/profile"><Bookmark size={16} /> Sign in to save</Link>
+  if (!user) return <Link className="button secondary" to={signInLink(location)}><Bookmark size={16} /> Sign in to save</Link>
   return <div><button className="button secondary" disabled={mutation.isPending || bookmarks.isPending || !!bookmarks.error} onClick={() => mutation.mutate()}>
     <Bookmark size={16} fill={saved ? 'currentColor' : 'none'} /> {saved ? 'Remove saved article' : 'Save article'}
   </button><ErrorNote error={mutation.error || bookmarks.error} /></div>

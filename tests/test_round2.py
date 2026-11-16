@@ -78,7 +78,7 @@ def test_verified_registration_resend_and_single_use(client):
     code = code_from_email()
     assert code not in EmailChallenge.objects.get().digest
     assert client.post("/api/auth/email-code/", {"email": email, "purpose": "register"}, format="json").status_code == 429
-    body = {"username": "verified", "password": "UnusualDemo!987", "email": email.upper(), "code": code}
+    body = {"username": "verified", "password": "UnusualDemo!987", "password_confirmation": "UnusualDemo!987", "email": email.upper(), "code": code}
     response = client.post("/api/auth/register/", body, format="json")
     assert response.status_code == 200 and response.json()["user"]["email_verified"]
     assert AccountEmail.objects.get().address == email
@@ -94,7 +94,7 @@ def test_wrong_codes_expiry_and_resend_replaces_code(client):
     email_verification.send_code(email, "register")
     old = code_from_email()
     wrong = "000000" if old != "000000" else "111111"
-    body = {"username": "attempts", "password": "UnusualDemo!987", "email": email, "code": wrong}
+    body = {"username": "attempts", "password": "UnusualDemo!987", "password_confirmation": "UnusualDemo!987", "email": email, "code": wrong}
     for _ in range(5):
         assert client.post("/api/auth/register/", body, format="json").status_code == 400
     assert EmailChallenge.objects.get().attempts == 5

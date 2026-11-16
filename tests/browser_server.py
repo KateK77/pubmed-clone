@@ -23,5 +23,9 @@ import django
 from django.core.management import call_command
 
 django.setup()
+# Concurrent browser scenarios share one IP. Test the production 20/min limit
+# separately in test_round3.py, while keeping per-email cooldowns unchanged.
+from literature.api import AccountThrottle
+AccountThrottle.rate = "200/min"
 call_command("migrate", interactive=False, verbosity=0)
 call_command("runserver", "127.0.0.1:8025", use_reloader=False)

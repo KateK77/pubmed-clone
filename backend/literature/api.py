@@ -38,6 +38,7 @@ class AccountThrottle(SimpleRateThrottle):
 class AccountInput(serializers.Serializer):
     username = serializers.RegexField(r"^[\w.@+-]+\Z", max_length=150)
     password = serializers.CharField(max_length=128, trim_whitespace=False)
+    password_confirmation = serializers.CharField(required=False, allow_blank=True, max_length=128, trim_whitespace=False)
     email = serializers.EmailField(required=False, allow_blank=True)
     code = serializers.RegexField(r"^[0-9]{6}$", required=False)
 
@@ -53,6 +54,7 @@ class ProfileInput(serializers.Serializer):
     last_name = serializers.CharField(required=False, max_length=150, allow_blank=True)
     password = serializers.CharField(required=False, max_length=128, trim_whitespace=False, allow_blank=True)
     current_password = serializers.CharField(required=False, max_length=128, trim_whitespace=False, allow_blank=True)
+    password_confirmation = serializers.CharField(required=False, allow_blank=True, max_length=128, trim_whitespace=False)
     code = serializers.RegexField(r"^[0-9]{6}$", required=False)
 
 
@@ -137,6 +139,13 @@ def password_check(password, user):
         raise ValidationError({"password": exc.messages}) from exc
 
 
+def confirm_password(password, confirmation):
+    if not confirmation:
+        raise ValidationError({"password_confirmation": "Enter your password again in Confirm password."})
+    if password != confirmation:
+        raise ValidationError({"password_confirmation": "Passwords do not match. Enter the same password in both fields."})
+
+
 @extend_schema(responses={200: OpenApiTypes.OBJECT})
 @never_cache
 @ensure_csrf_cookie
@@ -171,6 +180,7 @@ def account(request, action):
         return Response({"user": None})
     data = clean(AccountInput, request.data)
     if action == "register":
+        confirm_password(data["password"], data.get("password_confirmation"))
         email = data.get("email", "").strip().lower()
         if settings.EMAIL_VERIFICATION_REQUIRED and not email:
             raise ValidationError({"email": "Enter your email address to verify your account."})
@@ -208,6 +218,7 @@ def profile(request):
     data = clean(ProfileInput, request.data)
     current = data.pop("current_password", "")
     password = data.pop("password", "")
+    confirmation = data.pop("password_confirmation", "")
     code = data.pop("code", "")
     challenge = None
     email_changed = "email" in data and data["email"].strip().lower() != user.email.lower()
@@ -227,6 +238,7 @@ def profile(request):
     if password:
         if not user.check_password(current):
             raise ValidationError({"current_password": "The current password is incorrect."})
+        confirm_password(password, confirmation)
         password_check(password, user)
         user.set_password(password)
         fields.append("password")

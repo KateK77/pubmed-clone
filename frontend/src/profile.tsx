@@ -1,9 +1,12 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { signInDestination } from './auth-navigation'
+import { PasswordFields } from './password-fields'
 import { api, type Session, type User } from './api'
 import { Busy, ErrorNote, PageTitle, useSession } from './ui'
 
-type ProfileFields = Pick<User, 'first_name' | 'last_name' | 'email'>
+type ProfileFields = Pick<User, 'email'>
 type Draft = { userId: number; fields: ProfileFields }
 
 function formData(event: FormEvent<HTMLFormElement>) {
@@ -41,7 +44,7 @@ function EmailCode({ email, purpose, available, required, onCode }: {
   </div>
 }
 
-function AccountForm({ session }: { session: Session }) {
+function AccountForm({ session, onAuthenticated }: { session: Session; onAuthenticated: (user: User) => void }) {
   const [register, setRegister] = useState(false)
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
@@ -51,6 +54,7 @@ function AccountForm({ session }: { session: Session }) {
     mutationFn: (data: Record<string, FormDataEntryValue>) => api<Session>(register ? '/auth/register/' : '/auth/login/', 'POST', data),
     onSuccess: data => {
       client.setQueryData<Session>(['session'], current => ({ ...current, ...data }))
+      if (data.user) onAuthenticated(data.user)
     },
   })
   function submit(event: FormEvent<HTMLFormElement>) {
@@ -65,7 +69,7 @@ function AccountForm({ session }: { session: Session }) {
       <label>Username<input name="username" autoComplete={register ? 'section-signup username' : 'username'} required maxLength={150} /></label>
       {register && <label>Email<input name="email" type="email" autoComplete="section-signup email" required={verification}
         value={email} onChange={event => { setEmail(event.target.value); setCode('') }} /></label>}
-      <label>Password<input name="password" type="password" required maxLength={128} autoComplete={register ? 'new-password' : 'current-password'} /></label>
+      {register ? <PasswordFields id="signup" /> : <label>Password<input name="password" type="password" required maxLength={128} autoComplete="current-password" /></label>}
       {register && verification && <EmailCode key={email} email={email} purpose="register" available={!!session.email_delivery_available} required onCode={setCode} />}
       <ErrorNote error={mutation.error} />
       <div className="actions">
@@ -92,7 +96,7 @@ function PasswordForm() {
     }}>
       <fieldset className="stack form-fields" disabled={mutation.isPending}>
       <label>Current password<input name="current_password" type="password" required maxLength={128} autoComplete="current-password" /></label>
-      <label>New password<input name="password" type="password" required maxLength={128} autoComplete="new-password" /></label>
+      <PasswordFields id="change-password" label="New password" />
       <ErrorNote error={mutation.error} />
       {mutation.isSuccess && <p role="status">Password changed.</p>}
       <button className="button secondary align-start" disabled={mutation.isPending}>Update password</button>
@@ -106,7 +110,7 @@ function ProfileEditor({ user, session, draft, onDraft }: {
 }) {
   const client = useQueryClient()
   const [fields, setFields] = useState<ProfileFields>(() => draft?.userId === user.id ? draft.fields : {
-    first_name: user.first_name, last_name: user.last_name, email: user.email,
+    email: user.email,
   })
   const [code, setCode] = useState('')
   const [verify, setVerify] = useState(false)
@@ -136,21 +140,19 @@ function ProfileEditor({ user, session, draft, onDraft }: {
     if (name === 'email') setCode('')
   }
   return <>
-    <PageTitle title="Profile" />
+    <PageTitle title="Account" />
     <div className="panel stack">
-      <h2>{user.username}</h2>
+      <div><p className="muted">Username</p><h2>{user.username}</h2></div>
       <form className="stack" autoComplete="on" onSubmit={event => { event.preventDefault(); save.mutate() }}>
         <fieldset className="stack form-fields" disabled={save.isPending || logout.isPending}>
-        <label>First name<input name="first_name" value={fields.first_name} onChange={event => edit('first_name', event.target.value)} autoComplete="section-profile given-name" maxLength={150} /></label>
-        <label>Last name<input name="last_name" value={fields.last_name} onChange={event => edit('last_name', event.target.value)} autoComplete="section-profile family-name" maxLength={150} /></label>
         <label>Email<input name="email" type="email" value={fields.email} onChange={event => edit('email', event.target.value)} autoComplete="section-profile email" /></label>
         {user.email_verified && !emailChanged && <p className="muted">Email verified.</p>}
         {!user.email_verified && !!fields.email && !verify && !requiresCode && <button type="button" className="link-button" onClick={() => setVerify(true)}>Verify this email</button>}
         {(requiresCode || verify) && <EmailCode key={fields.email} email={fields.email} purpose="profile" available={!!session.email_delivery_available}
           required={requiresCode || verify} onCode={value => { setCode(value); save.reset() }} />}
         <ErrorNote error={save.error} />
-        {save.isSuccess && <p role="status">Profile saved.</p>}
-        <button className="button primary align-start" disabled={save.isPending}>{save.isPending ? 'Saving…' : 'Save profile'}</button>
+        {save.isSuccess && <p role="status">Email saved.</p>}
+        <button className="button primary align-start" disabled={save.isPending}>{save.isPending ? 'Saving…' : 'Save email'}</button>
         </fieldset>
       </form>
       <PasswordForm />
@@ -161,6 +163,8 @@ function ProfileEditor({ user, session, draft, onDraft }: {
 }
 
 export function Profile() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const session = useSession()
   const [draft, setDraft] = useState<Draft | null>(null)
   const user = session.data?.user
@@ -169,8 +173,14 @@ export function Profile() {
     {session.isPending ? <Busy /> : session.data && (user
       ? <ProfileEditor key={user.id} user={user} session={session.data} draft={draft} onDraft={setDraft} />
       : <>
-        {draft && <p className="notice">Your unsaved profile edits are kept while this page stays open. Sign in to the same account to continue.</p>}
-        <AccountForm session={session.data} />
+        {draft && <p className="notice">Your unsaved email edit is kept while this page stays open. Sign in to the same account to continue.</p>}
+        <AccountForm session={session.data} onAuthenticated={signedIn => {
+          if (draft?.userId === signedIn.id) navigate('/profile', { replace: true })
+          else {
+            setDraft(null)
+            navigate(signInDestination(location.search), { replace: true })
+          }
+        }} />
       </>)}
   </main>
 }

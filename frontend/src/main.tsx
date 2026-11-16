@@ -6,6 +6,7 @@ import { BookOpen, Menu, X } from 'lucide-react'
 import { AdvancedPage, ArticlePage, Home, SearchPage } from './discovery'
 import { CollectionsPage, HistoryPage, SavedPage } from './library'
 import { Profile } from './profile'
+import { signInLink } from './auth-navigation'
 import type { Session } from './api'
 import { Empty, useSession } from './ui'
 import './styles.css'
@@ -44,10 +45,10 @@ function App() {
       <button className="icon-button menu" type="button" aria-label={open?'Close navigation':'Open navigation'} aria-controls="primary-nav" aria-expanded={open} onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>
       <nav id="primary-nav" className={open?'open':''} aria-label="Primary navigation">
         {links.map(([path,label])=><NavLink key={path} to={path} end={path==='/'}>{label}</NavLink>)}
-        <NavLink className="profile-link" to="/profile">{user?'Profile':'Sign in'}</NavLink>
+        <NavLink className="profile-link" to={user ? '/profile' : signInLink(location)}>{user?'Account':'Sign in'}</NavLink>
       </nav>
     </div></header>
-    {sessionExpired && <p className="shell notice" role="alert">Your session has ended. <Link to="/profile">Sign in again</Link> to continue.</p>}
+    {sessionExpired && <p className="shell notice" role="alert">Your session has ended. <Link to={signInLink(location)}>Sign in again</Link> to continue.</p>}
     <div id="content" tabIndex={-1}><Routes>
       <Route path="/" element={<Home/>}/><Route path="/search" element={<SearchPage/>}/><Route path="/advanced" element={<AdvancedPage/>}/>
       <Route path="/article/:pmid" element={<ArticlePage/>}/><Route path="/saved" element={<SavedPage/>}/>

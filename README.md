@@ -1,8 +1,8 @@
-# MedResearch 2.0
+# MedResearch 3.0
 
 MedResearch searches live biomedical literature from PubMed and gives researchers a personal library for bookmarks, collections, saved searches, and citation exports. It is an independent educational prototype with no affiliation with PubMed, NCBI, NIH, or the National Library of Medicine.
 
-Version 2.0 combines the [original specification and revised requirements](experiments/round-02/description.md) with the owner's [manual testing feedback](experiments/round-02/manual-feedback.json). It fixes profile persistence, session recovery, field errors and author suffixes, and adds configurable email verification and a production container.
+Version 3.0 combines the [original specification and all revised requirements](experiments/round-03/description.md) with the owner's [manual testing feedback](experiments/round-03/manual-feedback.json). It simplifies registration, explains the password rule, adds password confirmation and removes unnecessary name fields. It preserves the session fixes, verified email workflow, author suffixes and deployment support from Version 2.0.
 
 **Deployment status:** this repository contains the software. A public website URL has not been provisioned. Publishing the code to GitHub does not start the Django server. See [deployment instructions](docs/deployment.md) to host the application and add its public URL to the GitHub repository's About section.
 
@@ -11,9 +11,17 @@ Version 2.0 combines the [original specification and revised requirements](exper
 - Search by keyword, author, title, journal, PMID, DOI, or PubMed field syntax. Combine Boolean groups in the advanced builder and inspect PubMed’s translated query.
 - Filter by date, article type, text availability, language, species, MEDLINE, or preprint exclusion. URL parameters preserve filters, sort, and pages.
 - Read article metadata, structured abstracts, affiliations, keywords, MeSH descriptors, references, and available similar or citing records. Follow links to PubMed, PMC, and DOI destinations.
-- Register, sign in, update your profile, bookmark articles, manage private collections, and rerun or save searches.
+- Register, sign in, manage your account email, bookmark articles, manage private collections, and rerun or save searches.
 - Verify registration and email changes with single-use email codes when enabled. Keep existing accounts and their libraries through the upgrade. Profile and password changes have separate forms.
 - Export selected articles, all bookmarks, or an entire collection in APA, MLA, Vancouver, BibTeX, or RIS. Copy a citation from the article page.
+
+## Accounts
+
+New passwords use **8–128 characters**. Uppercase letters, digits and symbols are optional. There is no hidden common-password or username-similarity restriction. The rule appears below the password field before you submit. Registration and password changes require a matching **Confirm password** in both the browser and API. Existing accounts sign in with their current password and do not need to register again.
+
+Successful registration or ordinary sign-in opens Search. When a library or article page asks you to sign in, you return to that page with its URL state. Account settings contain username, email, password change and sign out. First name and Last name are no longer shown or required. Existing stored names are preserved for compatibility. The same-user email draft recovery remains available if a session expires while editing email.
+
+For API clients, send `password_confirmation` alongside `password` to `/api/auth/register/`, and when changing a password with `PATCH /api/profile/`. Login and email-only updates do not need confirmation. API schema is available at `/api/schema/`.
 
 ## Architecture
 
@@ -61,9 +69,9 @@ The local demo account is `medresearch-demo` with password `LocalResearchDemo!26
 
 The example configuration disables mandatory email verification for local testing. With verification enabled, users must supply an email and a code, and registration remains unavailable until an email backend is configured. Production should use SMTP. Existing users can still log in and verify their email from Profile. No SMTP credential or test message is committed to this repository.
 
-### Upgrade from Round 1
+### Upgrade from an earlier version
 
-Back up the database, install the updated dependencies, run `python backend/manage.py migrate`, rebuild the frontend and restart both services. Do not replace an existing `.env` with the example. Add the email settings below explicitly. The migrations preserve accounts, saved articles and collections. Sign in again after upgrading because the session cookie now has an application-specific name. Legacy saved article metadata is refreshed from PubMed when opened or exported, preserving author suffixes such as `Jr`.
+Back up the database, install the updated dependencies, run `python backend/manage.py migrate`, rebuild the frontend and restart both services. Do not replace an existing `.env` with the example. Add the email settings below explicitly. Version 3.0 requires no new database migration and preserves accounts, saved articles and collections. If upgrading from Round 1, sign in again because the session cookie changed in Version 2.0. Legacy saved article metadata is refreshed from PubMed when opened or exported, preserving author suffixes such as `Jr`.
 
 ## Configuration
 
@@ -107,7 +115,7 @@ python tests/live_smoke.py
 
 Pytest and Vitest use deterministic fixtures. Playwright covers desktop and mobile discovery with fixture responses, plus real Django registration, verification, profile persistence, expired sessions and account isolation. Its temporary SQLite database and file-based test mailbox are separate from your local data. Set `MEDRESEARCH_TEST_PYTHON` to your virtual environment's Python path if `python` resolves elsewhere. The live smoke test contacts NCBI.
 
-For manual validation, search `31452104`, open the record and inspect the author suffix `Jr`, citations and related articles. Search `asthma`, apply Review and a publication date filter, go to the next page, then use browser Back. Sign in, save the article, create a collection, add the article and export RIS. Change First name, save, refresh and sign in again to verify persistence. Use a second account to confirm that the first account's collection URL is inaccessible.
+For manual validation, register with a password meeting the visible length rule and confirm it. Try a mismatch first and verify the explanation. After registration, check that Search opens. Visit Account and verify there are no name fields. Update an email using verification when enabled, reload, and sign in again to verify persistence. Sign out, open Saved Articles, follow its sign-in link and confirm you return there after login. Search `31452104`, inspect the author suffix `Jr`, citations and related articles. Search `asthma`, apply Review and a date filter, go to the next page, then use Back. Save an article, create a collection and export RIS. Use a second account to check that the first account's collection URL is inaccessible.
 
 ## Limits
 

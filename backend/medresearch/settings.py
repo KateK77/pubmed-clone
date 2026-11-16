@@ -58,17 +58,17 @@ SESSION_COOKIE_SAMESITE = CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_TRUSTED_ORIGINS = list(filter(None, os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")))
 SECURE_SSL_REDIRECT = not DEBUG
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https") if os.getenv("DJANGO_TRUST_PROXY") == "1" else None
-AUTH_PASSWORD_VALIDATORS = [{"NAME": "django.contrib.auth.password_validation." + name} for name in (
-    "UserAttributeSimilarityValidator", "MinimumLengthValidator",
-    "CommonPasswordValidator", "NumericPasswordValidator",
-)]
+AUTH_PASSWORD_VALIDATORS = [{
+    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    "OPTIONS": {"min_length": 8},
+}]
 REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "literature.errors.api_exception_handler",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework.authentication.SessionAuthentication"],
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
 }
-SPECTACULAR_SETTINGS = {"TITLE": "MedResearch API", "VERSION": "2.0.0"}
+SPECTACULAR_SETTINGS = {"TITLE": "MedResearch API", "VERSION": "3.0.0"}
 NCBI_API_KEY = os.getenv("NCBI_API_KEY", "")
 NCBI_EMAIL = os.getenv("NCBI_EMAIL", "")
 NCBI_CACHE_SECONDS = int(os.getenv("NCBI_CACHE_SECONDS", "900"))

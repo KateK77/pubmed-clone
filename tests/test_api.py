@@ -11,7 +11,7 @@ pytestmark = pytest.mark.django_db
 def test_session_csrf_registration_and_login(settings):
     settings.EMAIL_VERIFICATION_REQUIRED = False
     client = APIClient(enforce_csrf_checks=True)
-    body = {"username": "researcher", "password": "UnusualDemo!987"}
+    body = {"username": "researcher", "password": "UnusualDemo!987", "password_confirmation": "UnusualDemo!987"}
     assert client.post("/api/auth/register/", body, format="json").status_code == 403
     client.get("/api/session/")
     token = client.cookies["medresearch_csrftoken"].value

@@ -19,6 +19,7 @@ function csrfToken() {
 const fieldNames: Record<string, string> = {
   first_name: 'First name', last_name: 'Last name', current_password: 'Current password',
   password: 'Password', email: 'Email', code: 'Verification code', username: 'Username',
+  password_confirmation: 'Confirm password',
 }
 
 export class ApiError extends Error {
