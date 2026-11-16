@@ -15,7 +15,7 @@ Version 3.0 combines the [original specification and all revised requirements](e
 
 **Deployment status:** this repository contains the software. A public website URL has not been provisioned. Publishing the code to GitHub does not start the Django server. See [deployment instructions](docs/deployment.md) to host the application and add its public URL to the GitHub repository's About section.
 
-The repository and its version history are public. A free-tier Render + Neon deployment configuration is prepared in [`render.yaml`](render.yaml). **Hosting authorization is still pending; there is no live demo URL yet.** This button creates your own deployment and requires provider accounts:
+The repository and its version history are public. A free-tier Render + Neon deployment configuration is prepared in [`render.yaml`](render.yaml). Render access is confirmed; **Neon database authorization is still pending, so there is no live demo URL yet.** This button creates your own deployment and requires provider accounts:
 
 [![Deploy your own instance on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/KateK77/pubmed-clone)
 

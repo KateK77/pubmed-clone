@@ -8,7 +8,9 @@ GitHub stores the source, runs the automated checks and can link visitors to the
 
 ### Prepared Render + Neon showcase
 
-The owner requested that the existing GitHub repository and its full history become public. The repository is now public. Hosting is prepared but has not been provisioned: Render and Neon account authorization is still required.
+The owner requested that the existing GitHub repository and its full history become public. The repository is now public. Hosting is prepared but has not been provisioned. Render access and the target workspace have been confirmed; Neon database authorization is still required.
+
+Validation of commit `9918a1be27e0b94a1fc81eec9ab66cb2a404ab01` passed in [GitHub CI](https://github.com/KateK77/pubmed-clone/actions/runs/43801157728): 53 backend cases on both SQLite and PostgreSQL, 11 frontend unit cases, 8 browser cases, the production WSGI smoke check and the Docker startup smoke check. The latter created a temporary PostgreSQL database, registered an account through CSRF-protected HTTP, restarted the app and verified that its session persisted. The blueprint also passed the Render JSON schema check.
 
 `render.yaml` creates one **Free** Docker web service and obtains its own hostname from `RENDER_EXTERNAL_HOSTNAME`. It generates a Django secret, checks `/api/health/`, and deploys linked-repository changes after CI passes. No paid service or temporary Render database is declared.
 
