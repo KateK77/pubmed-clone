@@ -1,0 +1,29 @@
+{
+  "round": 3,
+  "version": "3.0.0",
+  "date": "2026-11-15",
+  "timezone": "America/Chicago",
+  "agent": "Codex",
+  "model_build": null,
+  "commit_sha": "cc4e2c214706fb712cd3e0a8e9358e6a75cf4d1f",
+  "commit_sha_scope": "implementation; release tag also includes results and metadata",
+  "git_tag": "v3.0.0-r3",
+  "repository": "https://github.com/KateK77/pubmed-clone",
+  "repository_visibility": "private",
+  "ci_run": "https://github.com/KateK77/pubmed-clone/actions/runs/43799414636",
+  "validation": {
+    "pytest_sqlite": 48,
+    "pytest_postgresql_ci": 48,
+    "docker_build_ci": "passed",
+    "vitest": 11,
+    "playwright": 8,
+    "django_checks": "passed",
+    "migration_check": "passed; no migration needed",
+    "openapi_validation": "passed",
+    "production_wsgi_smoke": "passed",
+    "live_pubmed_smoke": "passed",
+    "local_existing_account": "passed",
+    "external_smtp_delivery": "not configured",
+    "public_deployment": "not provisioned"
+  }
+}
