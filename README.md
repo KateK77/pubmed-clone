@@ -5,6 +5,10 @@
 
 **Search biomedical literature. Keep your research organized. Export citations.**
 
+### [Open MedResearch — 在线使用](https://medresearch-cljd.onrender.com)
+
+Search immediately, or create your own account to save articles and collections. No installation required. 打开网站即可检索；注册自己的账号后可以保存文献和收藏夹。
+
 MedResearch searches live biomedical literature from PubMed and gives researchers a personal library for bookmarks, collections, saved searches, and citation exports. It is an independent educational prototype with no affiliation with PubMed, NCBI, NIH, or the National Library of Medicine.
 
 ![MedResearch search interface](docs/images/search.png)
@@ -13,9 +17,11 @@ Built with React, TypeScript and Django. Research records come from the official
 
 Version 3.0 combines the [original specification and all revised requirements](experiments/round-03/description.md) with the owner's [manual testing feedback](experiments/round-03/manual-feedback.json). It simplifies registration, explains the password rule, adds password confirmation and removes unnecessary name fields. It preserves the session fixes, verified email workflow, author suffixes and deployment support from Version 2.0.
 
-**Deployment status:** this repository contains the software. A public website URL has not been provisioned. Publishing the code to GitHub does not start the Django server. See [deployment instructions](docs/deployment.md) to host the application and add its public URL to the GitHub repository's About section.
+**Live website:** [medresearch-cljd.onrender.com](https://medresearch-cljd.onrender.com), hosted on Render Free with persistent PostgreSQL on Neon Free. Registration, session persistence, live PubMed search, citations and private libraries were verified on the public deployment. See the [verification record](docs/public-verification.json).
 
-The repository and its version history are public. A free-tier Render + Neon deployment configuration is prepared in [`render.yaml`](render.yaml). Render access is confirmed; **Neon database authorization is still pending, so there is no live demo URL yet.** This button creates your own deployment and requires provider accounts:
+The free website may take a little longer to open after being idle. Public registration currently works without email verification; verification emails are not enabled. Accounts and collections are stored in the database rather than the web container. Provider usage limits apply.
+
+The repository and its version history are public. To host your own copy, see [deployment instructions](docs/deployment.md) and [`render.yaml`](render.yaml). The following button creates a separate deployment and requires provider accounts:
 
 [![Deploy your own instance on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/KateK77/pubmed-clone)
 

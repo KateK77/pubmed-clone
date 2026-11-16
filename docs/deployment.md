@@ -1,14 +1,16 @@
 # Public deployment
 
-The repository provides a React frontend and a Django application. A public deployment needs an application host, persistent PostgreSQL database and, if email verification is enabled, an SMTP provider. No hosting account, public URL or SMTP credential has been provisioned for this release.
+The public application is available at **[Open MedResearch](https://medresearch-cljd.onrender.com)**. It serves the React frontend and Django API from Render Free and stores accounts and libraries in Neon Free PostgreSQL. Email verification is disabled for this showcase; no SMTP credential has been configured.
 
 GitHub stores the source, runs the automated checks and can link visitors to the deployed website. GitHub Pages is static hosting and cannot run this Django backend. The Docker image serves the frontend, accounts and API on one origin so visitors only need one website URL.
 
 ## Prepare the service
 
-### Prepared Render + Neon showcase
+### Live Render + Neon showcase
 
-The owner requested that the existing GitHub repository and its full history become public. The repository is now public. Hosting is prepared but has not been provisioned. Render access and the target workspace have been confirmed; Neon database authorization is still required.
+The GitHub repository and its full history are public. The deployment became live on November 16, 2026 UTC (November 15 in America/Chicago), using the owner's confirmed Render workspace and a separate Neon project on its Free plan. Public browser/API verification passed; see [the verification record](public-verification.json).
+
+The running service uses the repository's Dockerfile and `python backend/hosted_start.py`, in Ohio, with one instance and automatic deployment on commits. It was created directly through Render; `render.yaml` remains a template for separate deployments, not an active Blueprint managing this service. The direct-created service uses Render's default TCP health probe; `/api/health/` was also verified over public HTTPS. Runtime secrets are held in Render environment variables and are not committed.
 
 Validation of commit `9918a1be27e0b94a1fc81eec9ab66cb2a404ab01` passed in [GitHub CI](https://github.com/KateK77/pubmed-clone/actions/runs/43801157728): 53 backend cases on both SQLite and PostgreSQL, 11 frontend unit cases, 8 browser cases, the production WSGI smoke check and the Docker startup smoke check. The latter created a temporary PostgreSQL database, registered an account through CSRF-protected HTTP, restarted the app and verified that its session persisted. The blueprint also passed the Render JSON schema check.
 
@@ -20,7 +22,7 @@ The showcase configuration explicitly uses `EMAIL_VERIFICATION_REQUIRED=0`, matc
 
 Render's Free web service may sleep when idle and has usage limits. Neon Free also has storage/compute quotas. Render's separate Free Postgres expires after 30 days, so this blueprint uses external Neon storage instead. These limits mean a free showcase has availability constraints; they do not create an unlimited production service. See [Render Free](https://render.com/docs/free) and [Neon plans](https://neon.com/docs/introduction/plans).
 
-Once the host returns a successful public deployment URL, test anonymous search, registration and account isolation. Then replace the README's pending status with an **Open MedResearch** link and set GitHub's About → Website to that exact URL. Do not invent a hostname before the host assigns it.
+Public verification covered browser registration, refreshed sessions, live PMID search, author suffixes, bookmarks, collections, RIS export, sign-out/sign-in persistence and isolation between two accounts. Desktop and mobile pages rendered without uncaught browser errors. The verification removed its temporary bookmarks and collection and signed out both test accounts; the two randomly credentialed verification accounts remain without administrator privileges.
 
 ### Other hosts
 
@@ -72,15 +74,15 @@ Automated tests use a temporary local mailbox. They verify the code workflow but
 
 After the deployment has a working HTTPS URL, set the repository's **About → Website** field to that URL and add an **Open MedResearch** link near the top of the README. Visitors can then open the website and create their own accounts without installing Python or Node.js. This repository is now public; the deployed website's access is a separate hosting setting.
 
-Do not advertise a localhost address, a GitHub source URL or an unconfigured Pages URL as the public application. This release intentionally contains no invented live URL.
+The public application URL is `https://medresearch-cljd.onrender.com`. Local development addresses and the Render deployment button are not substitutes for this visitor-facing link.
 
 ## Release acceptance
 
 - Open the public URL in a private browser window and search PubMed without signing in.
-- Register with a real email, a password meeting the visible 8–128-character rule and matching confirmation. Enter the email code and verify that Search opens.
-- Change the account email with a new code, save, reload and verify persistence. Sign out and sign back in to check the email and saved library.
+- Register with a password meeting the visible 8–128-character rule and matching confirmation; verify that Search opens. If email verification is enabled in a future deployment, also test a real email code.
+- Save an account email, reload and verify persistence. Sign out and sign back in to check the saved library. Test email-change codes when verification is enabled.
 - Use a different account and confirm it cannot access the first account's collection URL.
 - Search PMID `31452104`, verify the `Jr` suffix and download RIS.
-- Confirm HTTPS, database persistence across service restarts and an email provider delivery record.
+- Confirm HTTPS and database persistence across service restarts. Require an email provider delivery record before claiming real email verification works.
 
 References: [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages), [Django deployment checklist](https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/) and [Django email](https://docs.djangoproject.com/en/5.2/topics/email/).

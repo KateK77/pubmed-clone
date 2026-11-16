@@ -1,0 +1,15 @@
+{
+  "url": "https://medresearch-cljd.onrender.com",
+  "checked_at": "2026-11-16T04:13:06.074Z",
+  "checks": [
+    "HTTPS, frontend assets and health endpoint",
+    "Browser registration and redirect to Search",
+    "Session survives refresh; minimal account form",
+    "Live PubMed search and article author suffix",
+    "Bookmarks, collections and RIS export",
+    "Second account cannot access first account library",
+    "Sign out / sign in retains saved article",
+    "Desktop/mobile rendering and no uncaught browser errors"
+  ],
+  "result": "passed"
+}
