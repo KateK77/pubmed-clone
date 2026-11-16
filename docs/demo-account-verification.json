@@ -1,0 +1,23 @@
+{
+  "verified_at_utc": "2026-11-16T20:47:31.187197+00:00",
+  "site": "https://medresearch-cljd.onrender.com",
+  "checks": [
+    {
+      "username": "portfolio_researcher",
+      "created": true,
+      "fresh_login_http_status": 200,
+      "session_verified": true,
+      "logout_http_status": 200
+    },
+    {
+      "username": "portfolio_reader",
+      "created": true,
+      "fresh_login_http_status": 200,
+      "session_verified": true,
+      "logout_http_status": 200
+    }
+  ],
+  "account_type": "ordinary user created through public registration",
+  "email_sent": false,
+  "model_calls": 0
+}

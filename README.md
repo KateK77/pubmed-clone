@@ -9,6 +9,19 @@
 
 Search immediately, or create your own account to save articles and collections. No installation required. 打开网站即可检索；注册自己的账号后可以保存文献和收藏夹。
 
+### Demo accounts
+
+Use these accounts on **[MedResearch / PubMed](https://medresearch-cljd.onrender.com/profile)**. They belong to this project, separately from MedEvidence.
+
+| Account | Username | Password |
+|---|---|---|
+| Research workspace | `portfolio_researcher` | `MedResearch-Demo-2026!` |
+| Separate reviewer workspace | `portfolio_reader` | `MedResearch-Demo-2026!` |
+
+Both are ordinary, non-admin accounts. Each account's saved research is shared with anyone using its published credentials; use test information only. Please leave the shared passwords unchanged. Create your own account for a personal library. These accounts use the normal account settings; shared-profile/password changes are not technically blocked.
+
+Both accounts were created on the live website and verified through a fresh login, session check and logout on November 16, 2026. [Verification record](docs/demo-account-verification.json). The `medresearch-demo` account described below is a separate **local development** account.
+
 MedResearch searches live biomedical literature from PubMed and gives researchers a personal library for bookmarks, collections, saved searches, and citation exports. It is an independent educational prototype with no affiliation with PubMed, NCBI, NIH, or the National Library of Medicine.
 
 ![MedResearch search interface](docs/images/search.png)
