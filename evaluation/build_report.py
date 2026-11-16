@@ -53,7 +53,7 @@ def main():
         metadata = dict(description='Round 3 / V3 consolidated Description',
                         description_sha256='19f1b6ae980962d19c472a390a141757675ba611b3f8a6168e1ac9faf825f391',
                         application_commit='03a7dc2a349a3f26bc1712c79d77957cf9338a1a',
-                        planned_cua_model='gpt-6.1-sol', cua_model_used=None,
+                        planned_cua_model='gpt-5.4', cua_model_used=None,
                         model_requests=0, total_cua_actions=0, api_input_tokens=0,
                         api_output_tokens=0, native_execution_seconds=0,
                         actual_api_cost_usd=0, paid_inference_calls=0,

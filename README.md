@@ -56,6 +56,8 @@ A dedicated evaluation branch prepares **100 specification-based tasks** from th
 
 [Evaluation showcase](evaluation/README.md) · [All 100 tasks](evaluation/FINAL_TEST_CASES.md) · [Results and evidence](evaluation/FINAL_EVALUATION_REPORT.md) · [Cost and execution plan](evaluation/EXECUTION_PLAN.md) · [Frozen specification](evaluation/SPECIFICATION.md)
 
+The updated preparation uses **GPT-5.4**, a **$4 target / $5 maximum proposed budget**, and no paid retries. **Paid execution is not approved and no formal tasks have run.** Read the [CareFlow cost comparison and reproducible forecast](evaluation/BUDGET_ANALYSIS.md) and [offline environment checks](evaluation/OFFLINE_PREFLIGHT.json). The forecast does not promise all 100 tasks fit within $5; 25 case-specific prerequisites still need work.
+
 These evaluation and presentation changes remain on `evaluation/v3-native-cua-100` until the owner approves a merge into `main`.
 
 ## Accounts

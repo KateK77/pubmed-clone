@@ -1,5 +1,5 @@
 {
-  "model": "gpt-6.1-sol",
+  "model": "gpt-5.4",
   "suite": "evaluation/final_test_cases_100.json",
   "frozen_suite_sha256": "b9b1007098c297acb58158c21eb442a97deb49b835e893eda71c0dcab700ac37",
   "base_url": "http://127.0.0.1:8124",
@@ -27,17 +27,17 @@
     "europepmc.org",
     "academic.oup.com"
   ],
-  "total_usd": 100,
-  "reserve_input_usd_per_million": 5,
-  "reserve_output_usd_per_million": 20,
-  "max_output_tokens_per_request": 2048,
-  "max_input_tokens_per_request": 272000,
+  "total_usd": 4,
+  "reserve_input_usd_per_million": 2.5,
+  "reserve_output_usd_per_million": 15,
+  "max_output_tokens_per_request": 1024,
+  "max_input_tokens_per_request": 32000,
   "request_timeout_seconds": 90,
   "action_settle_ms": 400,
   "max_download_bytes": 10485760,
   "per_test": {
     "model_requests": 20,
-    "actions": 60,
+    "actions": 80,
     "input_tokens": 150000,
     "output_tokens": 20000,
     "runtime_seconds": 600
@@ -45,30 +45,30 @@
   "per_difficulty": {
     "Easy": {
       "model_requests": 20,
-      "actions": 60,
+      "actions": 80,
       "input_tokens": 150000,
       "output_tokens": 20000,
       "runtime_seconds": 600
     },
     "Medium": {
-      "model_requests": 30,
-      "actions": 100,
+      "model_requests": 36,
+      "actions": 160,
       "input_tokens": 300000,
-      "output_tokens": 30000,
+      "output_tokens": 36000,
       "runtime_seconds": 900
     },
     "Hard": {
-      "model_requests": 45,
-      "actions": 160,
+      "model_requests": 48,
+      "actions": 220,
       "input_tokens": 600000,
-      "output_tokens": 45000,
+      "output_tokens": 48000,
       "runtime_seconds": 1200
     },
     "Expert": {
-      "model_requests": 60,
-      "actions": 220,
+      "model_requests": 80,
+      "actions": 360,
       "input_tokens": 900000,
-      "output_tokens": 60000,
+      "output_tokens": 80000,
       "runtime_seconds": 1800
     }
   },
@@ -81,5 +81,18 @@
   },
   "environment_python": "../../work/venv/Scripts/python.exe",
   "preconditions_file": "evaluation/case_preconditions.json",
-  "synthetic_credentials_file": "evaluation/private/synthetic-credentials.local.json"
+  "synthetic_credentials_file": "evaluation/private/synthetic-credentials.local.json",
+  "target_usd": 4,
+  "maximum_proposed_usd": 5,
+  "reasoning_effort": "none",
+  "context_mode": "last_native_turn_with_complete_text_ledger",
+  "prices": {
+    "input": 2.5,
+    "cached_input": 0.25,
+    "output": 15
+  },
+  "external_resource_hosts": [
+    "static.ncbi.nlm.nih.gov",
+    "cdn.ncbi.nlm.nih.gov"
+  ]
 }

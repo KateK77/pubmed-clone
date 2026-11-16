@@ -1,33 +1,98 @@
 {
-  "model": "gpt-6.1-sol",
+  "model": "gpt-5.4",
   "suite": "evaluation/final_test_cases_100.json",
   "frozen_suite_sha256": "REPLACE_WITH_FROZEN_SUITE_HASH",
   "base_url": "http://127.0.0.1:8124",
-  "allowed_local_origins": ["http://127.0.0.1:8125", "http://127.0.0.1:8126"],
+  "allowed_local_origins": [
+    "http://127.0.0.1:8125",
+    "http://127.0.0.1:8126"
+  ],
   "mailbox_navigation_supported": true,
   "playwright_module": "frontend/node_modules/playwright/index.mjs",
   "browser_executable": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
-  "lifecycle_module": "evaluation/harness/lifecycle.mjs",
+  "lifecycle_module": "evaluation/environment/lifecycle.mjs",
   "approval_file": "evaluation/private/paid-approval.json",
   "output_dir": "evaluation/private/native-run-001",
   "headless": true,
-  "viewport": { "width": 1280, "height": 800 },
-  "external_hosts": ["pubmed.ncbi.nlm.nih.gov", "pmc.ncbi.nlm.nih.gov", "www.ncbi.nlm.nih.gov", "doi.org"],
-  "external_resource_hosts": ["static.ncbi.nlm.nih.gov", "cdn.ncbi.nlm.nih.gov"],
-  "total_usd": 100,
-  "reserve_input_usd_per_million": 5,
-  "reserve_output_usd_per_million": 20,
-  "max_output_tokens_per_request": 2048,
-  "max_input_tokens_per_request": 272000,
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "external_hosts": [
+    "pubmed.ncbi.nlm.nih.gov",
+    "pmc.ncbi.nlm.nih.gov",
+    "www.ncbi.nlm.nih.gov",
+    "doi.org",
+    "www.acpjournals.org",
+    "europepmc.org",
+    "academic.oup.com"
+  ],
+  "total_usd": 4,
+  "reserve_input_usd_per_million": 2.5,
+  "reserve_output_usd_per_million": 15,
+  "max_output_tokens_per_request": 1024,
+  "max_input_tokens_per_request": 32000,
   "request_timeout_seconds": 90,
   "action_settle_ms": 400,
   "max_download_bytes": 10485760,
-  "per_test": { "model_requests": 20, "actions": 60, "input_tokens": 150000, "output_tokens": 20000, "runtime_seconds": 600 },
-  "per_difficulty": {
-    "Easy": { "model_requests": 20, "actions": 60, "input_tokens": 150000, "output_tokens": 20000, "runtime_seconds": 600 },
-    "Medium": { "model_requests": 30, "actions": 100, "input_tokens": 300000, "output_tokens": 30000, "runtime_seconds": 900 },
-    "Hard": { "model_requests": 45, "actions": 160, "input_tokens": 600000, "output_tokens": 45000, "runtime_seconds": 1200 },
-    "Expert": { "model_requests": 60, "actions": 220, "input_tokens": 900000, "output_tokens": 60000, "runtime_seconds": 1800 }
+  "per_test": {
+    "model_requests": 20,
+    "actions": 80,
+    "input_tokens": 150000,
+    "output_tokens": 20000,
+    "runtime_seconds": 600
   },
-  "global": { "model_requests": 3000, "actions": 10000, "input_tokens": 30000000, "output_tokens": 3000000, "runtime_seconds": 28800 }
+  "per_difficulty": {
+    "Easy": {
+      "model_requests": 20,
+      "actions": 80,
+      "input_tokens": 150000,
+      "output_tokens": 20000,
+      "runtime_seconds": 600
+    },
+    "Medium": {
+      "model_requests": 36,
+      "actions": 160,
+      "input_tokens": 300000,
+      "output_tokens": 36000,
+      "runtime_seconds": 900
+    },
+    "Hard": {
+      "model_requests": 48,
+      "actions": 220,
+      "input_tokens": 600000,
+      "output_tokens": 48000,
+      "runtime_seconds": 1200
+    },
+    "Expert": {
+      "model_requests": 80,
+      "actions": 360,
+      "input_tokens": 900000,
+      "output_tokens": 80000,
+      "runtime_seconds": 1800
+    }
+  },
+  "global": {
+    "model_requests": 3000,
+    "actions": 10000,
+    "input_tokens": 30000000,
+    "output_tokens": 3000000,
+    "runtime_seconds": 28800
+  },
+  "environment_python": "../../work/venv/Scripts/python.exe",
+  "preconditions_file": "evaluation/case_preconditions.json",
+  "synthetic_credentials_file": "evaluation/private/synthetic-credentials.local.json",
+  "target_usd": 4,
+  "maximum_proposed_usd": 5,
+  "reasoning_effort": "none",
+  "context_mode": "last_native_turn_with_complete_text_ledger",
+  "prices": {
+    "input": 2.5,
+    "cached_input": 0.25,
+    "output": 15
+  },
+  "external_resource_hosts": [
+    "static.ncbi.nlm.nih.gov",
+    "cdn.ncbi.nlm.nih.gov"
+  ]
 }

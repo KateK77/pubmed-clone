@@ -1,0 +1,101 @@
+id,title,difficulty,role,status,stage,requests,completed_actions,input_tokens,output_tokens,estimated_token_cost_usd,pre_api_block
+CF-001,Unified landing,1,Anonymous,PASS,independent_verification,3,4,10253,94,0.027043,False
+CF-002,Staff sign-in entry,1,Anonymous,PASS,independent_verification,3,4,10253,79,0.026818,True
+CF-003,Patient sign-in entry,1,Anonymous,PASS,independent_verification,3,4,10253,73,0.026728,False
+CF-004,Patient signup fields,1,Anonymous,PASS,independent_verification,3,4,10253,90,0.026982,False
+CF-005,Staff application fields,1,Anonymous,PASS,independent_verification,3,4,10253,82,0.026863,False
+CF-006,Administrator dashboard,1,Administrator,PASS,independent_verification,3,4,10253,78,0.026802,False
+CF-007,Physician worklist,1,Physician,PASS,independent_verification,3,4,10253,84,0.026892,False
+CF-008,Nursing workspace,1,Nurse,PASS,independent_verification,3,4,10253,85,0.026908,False
+CF-009,Laboratory worklist,1,Lab Staff,PASS,independent_verification,3,4,10253,77,0.026787,False
+CF-010,Pharmacy worklist,1,Pharmacist,PASS,independent_verification,3,4,10253,79,0.026818,False
+CF-011,Patient directory,2,FrontDesk,PASS,independent_verification,3,4,10253,79,0.026818,False
+CF-012,Patient demographics,2,FrontDesk,PASS,independent_verification,3,4,10253,86,0.026922,False
+CF-013,Appointment calendar,2,FrontDesk,PASS,independent_verification,3,4,10253,81,0.026847,False
+CF-014,Check-in worklist,2,FrontDesk,PASS,independent_verification,3,4,10253,72,0.026713,False
+CF-015,Appointment creation history,2,FrontDesk,PASS,independent_verification,3,4,10253,95,0.027058,False
+CF-016,Longitudinal patient chart,2,Physician,PASS,independent_verification,3,4,10253,87,0.026937,False
+CF-017,In-progress encounter,2,Physician,PASS,independent_verification,3,4,10253,93,0.027027,False
+CF-018,Medical-history empty state,2,Physician,PASS,independent_verification,3,4,10253,96,0.027072,False
+CF-019,Longitudinal problems,2,Physician,PASS,independent_verification,3,4,10253,84,0.026892,False
+CF-020,Allergy review status,2,Physician,PASS,independent_verification,3,4,10253,98,0.027103,False
+CF-021,Medication history,2,Physician,PASS,independent_verification,3,4,10253,94,0.027043,False
+CF-022,Encounter diagnoses,2,Physician,PASS,independent_verification,3,4,10253,91,0.026998,False
+CF-023,Appointment nursing context,2,Nurse,PASS,independent_verification,3,4,10253,85,0.026908,False
+CF-024,Longitudinal flowsheet,2,Nurse,PASS,independent_verification,3,4,10253,90,0.026982,False
+CF-025,Lab catalog,2,Physician,PASS,independent_verification,3,4,10253,75,0.026758,False
+CF-026,Lab order history,2,Physician,PASS,independent_verification,3,4,10253,78,0.026802,False
+CF-027,Medication catalog,2,Physician,PASS,independent_verification,3,4,10253,82,0.026863,False
+CF-028,Signed medication history,2,Physician,PASS,independent_verification,3,4,10253,80,0.026832,False
+CF-029,Billing worklist,2,BillingStaff,PASS,independent_verification,3,4,10253,76,0.026773,False
+CF-030,Claims queue,2,BillingStaff,PASS,independent_verification,3,4,10253,82,0.026863,False
+CF-031,Radiology worklist,2,RadiologyStaff,PASS,independent_verification,3,4,10253,85,0.026908,True
+CF-032,Imaging catalog,2,Administrator,PASS,independent_verification,3,4,10253,70,0.026683,False
+CF-033,Inpatient dashboard,2,HospitalOperations,PASS,independent_verification,3,4,10253,87,0.026937,False
+CF-034,Capacity dashboard,2,HospitalOperations,PASS,independent_verification,3,4,10253,83,0.026877,False
+CF-035,Emergency tracking board,2,Nurse,PASS,independent_verification,3,4,10253,83,0.026877,True
+CF-036,Anonymous staff redirect,3,Anonymous,PASS,independent_verification,3,4,10271,92,0.027058,False
+CF-037,Anonymous patient redirect,3,Anonymous,PASS,independent_verification,3,4,10271,86,0.026967,False
+CF-038,Patient denied directory,3,Patient,PASS,independent_verification,3,4,10271,90,0.027027,False
+CF-039,Patient denied staff approval,3,Patient,PASS,independent_verification,3,4,10271,81,0.026892,False
+CF-040,Patient denied nursing,3,Patient,PASS,independent_verification,3,4,10271,93,0.027072,False
+CF-041,Patient denied pharmacy,3,Patient,FAIL,independent_verification,3,4,10271,100,0.027178,False
+CF-042,Physician denied registration,3,Physician,PASS,independent_verification,3,4,10271,91,0.027043,False
+CF-043,Physician denied demographics edit,3,Physician,PASS,independent_verification,3,4,10271,89,0.027012,False
+CF-044,Physician denied account approval,3,Physician,PASS,independent_verification,3,4,10271,88,0.026998,False
+CF-045,FrontDesk denied chart,3,FrontDesk,PASS,independent_verification,3,4,10271,93,0.027072,False
+CF-046,FrontDesk denied SOAP,3,FrontDesk,PASS,independent_verification,3,4,10271,88,0.026998,False
+CF-047,FrontDesk denied history,3,FrontDesk,PASS,independent_verification,3,4,10271,91,0.027043,False
+CF-048,Nurse denied SOAP authoring,3,Nurse,PASS,independent_verification,3,4,10271,72,0.026758,False
+CF-049,Nurse denied patient creation,3,Nurse,PASS,independent_verification,3,4,10271,92,0.027058,False
+CF-050,Lab denied demographics,3,Lab Staff,PASS,independent_verification,3,4,10271,93,0.027072,False
+CF-051,Lab denied physician worklist,3,Lab Staff,PASS,independent_verification,3,4,10271,92,0.027058,False
+CF-052,Pharmacist denied chart,3,Pharmacist,PASS,independent_verification,3,4,10271,93,0.027072,False
+CF-053,Pharmacist denied demographics edit,3,Pharmacist,PASS,independent_verification,3,4,10271,92,0.027058,False
+CF-054,Billing denied ED,3,BillingStaff,PASS,independent_verification,3,4,10271,72,0.026758,False
+CF-055,Billing denied inpatient,3,BillingStaff,PASS,independent_verification,3,4,10271,72,0.026758,False
+CF-056,Radiology denied SOAP,3,RadiologyStaff,PASS,independent_verification,3,4,10271,91,0.027043,False
+CF-057,HospitalOperations denied approval,3,HospitalOperations,PASS,independent_verification,3,4,10271,91,0.027043,False
+CF-058,Physician denied unrelated chart,3,Physician,PASS,independent_verification,3,4,10271,84,0.026937,False
+CF-059,Mismatched patient encounter denied,3,Physician,PASS,independent_verification,3,4,10271,85,0.026953,False
+CF-060,Unclaimed pharmacy details denied,3,Pharmacist,PASS,independent_verification,3,4,10271,87,0.026982,False
+CF-061,Own patient dashboard,2,Patient,PASS,independent_verification,3,4,10253,80,0.026832,False
+CF-062,Own appointments,2,Patient,PASS,independent_verification,3,4,10253,75,0.026758,False
+CF-063,Own visits,2,Patient,PASS,independent_verification,3,4,10253,86,0.026922,False
+CF-064,Own medications,2,Patient,PASS,independent_verification,3,4,10253,76,0.026773,False
+CF-065,Released-results empty state,2,Patient,PASS,independent_verification,3,4,10253,88,0.026953,False
+CF-066,Own messages,2,Patient,PASS,independent_verification,3,4,10253,75,0.026758,False
+CF-067,Own appointment requests,2,Patient,PASS,independent_verification,3,4,10253,83,0.026877,False
+CF-068,Own billing statements,2,Patient,PASS,independent_verification,3,4,10253,82,0.026863,False
+CF-069,Owner cannot see unreleased lab result,3,Patient,PASS,independent_verification,3,4,10253,75,0.026758,False
+CF-070,Other patient cannot see lab result,3,OtherPatient,PASS,independent_verification,3,4,10253,74,0.026742,False
+CF-071,Register synthetic patient,4,FrontDesk,PASS,independent_verification,6,19,32436,328,0.08601,False
+CF-072,Required synthetic confirmation,4,FrontDesk,PASS,independent_verification,6,17,32500,317,0.086005,False
+CF-073,Duplicate MRN rejection,4,FrontDesk,PASS,independent_verification,6,18,32478,303,0.08574,False
+CF-074,Edit demographics and audit,4,FrontDesk,FAIL,computer_action,2,2,5561,88,0.015222,False
+CF-075,Schedule and confirm appointment,4,FrontDesk,FAIL,computer_action,4,8,16219,173,0.043143,False
+CF-076,Check in and audit,4,FrontDesk,PASS,independent_verification,3,4,10223,109,0.027193,False
+CF-077,Reschedule same patient,4,FrontDesk,FAIL,computer_action,2,2,5585,91,0.015328,False
+CF-078,Cancel with retained reason,4,FrontDesk,PASS,independent_verification,3,5,10244,96,0.02705,False
+CF-079,Create four-section SOAP,4,Physician,FAIL,computer_action,3,8,10330,163,0.02827,False
+CF-080,Sign existing SOAP,4,Physician,FAIL,computer_action,4,6,16134,138,0.042405,False
+CF-081,Complete signed encounter,4,Physician,PASS,independent_verification,3,3,10197,71,0.026558,False
+CF-082,Past medical history,4,Physician,FAIL,independent_verification,5,23,23933,353,0.065128,False
+CF-083,Active longitudinal problem,4,Physician,FAIL,independent_verification,6,14,32045,273,0.084208,False
+CF-084,Document fictional allergy,4,Physician,FAIL,computer_action,5,13,23538,335,0.06387,False
+CF-085,Medication statement,4,Physician,FAIL,computer_screenshot,6,27,32402,475,0.08813,False
+CF-086,Nursing assessment,4,Nurse,FAIL,computer_action,3,6,10280,140,0.0278,False
+CF-087,Vital-sign panel,4,Nurse,FAIL,computer_action,6,16,31914,396,0.085725,False
+CF-088,Approve pending staff application,4,Administrator,PASS,independent_verification,3,5,10256,98,0.02711,False
+CF-089,Reject pending staff application,4,Administrator,FAIL,independent_verification,4,8,16175,143,0.042583,False
+CF-090,Mismatched password confirmation,4,Anonymous,PASS,independent_verification,3,10,10363,158,0.028278,False
+CF-091,Claim signed requisition,5,Pharmacist,PASS,independent_verification,4,8,16177,153,0.042737,False
+CF-092,Request clarification,5,Pharmacist,PASS,independent_verification,4,8,16213,155,0.042857,False
+CF-093,Approve pharmacy verification,5,Pharmacist,PASS,independent_verification,4,6,16155,121,0.042202,False
+CF-094,Record simulated dispensing,5,Pharmacist,PASS,independent_verification,4,8,16211,163,0.042972,False
+CF-095,Claim lab requisition,5,Lab Staff,PASS,independent_verification,5,10,23444,222,0.06194,False
+CF-096,Collect specimen with identity,5,Nurse,PASS,independent_verification,5,12,23560,248,0.06262,False
+CF-097,Publish prepared lab report,5,Lab Staff,PASS,independent_verification,5,8,23347,176,0.061007,False
+CF-098,Acknowledge exact lab revision,5,Physician,PASS,independent_verification,6,16,31908,281,0.083985,False
+CF-099,Compose and sign SOAP journey,5,Physician,FAIL,computer_action,2,8,5583,158,0.016328,False
+CF-100,Schedule and check-in journey,5,FrontDesk,FAIL,computer_action,4,8,16268,175,0.043295,False

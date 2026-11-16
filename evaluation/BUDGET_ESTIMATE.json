@@ -1,0 +1,264 @@
+{
+  "kind": "unbenchmarked_offline_budget_forecast",
+  "paid_calls": 0,
+  "approval": false,
+  "suite_sha256": "b9b1007098c297acb58158c21eb442a97deb49b835e893eda71c0dcab700ac37",
+  "model": "gpt-5.4",
+  "service_tier": "default",
+  "reasoning_effort": "none",
+  "prices_per_million": {
+    "input": 2.5,
+    "cached_input": 0.25,
+    "output": 15
+  },
+  "target_usd": 4,
+  "maximum_acceptable_usd": 5,
+  "active_stop_usd": 4,
+  "model_metadata_accessible": true,
+  "native_api_compatibility_verified": false,
+  "screenshot_tokens": {
+    "desktop_1440x900": 1566,
+    "mobile_390x844": 422,
+    "careflow_1280x800": 1200
+  },
+  "extra_tool_fees_assumed_usd": 0,
+  "extra_fee_note": "Local browser only; no hosted container/web-search/file-search. Official tools table does not list a separate native computer surcharge; confirm account billing before paid execution. Not an invoice or tax-inclusive guarantee.",
+  "reference": {
+    "source": "https://github.com/KateK77/careflow-ehr/blob/docs/public-showcase-cua100/docs/testing/cua100-v1/results.csv",
+    "model": "gpt-5.4",
+    "tasks": 100,
+    "requests": 336,
+    "input_tokens": 1279839,
+    "output_tokens": 12025,
+    "calculated_uncached_usd": 3.3799725,
+    "average_requests_per_task": 3.36,
+    "average_input_per_request": 3809.0446428571427,
+    "average_output_per_request": 35.788690476190474,
+    "completed_actions": 586,
+    "csv_sha256": "f7c3df974f9d33f51cdf2f379373c7b9169b2cafda92ceec717244a52238d135"
+  },
+  "scenarios": {
+    "optimistic": {
+      "groups": [
+        {
+          "difficulty": "Easy",
+          "tests": 30,
+          "requests_per_test": 4,
+          "total_requests": 120,
+          "input_per_request": 2600,
+          "output_per_request": 70,
+          "input_tokens": 312000,
+          "output_tokens": 8400,
+          "estimated_usd": 0.906
+        },
+        {
+          "difficulty": "Medium",
+          "tests": 40,
+          "requests_per_test": 7,
+          "total_requests": 280,
+          "input_per_request": 3200,
+          "output_per_request": 90,
+          "input_tokens": 896000,
+          "output_tokens": 25200,
+          "estimated_usd": 2.618
+        },
+        {
+          "difficulty": "Hard",
+          "tests": 20,
+          "requests_per_test": 9,
+          "total_requests": 180,
+          "input_per_request": 3800,
+          "output_per_request": 120,
+          "input_tokens": 684000,
+          "output_tokens": 21600,
+          "estimated_usd": 2.034
+        },
+        {
+          "difficulty": "Expert",
+          "tests": 10,
+          "requests_per_test": 14,
+          "total_requests": 140,
+          "input_per_request": 4600,
+          "output_per_request": 160,
+          "input_tokens": 644000,
+          "output_tokens": 22400,
+          "estimated_usd": 1.946
+        }
+      ],
+      "total_requests": 720,
+      "input_tokens": 2536000,
+      "output_tokens": 77600,
+      "estimated_total_usd": 7.504,
+      "budget_coverage": {
+        "4": {
+          "estimated_completed_attempts": 74,
+          "estimated_spend_usd": 3.9308,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        },
+        "5": {
+          "estimated_completed_attempts": 84,
+          "estimated_spend_usd": 4.9478,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        },
+        "15": {
+          "estimated_completed_attempts": 100,
+          "estimated_spend_usd": 7.504,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        }
+      }
+    },
+    "central": {
+      "groups": [
+        {
+          "difficulty": "Easy",
+          "tests": 30,
+          "requests_per_test": 5,
+          "total_requests": 150,
+          "input_per_request": 3000,
+          "output_per_request": 80,
+          "input_tokens": 450000,
+          "output_tokens": 12000,
+          "estimated_usd": 1.305
+        },
+        {
+          "difficulty": "Medium",
+          "tests": 40,
+          "requests_per_test": 9,
+          "total_requests": 360,
+          "input_per_request": 3800,
+          "output_per_request": 110,
+          "input_tokens": 1368000,
+          "output_tokens": 39600,
+          "estimated_usd": 4.014
+        },
+        {
+          "difficulty": "Hard",
+          "tests": 20,
+          "requests_per_test": 12,
+          "total_requests": 240,
+          "input_per_request": 4600,
+          "output_per_request": 140,
+          "input_tokens": 1104000,
+          "output_tokens": 33600,
+          "estimated_usd": 3.264
+        },
+        {
+          "difficulty": "Expert",
+          "tests": 10,
+          "requests_per_test": 20,
+          "total_requests": 200,
+          "input_per_request": 5800,
+          "output_per_request": 200,
+          "input_tokens": 1160000,
+          "output_tokens": 40000,
+          "estimated_usd": 3.5
+        }
+      ],
+      "total_requests": 950,
+      "input_tokens": 4082000,
+      "output_tokens": 125200,
+      "estimated_total_usd": 12.083,
+      "budget_coverage": {
+        "4": {
+          "estimated_completed_attempts": 56,
+          "estimated_spend_usd": 3.9141,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        },
+        "5": {
+          "estimated_completed_attempts": 66,
+          "estimated_spend_usd": 4.9176,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        },
+        "15": {
+          "estimated_completed_attempts": 100,
+          "estimated_spend_usd": 12.083,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        }
+      }
+    },
+    "higher_usage": {
+      "groups": [
+        {
+          "difficulty": "Easy",
+          "tests": 30,
+          "requests_per_test": 8,
+          "total_requests": 240,
+          "input_per_request": 3500,
+          "output_per_request": 120,
+          "input_tokens": 840000,
+          "output_tokens": 28800,
+          "estimated_usd": 2.532
+        },
+        {
+          "difficulty": "Medium",
+          "tests": 40,
+          "requests_per_test": 14,
+          "total_requests": 560,
+          "input_per_request": 4500,
+          "output_per_request": 180,
+          "input_tokens": 2520000,
+          "output_tokens": 100800,
+          "estimated_usd": 7.812
+        },
+        {
+          "difficulty": "Hard",
+          "tests": 20,
+          "requests_per_test": 20,
+          "total_requests": 400,
+          "input_per_request": 5500,
+          "output_per_request": 240,
+          "input_tokens": 2200000,
+          "output_tokens": 96000,
+          "estimated_usd": 6.94
+        },
+        {
+          "difficulty": "Expert",
+          "tests": 10,
+          "requests_per_test": 32,
+          "total_requests": 320,
+          "input_per_request": 7000,
+          "output_per_request": 320,
+          "input_tokens": 2240000,
+          "output_tokens": 102400,
+          "estimated_usd": 7.136
+        }
+      ],
+      "total_requests": 1520,
+      "input_tokens": 7800000,
+      "output_tokens": 328000,
+      "estimated_total_usd": 24.42,
+      "budget_coverage": {
+        "4": {
+          "estimated_completed_attempts": 37,
+          "estimated_spend_usd": 3.8991,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        },
+        "5": {
+          "estimated_completed_attempts": 42,
+          "estimated_spend_usd": 4.8756,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        },
+        "15": {
+          "estimated_completed_attempts": 83,
+          "estimated_spend_usd": 14.855,
+          "assumes_all_prerequisites_ready": true,
+          "not_a_pass_count": true
+        }
+      }
+    }
+  },
+  "limitations": [
+    "No paid calibration; request and token quantities are explicit hypotheses",
+    "A completed paid attempt is not a PASS; failures and infrastructure errors remain separate",
+    "All 100 expectations unchanged; currently 25 case-specific prerequisites still pending",
+    "Neither $15 nor $5 is authorization to spend; explicit approval remains required"
+  ]
+}

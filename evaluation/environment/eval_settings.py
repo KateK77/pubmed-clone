@@ -40,3 +40,6 @@ elif os.environ['EVALUATION_MODE'] == 'smtp':
 FRONTEND_DIR = source / 'frontend' / 'dist'
 NCBI_API_KEY = ''
 NCBI_EMAIL = ''
+
+# Use the pinned application's existing static-asset WSGI wrapper.
+WSGI_APPLICATION = 'medresearch.wsgi.application'
