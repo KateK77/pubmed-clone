@@ -1,0 +1,13 @@
+{
+  "status": "pre_execution_fixture_freeze",
+  "suite_sha256": "b9b1007098c297acb58158c21eb442a97deb49b835e893eda71c0dcab700ac37",
+  "files": {
+    "manifest.json": "1c5e25a410df9ee97f07847211e28806bbaffad3e01c680a4438997ad70d41fd",
+    "data-manifest-selection.json": "dfe874d2b7651916ef666aa7b6f4f92477455c55cb44610ebcd2a112fab79ee2",
+    "source-responses.json": "bb5c73224b13d9884ddead58bce5158c2c7a85acae3959d6c332b16a5ceb4d5e",
+    "query-preflight.json": "a2388d1ee16a72e6617ad5eff06f588044d9bd8b8e20d256eb6f97c4279be921",
+    "baseline.json": "7ee0b1e9939a5084b8e9a17de957941b399a6a4436d260e5444d5f7e4ca71678",
+    "build_manifest.py": "6f276946d1511220381ac6b0126ea132a32c4657e2b5b064e040f60983fec017"
+  },
+  "formal_tests_executed": 0
+}

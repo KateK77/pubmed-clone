@@ -1,0 +1,3429 @@
+{
+  "suite_sha256": "b9b1007098c297acb58158c21eb442a97deb49b835e893eda71c0dcab700ac37",
+  "application_commit": "03a7dc2a349a3f26bc1712c79d77957cf9338a1a",
+  "status": "precondition_readiness_review_not_test_results",
+  "scope_note": "Actor readiness does not imply final grading readiness. No test has executed. Required fixture inputs and independent oracles must be established before their corresponding judgment.",
+  "cases": {
+    "T001": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 匿名；桌面视口；首页主数据真实可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "匿名；桌面视口；首页主数据真实可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、导航URL；精选PMID与官方清单核对。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T002": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 匿名；正常实时PubMed。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "匿名；正常实时PubMed。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、同次官方ESearch/元数据记录。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T003": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 基础记录已通过LIVE预检。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "基础记录已通过LIVE预检。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方BASE元数据与截图。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T004": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1的DOI槽位已冻结。\nFrozen official fixture inputs: {\"DOI\": {\"pmid\": \"1586094\", \"title\": \"Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.\", \"doi\": \"10.7326/0003-4819-116-12-1030\", \"journal\": \"Annals of internal medicine\", \"year\": \"1992\", \"mesh\": [\"Duplicate Publications as Topic\", \"Peer Review\", \"Periodicals as Topic\", \"Publishing\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1的DOI槽位已冻结。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方manifest与搜索响应。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "DOI": {
+          "pmid": "1586094",
+          "title": "Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.",
+          "doi": "10.7326/0003-4819-116-12-1030",
+          "journal": "Annals of internal medicine",
+          "year": "1992",
+          "mesh": [
+            "Duplicate Publications as Topic",
+            "Peer Review",
+            "Periodicals as Topic",
+            "Publishing"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T005": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE标题在清单固定。\nFrozen official fixture inputs: {\"BASE\": {\"pmid\": \"31452104\", \"title\": \"Molegro Virtual Docker for Docking.\", \"doi\": \"10.1007/978-1-4939-9752-7_10\", \"journal\": \"Methods in molecular biology (Clifton, N.J.)\", \"year\": \"2019\", \"mesh\": [\"Binding Sites\", \"Cyclin-Dependent Kinase 2\", \"Drug Design\", \"Humans\", \"Ligands\", \"Molecular Docking Simulation\", \"Molecular Dynamics Simulation\", \"Protein Binding\", \"Proteins\", \"Software\", \"User-Computer Interface\"], \"author_count\": 2, \"first_personal_author\": \"Gabriela Bitencourt-Ferreira\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE标题在清单固定。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "同次官方检索与BASE元数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "BASE": {
+          "pmid": "31452104",
+          "title": "Molegro Virtual Docker for Docking.",
+          "doi": "10.1007/978-1-4939-9752-7_10",
+          "journal": "Methods in molecular biology (Clifton, N.J.)",
+          "year": "2019",
+          "mesh": [
+            "Binding Sites",
+            "Cyclin-Dependent Kinase 2",
+            "Drug Design",
+            "Humans",
+            "Ligands",
+            "Molecular Docking Simulation",
+            "Molecular Dynamics Simulation",
+            "Protein Binding",
+            "Proteins",
+            "Software",
+            "User-Computer Interface"
+          ],
+          "author_count": 2,
+          "first_personal_author": "Gabriela Bitencourt-Ferreira",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T006": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE作者列表存在；取首位个人作者，无个人作者则前置阻塞。\nFrozen official fixture inputs: {\"BASE\": {\"pmid\": \"31452104\", \"title\": \"Molegro Virtual Docker for Docking.\", \"doi\": \"10.1007/978-1-4939-9752-7_10\", \"journal\": \"Methods in molecular biology (Clifton, N.J.)\", \"year\": \"2019\", \"mesh\": [\"Binding Sites\", \"Cyclin-Dependent Kinase 2\", \"Drug Design\", \"Humans\", \"Ligands\", \"Molecular Docking Simulation\", \"Molecular Dynamics Simulation\", \"Protein Binding\", \"Proteins\", \"Software\", \"User-Computer Interface\"], \"author_count\": 2, \"first_personal_author\": \"Gabriela Bitencourt-Ferreira\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE作者列表存在；取首位个人作者，无个人作者则前置阻塞。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方同查询结果及作者元数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "BASE": {
+          "pmid": "31452104",
+          "title": "Molegro Virtual Docker for Docking.",
+          "doi": "10.1007/978-1-4939-9752-7_10",
+          "journal": "Methods in molecular biology (Clifton, N.J.)",
+          "year": "2019",
+          "mesh": [
+            "Binding Sites",
+            "Cyclin-Dependent Kinase 2",
+            "Drug Design",
+            "Humans",
+            "Ligands",
+            "Molecular Docking Simulation",
+            "Molecular Dynamics Simulation",
+            "Protein Binding",
+            "Proteins",
+            "Software",
+            "User-Computer Interface"
+          ],
+          "author_count": 2,
+          "first_personal_author": "Gabriela Bitencourt-Ferreira",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T007": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE期刊字段已核实。\nFrozen official fixture inputs: {\"BASE\": {\"pmid\": \"31452104\", \"title\": \"Molegro Virtual Docker for Docking.\", \"doi\": \"10.1007/978-1-4939-9752-7_10\", \"journal\": \"Methods in molecular biology (Clifton, N.J.)\", \"year\": \"2019\", \"mesh\": [\"Binding Sites\", \"Cyclin-Dependent Kinase 2\", \"Drug Design\", \"Humans\", \"Ligands\", \"Molecular Docking Simulation\", \"Molecular Dynamics Simulation\", \"Protein Binding\", \"Proteins\", \"Software\", \"User-Computer Interface\"], \"author_count\": 2, \"first_personal_author\": \"Gabriela Bitencourt-Ferreira\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE期刊字段已核实。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方查询响应和截图。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "BASE": {
+          "pmid": "31452104",
+          "title": "Molegro Virtual Docker for Docking.",
+          "doi": "10.1007/978-1-4939-9752-7_10",
+          "journal": "Methods in molecular biology (Clifton, N.J.)",
+          "year": "2019",
+          "mesh": [
+            "Binding Sites",
+            "Cyclin-Dependent Kinase 2",
+            "Drug Design",
+            "Humans",
+            "Ligands",
+            "Molecular Docking Simulation",
+            "Molecular Dynamics Simulation",
+            "Protein Binding",
+            "Proteins",
+            "Software",
+            "User-Computer Interface"
+          ],
+          "author_count": 2,
+          "first_personal_author": "Gabriela Bitencourt-Ferreira",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T008": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 首页；实时检索可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "首页；实时检索可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "首页截图记录选中入口，实际出站查询及结果。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T009": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 实时查询可返回结果。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "实时查询可返回结果。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "卡片、详情截图与官方元数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T010": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1的META最小覆盖集合及REFERENCES/CITED_BY已冻结；找不到某条件时对应检查BLOCKED，不判不存在功能通过。\nFrozen official fixture inputs: {\"META\": {\"pmids\": [\"25835490\"], \"author_count\": 0, \"author_suffixes\": []}, \"REFERENCES\": {\"pmid\": \"9016524\", \"title\": \"The PAH mutation analysis consortium database: update 1996.\", \"doi\": \"10.1093/nar/25.1.139\", \"journal\": \"Nucleic acids research\", \"year\": \"1997\", \"mesh\": [\"Animals\", \"Base Sequence\", \"Computer Communication Networks\", \"Databases, Factual\", \"Genes\", \"Humans\", \"Mice\", \"Molecular Sequence Data\", \"Mutation\", \"Phenylalanine Hydroxylase\"], \"author_count\": 4, \"first_personal_author\": \"P Nowacki\", \"author_suffixes\": []}, \"CITED_BY\": {\"pmid\": \"1586094\", \"title\": \"Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.\", \"doi\": \"10.7326/0003-4819-116-12-1030\", \"journal\": \"Annals of internal medicine\", \"year\": \"1992\", \"mesh\": [\"Duplicate Publications as Topic\", \"Peer Review\", \"Periodicals as Topic\", \"Publishing\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1的META最小覆盖集合及REFERENCES/CITED_BY已冻结；找不到某条件时对应检查BLOCKED，不判不存在功能通过。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方EFetch及ELink清单与截图逐字段核对。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "META": {
+          "pmids": [
+            "25835490"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        },
+        "REFERENCES": {
+          "pmid": "9016524",
+          "title": "The PAH mutation analysis consortium database: update 1996.",
+          "doi": "10.1093/nar/25.1.139",
+          "journal": "Nucleic acids research",
+          "year": "1997",
+          "mesh": [
+            "Animals",
+            "Base Sequence",
+            "Computer Communication Networks",
+            "Databases, Factual",
+            "Genes",
+            "Humans",
+            "Mice",
+            "Molecular Sequence Data",
+            "Mutation",
+            "Phenylalanine Hydroxylase"
+          ],
+          "author_count": 4,
+          "first_personal_author": "P Nowacki",
+          "author_suffixes": []
+        },
+        "CITED_BY": {
+          "pmid": "1586094",
+          "title": "Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.",
+          "doi": "10.7326/0003-4819-116-12-1030",
+          "journal": "Annals of internal medicine",
+          "year": "1992",
+          "mesh": [
+            "Duplicate Publications as Topic",
+            "Peer Review",
+            "Periodicals as Topic",
+            "Publishing"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T011": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1的ABSENT_ABSTRACT固定。\nFrozen official fixture inputs: {\"ABSENT_ABSTRACT\": {\"pmid\": \"1586094\", \"title\": \"Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.\", \"doi\": \"10.7326/0003-4819-116-12-1030\", \"journal\": \"Annals of internal medicine\", \"year\": \"1992\", \"mesh\": [\"Duplicate Publications as Topic\", \"Peer Review\", \"Periodicals as Topic\", \"Publishing\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1的ABSENT_ABSTRACT固定。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方无摘要证据与截图。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "ABSENT_ABSTRACT": {
+          "pmid": "1586094",
+          "title": "Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.",
+          "doi": "10.7326/0003-4819-116-12-1030",
+          "journal": "Annals of internal medicine",
+          "year": "1992",
+          "mesh": [
+            "Duplicate Publications as Topic",
+            "Peer Review",
+            "Periodicals as Topic",
+            "Publishing"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T012": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1的RELATED以及其ELink结果冻结。\nFrozen official fixture inputs: {\"RELATED\": {\"pmid\": \"1586094\", \"title\": \"Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.\", \"doi\": \"10.7326/0003-4819-116-12-1030\", \"journal\": \"Annals of internal medicine\", \"year\": \"1992\", \"mesh\": [\"Duplicate Publications as Topic\", \"Peer Review\", \"Periodicals as Topic\", \"Publishing\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1的RELATED以及其ELink结果冻结。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "ELink证据及目标元数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "RELATED": {
+          "pmid": "1586094",
+          "title": "Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.",
+          "doi": "10.7326/0003-4819-116-12-1030",
+          "journal": "Annals of internal medicine",
+          "year": "1992",
+          "mesh": [
+            "Duplicate Publications as Topic",
+            "Peer Review",
+            "Periodicals as Topic",
+            "Publishing"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T013": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE记录可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE记录可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "原生浏览器地址及截图；不依赖外站反爬页面是否可加载判应用错误。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T014": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1的FREE/PUBLISHER/ABSTRACT_ONLY槽位可用。\nFrozen official fixture inputs: {\"FREE\": {\"pmid\": \"8594567\", \"title\": \"The glucocorticoid receptor resource.\", \"doi\": \"10.1093/nar/24.1.155\", \"journal\": \"Nucleic acids research\", \"year\": \"1996\", \"mesh\": [\"Computer Communication Networks\", \"DNA, Complementary\", \"Databases, Factual\", \"Receptors, Glucocorticoid\"], \"author_count\": 2, \"first_personal_author\": \"M Danielsen\", \"author_suffixes\": []}, \"PUBLISHER\": {\"pmid\": \"1586094\", \"title\": \"Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.\", \"doi\": \"10.7326/0003-4819-116-12-1030\", \"journal\": \"Annals of internal medicine\", \"year\": \"1992\", \"mesh\": [\"Duplicate Publications as Topic\", \"Peer Review\", \"Periodicals as Topic\", \"Publishing\"], \"author_count\": 0, \"author_suffixes\": []}, \"ABSTRACT_ONLY\": {\"pmid\": \"9608526\", \"title\": \"[4 years of Microbiología SEM (1994-1997)].\", \"doi\": \"\", \"journal\": \"Microbiologia (Madrid, Spain)\", \"year\": \"1997\", \"mesh\": [\"Bibliometrics\", \"Computer Communication Networks\", \"Databases, Bibliographic\", \"Information Services\", \"Latin America\", \"Microbiology\", \"Periodicals as Topic\", \"Publishing\", \"Spain\"], \"author_count\": 1, \"first_personal_author\": \"J Mas-Castellà\", \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1的FREE/PUBLISHER/ABSTRACT_ONLY槽位可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方全文链接与浏览器目标；不要求外部出版商允许免费访问。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "FREE": {
+          "pmid": "8594567",
+          "title": "The glucocorticoid receptor resource.",
+          "doi": "10.1093/nar/24.1.155",
+          "journal": "Nucleic acids research",
+          "year": "1996",
+          "mesh": [
+            "Computer Communication Networks",
+            "DNA, Complementary",
+            "Databases, Factual",
+            "Receptors, Glucocorticoid"
+          ],
+          "author_count": 2,
+          "first_personal_author": "M Danielsen",
+          "author_suffixes": []
+        },
+        "PUBLISHER": {
+          "pmid": "1586094",
+          "title": "Statements on electronic publication and on peer-reviewed journals. International Committee of Medical Journal Editors.",
+          "doi": "10.7326/0003-4819-116-12-1030",
+          "journal": "Annals of internal medicine",
+          "year": "1992",
+          "mesh": [
+            "Duplicate Publications as Topic",
+            "Peer Review",
+            "Periodicals as Topic",
+            "Publishing"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        },
+        "ABSTRACT_ONLY": {
+          "pmid": "9608526",
+          "title": "[4 years of Microbiología SEM (1994-1997)].",
+          "doi": "",
+          "journal": "Microbiologia (Madrid, Spain)",
+          "year": "1997",
+          "mesh": [
+            "Bibliometrics",
+            "Computer Communication Networks",
+            "Databases, Bibliographic",
+            "Information Services",
+            "Latin America",
+            "Microbiology",
+            "Periodicals as Topic",
+            "Publishing",
+            "Spain"
+          ],
+          "author_count": 1,
+          "first_personal_author": "J Mas-Castellà",
+          "author_suffixes": []
+        }
+      }
+    },
+    "T015": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 正常PubMed；外部请求可观察。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "正常PubMed；外部请求可观察。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "出站请求日志与ESearch结果；只看标签不足以通过。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T016": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/search?q=cancer%20immunotherapy",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 正常PubMed；查询已执行。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "正常PubMed；查询已执行。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "请求与响应oracle；不自行把Most Recent等同出版日期。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T017": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 正常PubMed。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "正常PubMed。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "同次ESearch顺序与元数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T018": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: query官方匹配总数大于100。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "query官方匹配总数大于100。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图卡片计数和出站分页记录。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "query_count_preflight": [
+        {
+          "query": "diabetes",
+          "count": 1153759,
+          "prerequisite_ready": true
+        }
+      ]
+    },
+    "T019": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 匿名；搜索框初始为空。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "匿名；搜索框初始为空。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与出站日志；规范未要求特定错误文案。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T020": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 预检官方查询为0；若非0则前置BLOCKED，不临场改词。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "预检官方查询为0；若非0则前置BLOCKED，不临场改词。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方0结果与截图。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "query_count_preflight": [
+        {
+          "query": "\"medresearch_evaluation_20261115_zero_7f4d99\"[Title]",
+          "count": 0,
+          "prerequisite_ready": true
+        }
+      ]
+    },
+    "T021": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a存在且已验证；匿名启动。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a存在且已验证；匿名启动。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "登录前后截图/URL及只读用户会话状态。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T022": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录且有一篇保存文献。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录且有一篇保存文献。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图及只读会话/响应状态；不把浏览器瞬间旧画面当作服务端泄露。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T022.json"
+    },
+    "T023": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "完整账号页截图及独立DOM字段清单。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T024": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "demo",
+      "requires": [
+        "anonymous",
+        "demo_account"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 隔离本地实例；从交付说明获取演示账号，不从真实用户获取。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "隔离本地实例；从交付说明获取演示账号，不从真实用户获取。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "说明截图、登录与库截图，脱敏。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T025": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a已登录，BASE未保存。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a已登录，BASE未保存。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读书签记录。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T026": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a库中仅有BASE；其他用户无关记录预置。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a库中仅有BASE；其他用户无关记录预置。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读书签/出版物身份核查。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T026.json"
+    },
+    "T027": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；无同名集合。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；无同名集合。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读集合记录。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T028": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；历史为空。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；历史为空。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、出站搜索响应及只读历史。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T029": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database",
+        "trusted_browser_navigation"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE元数据固定；系统允许读取本地剪贴板oracle。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE元数据固定；系统允许读取本地剪贴板oracle。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "剪贴板文本与冻结元数据；不凭成功提示认定复制完成。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T030": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "instructions": "Execute only the frozen task. Preconditions: VIEWPORT手机390×844；匿名。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "VIEWPORT手机390×844；匿名。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "手机全页截图与原生触控/鼠标动作。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T031": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "smtp",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database",
+        "smtp_mailbox"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: MAIL_SMTP可用；eva_t031不存在；匿名；普通注册入口无return参数。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "MAIL_SMTP可用；eva_t031不存在；匿名；普通注册入口无return参数。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、隔离邮箱邮件原始记录、只读用户/验证状态；邮箱基础设施不可用则BLOCKED，不能只用控制台链接判PASS。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T032": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: MAIL开发/捕获配置明确；eva_t032未存在；不需要声称实际投递。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "MAIL开发/捕获配置明确；eva_t032未存在；不需要声称实际投递。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读用户存在性。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T033": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_t033不存在；注册可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_t033不存在；注册可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "独立DOM仅核长度、只读用户状态及CUA重新登录；不记录完整密码。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T034": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 三个合成用户均不存在；注册可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "三个合成用户均不存在；注册可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、只读账号清单和登录结果；三个变体必须全部满足才PASS。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T035": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT请求代理已独立自测；eva_t035不存在。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT请求代理已独立自测；eva_t035不存在。"
+      ],
+      "pending_preconditions": [
+        "registration_confirmation_request_fault"
+      ],
+      "grading_dependencies": [
+        "代理原始/变更请求差异脱敏记录、响应与只读DB。代理只改confirmation，CUA执行所有表单提交。"
+      ],
+      "reason": "Pending setup: registration_confirmation_request_fault"
+    },
+    "T036": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "mail",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "email_file_mailbox"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；初始邮箱已验证；MAIL可用以处理应用实际要求的邮箱变更验证。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；初始邮箱已验证；MAIL可用以处理应用实际要求的邮箱变更验证。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、只读用户邮箱与凭证状态；不要求规格未指定的邮箱唯一性。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T037": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；FAULT确认字段代理可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；FAULT确认字段代理可用。"
+      ],
+      "pending_preconditions": [
+        "password_confirmation_request_fault"
+      ],
+      "grading_dependencies": [
+        "代理证据、只读密码哈希变更时间及CUA两次登录结果；不输出哈希。"
+      ],
+      "reason": "Pending setup: password_confirmation_request_fault",
+      "auth_user": "eva_a"
+    },
+    "T038": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "unavailable",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts",
+        "email_unavailable",
+        "seeded_library"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 独立无SMTP配置实例；eva_a原有保存文献/集合；不向任何外部邮箱发送。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "独立无SMTP配置实例；eva_a原有保存文献/集合；不向任何外部邮箱发送。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "UI/设置文档截图及SMTP关闭审计；具体开发策略不在规格中固定，禁止按结果临场放宽是否明确。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "seed_state_file": "evaluation/fixtures/setup/T038.json"
+    },
+    "T039": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 匿名；正常PubMed；固定查询已用日期及Review筛选；需要保存等认证动作。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "匿名；正常PubMed；固定查询已用日期及Review筛选；需要保存等认证动作。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "认证前后截图/URL及最终查询请求。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T040": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录，账号页保持打开；外部fixture可使其服务端session过期，不清浏览器页面。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录，账号页保持打开；外部fixture可使其服务端session过期，不清浏览器页面。"
+      ],
+      "pending_preconditions": [
+        "controlled_session_expiry_after_email_draft"
+      ],
+      "grading_dependencies": [
+        "会话fixture日志、截图、只读邮箱状态；不得通过测试工具把草稿重新填回。"
+      ],
+      "reason": "Pending setup: controlled_session_expiry_after_email_draft",
+      "auth_user": "eva_a"
+    },
+    "T041": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 真实查询结果存在；评估UTC日期在fixture记录。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "真实查询结果存在；评估UTC日期在fixture记录。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "当前UTC时间、请求和官方响应；允许PubMed合法的年度边界定义，不强制未指定时区细节。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T042": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 正常PubMed。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "正常PubMed。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、URL、官方日期查询oracle。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T043": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 正常PubMed，固定广义查询。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "正常PubMed，固定广义查询。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "逐型请求日志及截图；全部六种通过才PASS。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T044": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 固定查询可返回结果。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "固定查询可返回结果。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方查询、EFetch/链接与截图。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T045": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: PubMed正常；语言English为固定测试值。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "PubMed正常；语言English为固定测试值。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与前后官方请求。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T046": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 真实PubMed正常。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "真实PubMed正常。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "抓包及官方响应，不只根据文献标题推断物种。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T047": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 官方查询语法预检记录排除预印本是否受支持；M1 PREPRINT存在用于比较。\nFrozen official fixture inputs: {\"PREPRINT\": {\"pmid\": \"39868339\", \"title\": \"The nucleus accumbens dorsomedial column: distinct anterior-posterior inputs and activation inversely associated with opioid relapse.\", \"doi\": \"10.1101/2025.01.18.633747\", \"journal\": \"bioRxiv : the preprint server for biology\", \"year\": \"2026\", \"mesh\": [], \"author_count\": 12, \"first_personal_author\": \"Kenichiro Negishi\", \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "官方查询语法预检记录排除预印本是否受支持；M1 PREPRINT存在用于比较。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方支持性预检、ESearch响应与manifest.PREPRINT。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "PREPRINT": {
+          "pmid": "39868339",
+          "title": "The nucleus accumbens dorsomedial column: distinct anterior-posterior inputs and activation inversely associated with opioid relapse.",
+          "doi": "10.1101/2025.01.18.633747",
+          "journal": "bioRxiv : the preprint server for biology",
+          "year": "2026",
+          "mesh": [],
+          "author_count": 12,
+          "first_personal_author": "Kenichiro Negishi",
+          "author_suffixes": []
+        }
+      }
+    },
+    "T048": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 真实PubMed正常。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "真实PubMed正常。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、URL和三个阶段官方请求。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T049": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database",
+        "trusted_browser_navigation"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 浏览器允许第二标签；正常PubMed。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "浏览器允许第二标签；正常PubMed。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "各阶段URL/截图与出站查询；浏览器历史新增粒度按实际导航记录，不强制每次状态更新都另建记录。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T050": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 高级搜索页可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "高级搜索页可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "生成表达式、出站请求和官方结果核对；具体混合优先级另在T052测。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T051": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE及M1元数据有相应字段；无MeSH则前置BLOCKED。\nFrozen official fixture inputs: {\"BASE\": {\"pmid\": \"31452104\", \"title\": \"Molegro Virtual Docker for Docking.\", \"doi\": \"10.1007/978-1-4939-9752-7_10\", \"journal\": \"Methods in molecular biology (Clifton, N.J.)\", \"year\": \"2019\", \"mesh\": [\"Binding Sites\", \"Cyclin-Dependent Kinase 2\", \"Drug Design\", \"Humans\", \"Ligands\", \"Molecular Docking Simulation\", \"Molecular Dynamics Simulation\", \"Protein Binding\", \"Proteins\", \"Software\", \"User-Computer Interface\"], \"author_count\": 2, \"first_personal_author\": \"Gabriela Bitencourt-Ferreira\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE及M1元数据有相应字段；无MeSH则前置BLOCKED。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "七次预览/请求/响应；允许合法PubMed等价字段别名。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "BASE": {
+          "pmid": "31452104",
+          "title": "Molegro Virtual Docker for Docking.",
+          "doi": "10.1007/978-1-4939-9752-7_10",
+          "journal": "Methods in molecular biology (Clifton, N.J.)",
+          "year": "2019",
+          "mesh": [
+            "Binding Sites",
+            "Cyclin-Dependent Kinase 2",
+            "Drug Design",
+            "Humans",
+            "Ligands",
+            "Molecular Docking Simulation",
+            "Molecular Dynamics Simulation",
+            "Protein Binding",
+            "Proteins",
+            "Software",
+            "User-Computer Interface"
+          ],
+          "author_count": 2,
+          "first_personal_author": "Gabriela Bitencourt-Ferreira",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T052": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 高级页提供可行的分组UI或可编辑完整表达式入口。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "高级页提供可行的分组UI或可编辑完整表达式入口。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "预览、外部请求和官方结果；不要求规格仅称where feasible的特定拖拽/树形编辑器。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T053": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 高级查询可手动输入或由界面触发对应错误。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "高级查询可手动输入或由界面触发对应错误。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与请求日志；可在前端或服务端校验，不限定实现。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T054": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；无同名已保存查询。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；无同名已保存查询。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读SavedSearch记录、出站请求。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T055": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a历史初始为空；正常PubMed。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a历史初始为空；正常PubMed。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "历史截图、初次/重执行请求、只读历史元数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T056": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_history"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a预置三条固定真实搜索历史；eva_b历史另存。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a预置三条固定真实搜索历史；eva_b历史另存。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读历史集合；具体哪些操作使用确认由全局可访问确认用例另外检查。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T056.json"
+    },
+    "T057": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a保存BASE、DOI及FREE三个不同PMID，若槽位重复则按M1候选数值顺序补至三个；含各自真实年份/标题。\nFrozen official fixture inputs: {\"LIBRARY3\": {\"pmids\": [\"31452104\", \"1586094\", \"8594567\"], \"author_count\": 0, \"author_suffixes\": []}, \"BASE\": {\"pmid\": \"31452104\", \"title\": \"Molegro Virtual Docker for Docking.\", \"doi\": \"10.1007/978-1-4939-9752-7_10\", \"journal\": \"Methods in molecular biology (Clifton, N.J.)\", \"year\": \"2019\", \"mesh\": [\"Binding Sites\", \"Cyclin-Dependent Kinase 2\", \"Drug Design\", \"Humans\", \"Ligands\", \"Molecular Docking Simulation\", \"Molecular Dynamics Simulation\", \"Protein Binding\", \"Proteins\", \"Software\", \"User-Computer Interface\"], \"author_count\": 2, \"first_personal_author\": \"Gabriela Bitencourt-Ferreira\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a保存BASE、DOI及FREE三个不同PMID，若槽位重复则按M1候选数值顺序补至三个；含各自真实年份/标题。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "只读个人库与独立排序/标题匹配oracle；排序种类未指定不强制特定选项。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T057.json",
+      "resolved_fixture_inputs": {
+        "LIBRARY3": {
+          "pmids": [
+            "31452104",
+            "1586094",
+            "8594567"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        },
+        "BASE": {
+          "pmid": "31452104",
+          "title": "Molegro Virtual Docker for Docking.",
+          "doi": "10.1007/978-1-4939-9752-7_10",
+          "journal": "Methods in molecular biology (Clifton, N.J.)",
+          "year": "2019",
+          "mesh": [
+            "Binding Sites",
+            "Cyclin-Dependent Kinase 2",
+            "Drug Design",
+            "Humans",
+            "Ligands",
+            "Molecular Docking Simulation",
+            "Molecular Dynamics Simulation",
+            "Protein Binding",
+            "Proteins",
+            "Software",
+            "User-Computer Interface"
+          ],
+          "author_count": 2,
+          "first_personal_author": "Gabriela Bitencourt-Ferreira",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T058": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a库内恰好两篇不同真实记录；eva_b另保存第三篇不在A库的真实记录；下载目录隔离。\nFrozen official fixture inputs: {\"LIBRARY3\": {\"pmids\": [\"31452104\", \"1586094\", \"8594567\"], \"author_count\": 0, \"author_suffixes\": []}}\nFrozen saved sets: eva_a=31452104, 1586094; eva_b-only=8594567",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a库内恰好两篇不同真实记录；eva_b另保存第三篇不在A库的真实记录；下载目录隔离。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "下载文件SHA256、独立RIS解析与两用户保存库oracle；不要求保存库必须支持特定子集多选UI，通用多选另由T063验证。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T058.json",
+      "resolved_fixture_inputs": {
+        "LIBRARY3": {
+          "pmids": [
+            "31452104",
+            "1586094",
+            "8594567"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T059": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a集合EVA Rename已有BASE。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a集合EVA Rename已有BASE。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读集合/关联记录；删除集合不规定是否保留个人独立书签，但不能删无关数据。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T059.json"
+    },
+    "T060": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a有空集合EVA Working；两篇不同真实PMID已固定。\nFrozen official fixture inputs: {\"LIBRARY3\": {\"pmids\": [\"31452104\", \"1586094\", \"8594567\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a有空集合EVA Working；两篇不同真实PMID已固定。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图与只读集合成员集合。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T060.json",
+      "resolved_fixture_inputs": {
+        "LIBRARY3": {
+          "pmids": [
+            "31452104",
+            "1586094",
+            "8594567"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T061": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database",
+        "trusted_browser_navigation"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE元数据固定；剪贴板oracle可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE元数据固定；剪贴板oracle可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "剪贴板文本及独立格式/元数据核查。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T062": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: BASE真实元数据；独立下载目录。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "BASE真实元数据；独立下载目录。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "文件SHA256及独立解析器，截图记录点击。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T063": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: query有至少10条真实结果；不预设跨页选择是必需功能。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "query有至少10条真实结果；不预设跨页选择是必需功能。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "选择前后截图、同次官方元数据及文件解析。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "query_count_preflight": [
+        {
+          "query": "electronic health records",
+          "count": 98671,
+          "prerequisite_ready": true
+        }
+      ]
+    },
+    "T064": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1 ABSENT_FIELDS最小覆盖集固定，逐字段有官方缺失证据。\nFrozen official fixture inputs: {\"ABSENT_FIELDS\": {\"pmids\": [\"42995738\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1 ABSENT_FIELDS最小覆盖集固定，逐字段有官方缺失证据。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "五格式文本/文件与官方缺失字段oracle；不可拿本来有字段的记录冒充缺失。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "ABSENT_FIELDS": {
+          "pmids": [
+            "42995738"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T065": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1 SUFFIX真实结构化Suffix非空。\nFrozen official fixture inputs: {\"SUFFIX\": {\"pmid\": \"9016529\", \"title\": \"The Nuclear Receptor Resource Project.\", \"doi\": \"10.1093/nar/25.1.163\", \"journal\": \"Nucleic acids research\", \"year\": \"1997\", \"mesh\": [\"Amino Acid Sequence\", \"Animals\", \"Base Sequence\", \"Databases, Factual\", \"Humans\", \"Molecular Sequence Data\", \"Receptors, Cytoplasmic and Nuclear\"], \"author_count\": 9, \"first_personal_author\": \"E Martinez\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1 SUFFIX真实结构化Suffix非空。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方结构化作者与格式输出；标点标准差异不当作后缀丢失。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "SUFFIX": {
+          "pmid": "9016529",
+          "title": "The Nuclear Receptor Resource Project.",
+          "doi": "10.1093/nar/25.1.163",
+          "journal": "Nucleic acids research",
+          "year": "1997",
+          "mesh": [
+            "Amino Acid Sequence",
+            "Animals",
+            "Base Sequence",
+            "Databases, Factual",
+            "Humans",
+            "Molecular Sequence Data",
+            "Receptors, Cytoplasmic and Nuclear"
+          ],
+          "author_count": 9,
+          "first_personal_author": "E Martinez",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T066": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 正常浏览器；非法值固定，不能替换为仅不存在但格式合法的标识。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "正常浏览器；非法值固定，不能替换为仅不存在但格式合法的标识。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图、HTTP响应状态与官方真实DOI核查；不要求存在独立DOI专用输入。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T067": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "instructions": "Execute only the frozen task. Preconditions: VIEWPORT手机；实时查询。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "VIEWPORT手机；实时查询。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "手机各阶段截图、URL与官方查询。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T068": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；有EVA Keyboard集合及可分页真实查询；独立语义审计可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；有EVA Keyboard集合及可分页真实查询；独立语义审计可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "CUA键盘日志/截图及独立DOM/对比计算；不能仅由截图推断ARIA正确。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T068.json"
+    },
+    "T069": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 真实query计数大于100；服务器出站日志可观察。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "真实query计数大于100；服务器出站日志可观察。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "同次ESearch retstart/retmax或等价后端缓存索引证据、结果PMID与页面截图。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T070": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT仅为一条实时外部请求增加3秒延迟，最终透传真实响应；不改响应内容。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT仅为一条实时外部请求增加3秒延迟，最终透传真实响应；不改响应内容。"
+      ],
+      "pending_preconditions": [
+        "bounded_three_second_upstream_delay"
+      ],
+      "grading_dependencies": [
+        "注入开始/结束时间、截图与实际官方响应。"
+      ],
+      "reason": "Pending setup: bounded_three_second_upstream_delay"
+    },
+    "T071": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a无BASE书签；真实BASE存在；可同时打开搜索与详情标签。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a无BASE书签；真实BASE存在；可同时打开搜索与详情标签。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "截图及只读用户-PMID书签/规范出版物计数；不把已保存状态下的取消按钮当作第二次保存。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a"
+    },
+    "T072": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library",
+        "seeded_history"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a/eva_b各有不同合成邮箱、独有保存PMID、集合和历史；共享公共文献允许。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a/eva_b各有不同合成邮箱、独有保存PMID、集合和历史；共享公共文献允许。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "两用户截图、只读归属清单与实际响应；任何缺环境数据则BLOCKED。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T072.json"
+    },
+    "T073": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library",
+        "trusted_browser_navigation"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a集合EVA A Private含BASE；预先仅在fixture登记其合法URL/ID；eva_b登录。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a集合EVA A Private含BASE；预先仅在fixture登记其合法URL/ID；eva_b登录。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "CUA导航截图及读响应oracle；401/403/404均可符合不泄露要求，不强制状态码。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_b",
+      "seed_state_file": "evaluation/fixtures/setup/T073.json",
+      "collection_targets": [
+        {
+          "owner": "eva_a",
+          "name": "EVA A Private",
+          "label": "eva_a.private_collection_url"
+        }
+      ]
+    },
+    "T074": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a、eva_b各有集合；B有合法改名操作；FAULT代理可以仅替换对象ID；只读DB快照已保存。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a、eva_b各有集合；B有合法改名操作；FAULT代理可以仅替换对象ID；只读DB快照已保存。"
+      ],
+      "pending_preconditions": [
+        "object_id_request_rewrite"
+      ],
+      "grading_dependencies": [
+        "代理差异日志、响应及两用户只读前后快照；只注入合成对象。"
+      ],
+      "reason": "Pending setup: object_id_request_rewrite",
+      "auth_user": "eva_b",
+      "seed_state_file": "evaluation/fixtures/setup/T074.json"
+    },
+    "T075": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；同一隔离实例cookie会话认证；FAULT可删CSRF相关值并标记跨站Origin；独立确认请求抵达服务端。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；同一隔离实例cookie会话认证；FAULT可删CSRF相关值并标记跨站Origin；独立确认请求抵达服务端。"
+      ],
+      "pending_preconditions": [
+        "csrf_and_origin_request_rewrite"
+      ],
+      "grading_dependencies": [
+        "入站/响应日志及只读集合计数；若非cookie认证，按预先登记等价CSRF威胁模型验证且不能运行后免除要求。"
+      ],
+      "reason": "Pending setup: csrf_and_origin_request_rewrite",
+      "auth_user": "eva_a"
+    },
+    "T076": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a已有账户；只读安全oracle能在隔离DB核验密码算法而不导出散列；另一个受控本地测试应用具有同名会话cookie场景；本机HTTPS仅在配置存在时检查Secure属性。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a已有账户；只读安全oracle能在隔离DB核验密码算法而不导出散列；另一个受控本地测试应用具有同名会话cookie场景；本机HTTPS仅在配置存在时检查Secure属性。"
+      ],
+      "pending_preconditions": [
+        "controlled_cookie_collision_probe",
+        "password_hash_readonly_audit"
+      ],
+      "grading_dependencies": [
+        "CUA截图、脱敏cookie名称/域/属性、只读哈希算法验证布尔结果；不能由登录成功推断哈希正确。"
+      ],
+      "reason": "Pending setup: controlled_cookie_collision_probe, password_hash_readonly_audit"
+    },
+    "T077": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；BASE未保存；session expiry fixture可用；含查询和筛选的结果页仍开着。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；BASE未保存；session expiry fixture可用；含查询和筛选的结果页仍开着。"
+      ],
+      "pending_preconditions": [
+        "controlled_session_expiry_with_research_page_open"
+      ],
+      "grading_dependencies": [
+        "会话expiry日志、认证前后截图与只读书签。"
+      ],
+      "reason": "Pending setup: controlled_session_expiry_with_research_page_open",
+      "auth_user": "eva_a"
+    },
+    "T078": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts",
+        "trusted_browser_navigation"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 登录入口实际return参数名称由UI导航日志预先确定，不依据执行结果选择；FAULT可替换该参数；匿名。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "登录入口实际return参数名称由UI导航日志预先确定，不依据执行结果选择；FAULT可替换该参数；匿名。"
+      ],
+      "pending_preconditions": [
+        "return_parameter_name_from_preflight_navigation"
+      ],
+      "grading_dependencies": [
+        "CUA登录日志、地址、网络导航记录；仅隔离保留域名，禁止真实外传。"
+      ],
+      "reason": "Pending setup: return_parameter_name_from_preflight_navigation"
+    },
+    "T079": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: LEGACY真实兼容fixture可用；其六位密码/旧姓名称值及保存研究在启动前固定。\nFrozen official fixture inputs: {\"SUFFIX\": {\"pmid\": \"9016529\", \"title\": \"The Nuclear Receptor Resource Project.\", \"doi\": \"10.1093/nar/25.1.163\", \"journal\": \"Nucleic acids research\", \"year\": \"1997\", \"mesh\": [\"Amino Acid Sequence\", \"Animals\", \"Base Sequence\", \"Databases, Factual\", \"Humans\", \"Molecular Sequence Data\", \"Receptors, Cytoplasmic and Nuclear\"], \"author_count\": 9, \"first_personal_author\": \"E Martinez\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "LEGACY真实兼容fixture可用；其六位密码/旧姓名称值及保存研究在启动前固定。"
+      ],
+      "pending_preconditions": [
+        "credible_round1_legacy_migration_fixture"
+      ],
+      "grading_dependencies": [
+        "旧fixture哈希/快照、CUA截图和只读数据前后比较；缺可信旧fixture为BLOCKED。"
+      ],
+      "reason": "Pending setup: credible_round1_legacy_migration_fixture",
+      "resolved_fixture_inputs": {
+        "SUFFIX": {
+          "pmid": "9016529",
+          "title": "The Nuclear Receptor Resource Project.",
+          "doi": "10.1093/nar/25.1.163",
+          "journal": "Nucleic acids research",
+          "year": "1997",
+          "mesh": [
+            "Amino Acid Sequence",
+            "Animals",
+            "Base Sequence",
+            "Databases, Factual",
+            "Humans",
+            "Molecular Sequence Data",
+            "Receptors, Cytoplasmic and Nuclear"
+          ],
+          "author_count": 9,
+          "first_personal_author": "E Martinez",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T080": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1 LONG、UNICODE、EDATE真实记录固定；独立格式解析器支持Unicode。\nFrozen official fixture inputs: {\"LONG\": {\"pmid\": \"15608240\", \"title\": \"The Mouse Genome Database (MGD): from genes to mice--a community resource for mouse biology.\", \"doi\": \"10.1093/nar/gki113\", \"journal\": \"Nucleic acids research\", \"year\": \"2005\", \"mesh\": [\"Animals\", \"Databases, Genetic\", \"Genes\", \"Genome\", \"Genomics\", \"Genotype\", \"Internet\", \"Mice\", \"Mice, Mutant Strains\", \"Phenotype\", \"Systems Integration\", \"User-Computer Interface\"], \"author_count\": 51, \"first_personal_author\": \"Janan T Eppig\", \"author_suffixes\": []}, \"UNICODE\": {\"pmid\": \"9608526\", \"title\": \"[4 years of Microbiología SEM (1994-1997)].\", \"doi\": \"\", \"journal\": \"Microbiologia (Madrid, Spain)\", \"year\": \"1997\", \"mesh\": [\"Bibliometrics\", \"Computer Communication Networks\", \"Databases, Bibliographic\", \"Information Services\", \"Latin America\", \"Microbiology\", \"Periodicals as Topic\", \"Publishing\", \"Spain\"], \"author_count\": 1, \"first_personal_author\": \"J Mas-Castellà\", \"author_suffixes\": []}, \"EDATE\": {\"pmid\": \"11395811\", \"title\": \"Scientific electronic publication: An updated report.\", \"doi\": \"10.1007/s00464-001-0029-z\", \"journal\": \"Surgical endoscopy\", \"year\": \"2001\", \"mesh\": [\"History, 20th Century\", \"Information Services\", \"Internet\", \"National Institutes of Health (U.S.)\", \"Peer Review\", \"Periodicals as Topic\", \"Publishing\", \"Science\", \"United States\"], \"author_count\": 2, \"first_personal_author\": \"B V MacFadyen\", \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1 LONG、UNICODE、EDATE真实记录固定；独立格式解析器支持Unicode。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方结构化数据、剪贴板/文件及独立解析；不强制规格未指定引用格式版本。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "LONG": {
+          "pmid": "15608240",
+          "title": "The Mouse Genome Database (MGD): from genes to mice--a community resource for mouse biology.",
+          "doi": "10.1093/nar/gki113",
+          "journal": "Nucleic acids research",
+          "year": "2005",
+          "mesh": [
+            "Animals",
+            "Databases, Genetic",
+            "Genes",
+            "Genome",
+            "Genomics",
+            "Genotype",
+            "Internet",
+            "Mice",
+            "Mice, Mutant Strains",
+            "Phenotype",
+            "Systems Integration",
+            "User-Computer Interface"
+          ],
+          "author_count": 51,
+          "first_personal_author": "Janan T Eppig",
+          "author_suffixes": []
+        },
+        "UNICODE": {
+          "pmid": "9608526",
+          "title": "[4 years of Microbiología SEM (1994-1997)].",
+          "doi": "",
+          "journal": "Microbiologia (Madrid, Spain)",
+          "year": "1997",
+          "mesh": [
+            "Bibliometrics",
+            "Computer Communication Networks",
+            "Databases, Bibliographic",
+            "Information Services",
+            "Latin America",
+            "Microbiology",
+            "Periodicals as Topic",
+            "Publishing",
+            "Spain"
+          ],
+          "author_count": 1,
+          "first_personal_author": "J Mas-Castellà",
+          "author_suffixes": []
+        },
+        "EDATE": {
+          "pmid": "11395811",
+          "title": "Scientific electronic publication: An updated report.",
+          "doi": "10.1007/s00464-001-0029-z",
+          "journal": "Surgical endoscopy",
+          "year": "2001",
+          "mesh": [
+            "History, 20th Century",
+            "Information Services",
+            "Internet",
+            "National Institutes of Health (U.S.)",
+            "Peer Review",
+            "Periodicals as Topic",
+            "Publishing",
+            "Science",
+            "United States"
+          ],
+          "author_count": 2,
+          "first_personal_author": "B V MacFadyen",
+          "author_suffixes": []
+        }
+      }
+    },
+    "T081": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: M1 NO_RELATED官方ELink为空；BASE相关详情正常可用对照。\nFrozen official fixture inputs: {\"NO_RELATED\": {\"pmid\": \"42866665\", \"title\": \"Diverse oxidosqualene cyclases for triterpenoid biosynthesis.\", \"doi\": \"10.1111/j.1742-4658.2011.08175.x\", \"journal\": \"Synthetic and systems biotechnology\", \"year\": \"2027\", \"mesh\": [], \"author_count\": 8, \"first_personal_author\": \"Qiannan Hao\", \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "M1 NO_RELATED官方ELink为空；BASE相关详情正常可用对照。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "官方空ELink与截图；若真实参考/被引关系另有数据，只允许展示该独立证据支持的内容。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "resolved_fixture_inputs": {
+        "NO_RELATED": {
+          "pmid": "42866665",
+          "title": "Diverse oxidosqualene cyclases for triterpenoid biosynthesis.",
+          "doi": "10.1111/j.1742-4658.2011.08175.x",
+          "journal": "Synthetic and systems biotechnology",
+          "year": "2027",
+          "mesh": [],
+          "author_count": 8,
+          "first_personal_author": "Qiannan Hao",
+          "author_suffixes": []
+        }
+      }
+    },
+    "T082": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT让本次未缓存查询的全部上游尝试超时，直到UI显示失败或达到预登记请求/运行限额；随后完全解除；限额预先设置不改期望。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT让本次未缓存查询的全部上游尝试超时，直到UI显示失败或达到预登记请求/运行限额；随后完全解除；限额预先设置不改期望。"
+      ],
+      "pending_preconditions": [
+        "upstream_timeout_and_explicit_release"
+      ],
+      "grading_dependencies": [
+        "代理时序、请求计数、截图与恢复后的官方响应；若CUA预算先耗尽且不足判断上界，ERROR/BLOCKED不能草率FAIL。"
+      ],
+      "reason": "Pending setup: upstream_timeout_and_explicit_release"
+    },
+    "T083": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT对固定查询前两次上游请求返回429及Retry-After:2，之后透传；记录执行时官方限额与配置key状态，真实请求受速率保护。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT对固定查询前两次上游请求返回429及Retry-After:2，之后透传；记录执行时官方限额与配置key状态，真实请求受速率保护。"
+      ],
+      "pending_preconditions": [
+        "upstream_429_retry_after_sequence",
+        "current_ncbi_rate_limit_reference"
+      ],
+      "grading_dependencies": [
+        "外呼时间戳、官方限额预检及截图；不固定规格未要求的重试次数。"
+      ],
+      "reason": "Pending setup: upstream_429_retry_after_sequence, current_ncbi_rate_limit_reference"
+    },
+    "T084": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT对未缓存查询所有上游请求返回503直到解除；若产品提供offline模式，清单已预先登记其入口。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT对未缓存查询所有上游请求返回503直到解除；若产品提供offline模式，清单已预先登记其入口。"
+      ],
+      "pending_preconditions": [
+        "upstream_503_and_explicit_release"
+      ],
+      "grading_dependencies": [
+        "代理响应、截图及任何展示PMID的官方核实；不要求必须实现offline模式。"
+      ],
+      "reason": "Pending setup: upstream_503_and_explicit_release"
+    },
+    "T085": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 固定真实搜索页至少10篇；FAULT只在首次对应ESummary/EFetch批响应移除第3篇记录或其摘要字段，其余字节对应真实记录；记录原始与注入差异；cache可观察。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "固定真实搜索页至少10篇；FAULT只在首次对应ESummary/EFetch批响应移除第3篇记录或其摘要字段，其余字节对应真实记录；记录原始与注入差异；cache可观察。"
+      ],
+      "pending_preconditions": [
+        "partial_xml_record_fault",
+        "observable_cache_state"
+      ],
+      "grading_dependencies": [
+        "原始官方批响应、注入差异、只读cache状态及恢复响应；可等待预登记TTL，不临场修改期待。"
+      ],
+      "reason": "Pending setup: partial_xml_record_fault, observable_cache_state"
+    },
+    "T086": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT可仅中断隔离测试DB连接或将本次写事务回滚，不改代码；eva_a集合EVA DB Original已有两篇。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT可仅中断隔离测试DB连接或将本次写事务回滚，不改代码；eva_a集合EVA DB Original已有两篇。"
+      ],
+      "pending_preconditions": [
+        "reversible_isolated_database_transaction_fault"
+      ],
+      "grading_dependencies": [
+        "只读DB前后快照、故障日志和截图；基础设施必须可控恢复，否则BLOCKED。"
+      ],
+      "reason": "Pending setup: reversible_isolated_database_transaction_fault",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T086.json"
+    },
+    "T087": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 隔离环境TTL预先设为60秒；外呼/cache观察器可读；任何查询正常成功；fixture不改应用代码。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "隔离环境TTL预先设为60秒；外呼/cache观察器可读；任何查询正常成功；fixture不改应用代码。"
+      ],
+      "pending_preconditions": [
+        "configurable_60_second_cache_ttl",
+        "outbound_request_and_cache_auditor"
+      ],
+      "grading_dependencies": [
+        "外呼次数/参数/时间戳、cache只读条目及同次官方响应；不要求精确零请求，允许合理重新验证。"
+      ],
+      "reason": "Pending setup: configurable_60_second_cache_ttl, outbound_request_and_cache_auditor"
+    },
+    "T088": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 两合成账户与服务器测试API key配置可用；独立审计器知道敏感值但输出仅命中布尔/字段名；FAULT可制造503。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "两合成账户与服务器测试API key配置可用；独立审计器知道敏感值但输出仅命中布尔/字段名；FAULT可制造503。"
+      ],
+      "pending_preconditions": [
+        "synthetic_server_key_and_secret_auditor",
+        "upstream_503_fault"
+      ],
+      "grading_dependencies": [
+        "脱敏网络/资源审计、截图及敏感匹配结果；无法审计只能BLOCKED，不能以未看见UI泄漏当PASS。"
+      ],
+      "reason": "Pending setup: synthetic_server_key_and_secret_auditor, upstream_503_fault"
+    },
+    "T089": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT对首次BASE EFetch响应返回不可解析的截断XML，后续保持故障到友好提示，解除后透传；BASE缓存从隔离环境清理。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT对首次BASE EFetch响应返回不可解析的截断XML，后续保持故障到友好提示，解除后透传；BASE缓存从隔离环境清理。"
+      ],
+      "pending_preconditions": [
+        "malformed_xml_fault_and_release"
+      ],
+      "grading_dependencies": [
+        "故障代理日志、响应hash、只读cache和恢复详情截图。"
+      ],
+      "reason": "Pending setup: malformed_xml_fault_and_release"
+    },
+    "T090": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: FAULT可仅修改CUA触发搜索请求的page/page_size等实际等价参数；先记录正常参数名；DB/上游请求可观察。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "FAULT可仅修改CUA触发搜索请求的page/page_size等实际等价参数；先记录正常参数名；DB/上游请求可观察。"
+      ],
+      "pending_preconditions": [
+        "pagination_parameter_request_rewrite"
+      ],
+      "grading_dependencies": [
+        "修改前后请求差异、响应与官方外呼日志；合法默认行为必须在执行前文档登记。"
+      ],
+      "reason": "Pending setup: pagination_parameter_request_rewrite"
+    },
+    "T091": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "mail",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database",
+        "email_file_mailbox"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: MAIL可用；eva_t091不存在；查询真实结果至少三篇；下载/剪贴板oracle就绪。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "MAIL可用；eva_t091不存在；查询真实结果至少三篇；下载/剪贴板oracle就绪。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "端到端截图/动作、邮件捕获及验证证据、官方响应、只读用户/研究数据及下载审计。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    },
+    "T092": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a有EVA Evidence Set，预置LIBRARY55真实记录；M1扩展清单LIBRARY55由固定diabetes查询sort=pub date的前55个不同PMID构成，在执行前取官方元数据冻结；下载审计可用。\nFrozen official fixture inputs: {\"LIBRARY55\": {\"pmids\": [\"43008771\", \"43020745\", \"42881014\", \"42526488\", \"43022616\", \"42914655\", \"42898399\", \"42858744\", \"42849314\", \"42828281\", \"42800154\", \"42777546\", \"42759131\", \"42731549\", \"42843271\", \"42665118\", \"42632442\", \"42624191\", \"42603582\", \"42594981\", \"42580609\", \"42501777\", \"42843670\", \"42838304\", \"42833366\", \"42822613\", \"42822612\", \"42503448\", \"42833088\", \"42828937\", \"42785018\", \"43022936\", \"43009234\", \"42970903\", \"42933072\", \"42925649\", \"42914604\", \"42913157\", \"42906433\", \"42849374\", \"42843255\", \"42832895\", \"42815075\", \"42785082\", \"42780667\", \"42777499\", \"42763955\", \"42761476\", \"42733728\", \"42664714\", \"42603429\", \"42574963\", \"42566950\", \"42546584\", \"42520634\"], \"author_count\": 0, \"author_suffixes\": []}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a有EVA Evidence Set，预置LIBRARY55真实记录；M1扩展清单LIBRARY55由固定diabetes查询sort=pub date的前55个不同PMID构成，在执行前取官方元数据冻结；下载审计可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "冻结55+1真实清单、只读集合全集及独立导出解析；若无56篇真实预检数据则BLOCKED。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T092.json",
+      "resolved_fixture_inputs": {
+        "LIBRARY55": {
+          "pmids": [
+            "43008771",
+            "43020745",
+            "42881014",
+            "42526488",
+            "43022616",
+            "42914655",
+            "42898399",
+            "42858744",
+            "42849314",
+            "42828281",
+            "42800154",
+            "42777546",
+            "42759131",
+            "42731549",
+            "42843271",
+            "42665118",
+            "42632442",
+            "42624191",
+            "42603582",
+            "42594981",
+            "42580609",
+            "42501777",
+            "42843670",
+            "42838304",
+            "42833366",
+            "42822613",
+            "42822612",
+            "42503448",
+            "42833088",
+            "42828937",
+            "42785018",
+            "43022936",
+            "43009234",
+            "42970903",
+            "42933072",
+            "42925649",
+            "42914604",
+            "42913157",
+            "42906433",
+            "42849374",
+            "42843255",
+            "42832895",
+            "42815075",
+            "42785082",
+            "42780667",
+            "42777499",
+            "42763955",
+            "42761476",
+            "42733728",
+            "42664714",
+            "42603429",
+            "42574963",
+            "42566950",
+            "42546584",
+            "42520634"
+          ],
+          "author_count": 0,
+          "author_suffixes": []
+        }
+      }
+    },
+    "T093": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "mail",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "email_file_mailbox"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a登录；两标签分别为带筛选研究结果与账号页；session expiry fixture/MAIL可用；账号页不能关闭。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a登录；两标签分别为带筛选研究结果与账号页；session expiry fixture/MAIL可用；账号页不能关闭。"
+      ],
+      "pending_preconditions": [
+        "controlled_session_expiry_multitab"
+      ],
+      "grading_dependencies": [
+        "双标签截图、会话expiry记录、只读邮箱/历史/书签以及实际邮件捕获记录。"
+      ],
+      "reason": "Pending setup: controlled_session_expiry_multitab",
+      "auth_user": "eva_a"
+    },
+    "T094": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library",
+        "seeded_history"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: A/B独立账号及研究；A账号页未保存草稿仍开着；expiry fixture可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "A/B独立账号及研究；A账号页未保存草稿仍开着；expiry fixture可用。"
+      ],
+      "pending_preconditions": [
+        "controlled_session_expiry_after_private_draft"
+      ],
+      "grading_dependencies": [
+        "两用户前后只读快照、CUA切换截图；不要求跨用户保存A草稿，因为规格只保证同用户恢复。"
+      ],
+      "reason": "Pending setup: controlled_session_expiry_after_private_draft",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T094.json"
+    },
+    "T095": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "authenticated",
+        "synthetic_accounts",
+        "seeded_library",
+        "seeded_history"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: eva_a有已存完整真实元数据的两篇书签和集合；此前研究历史存在；FAULT对所有新的PubMed外呼返回503，现有DB不受影响；下载oracle可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "eva_a有已存完整真实元数据的两篇书签和集合；此前研究历史存在；FAULT对所有新的PubMed外呼返回503，现有DB不受影响；下载oracle可用。"
+      ],
+      "pending_preconditions": [
+        "upstream_503_with_existing_private_library"
+      ],
+      "grading_dependencies": [
+        "故障日志、官方恢复响应、只读库/集合及前后RIS文件。"
+      ],
+      "reason": "Pending setup: upstream_503_with_existing_private_library",
+      "auth_user": "eva_a",
+      "seed_state_file": "evaluation/fixtures/setup/T095.json"
+    },
+    "T096": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: LEGACY提供可信Round1兼容记录，SUFFIX后缀官方可核实；保留旧姓名字段与六位凭证；记录初始私有集合和metadata快照。\nFrozen official fixture inputs: {\"SUFFIX\": {\"pmid\": \"9016529\", \"title\": \"The Nuclear Receptor Resource Project.\", \"doi\": \"10.1093/nar/25.1.163\", \"journal\": \"Nucleic acids research\", \"year\": \"1997\", \"mesh\": [\"Amino Acid Sequence\", \"Animals\", \"Base Sequence\", \"Databases, Factual\", \"Humans\", \"Molecular Sequence Data\", \"Receptors, Cytoplasmic and Nuclear\"], \"author_count\": 9, \"first_personal_author\": \"E Martinez\", \"author_suffixes\": [\"Jr\"]}}",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "LEGACY提供可信Round1兼容记录，SUFFIX后缀官方可核实；保留旧姓名字段与六位凭证；记录初始私有集合和metadata快照。"
+      ],
+      "pending_preconditions": [
+        "credible_round1_legacy_migration_fixture"
+      ],
+      "grading_dependencies": [
+        "兼容fixture证据、只读原始/最终数据、官方SUFFIX记录与五格式文件。"
+      ],
+      "reason": "Pending setup: credible_round1_legacy_migration_fixture",
+      "resolved_fixture_inputs": {
+        "SUFFIX": {
+          "pmid": "9016529",
+          "title": "The Nuclear Receptor Resource Project.",
+          "doi": "10.1093/nar/25.1.163",
+          "journal": "Nucleic acids research",
+          "year": "1997",
+          "mesh": [
+            "Amino Acid Sequence",
+            "Animals",
+            "Base Sequence",
+            "Databases, Factual",
+            "Humans",
+            "Molecular Sequence Data",
+            "Receptors, Cytoplasmic and Nuclear"
+          ],
+          "author_count": 9,
+          "first_personal_author": "E Martinez",
+          "author_suffixes": [
+            "Jr"
+          ]
+        }
+      }
+    },
+    "T097": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "empty",
+      "requires": [
+        "anonymous",
+        "empty_database"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 真实PubMed；预检固定query/filter下结果至少150，目标第3页须在执行时官方合法检索窗口内，否则BLOCKED而非改查询；同次外呼日志和缓存证据可用。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "真实PubMed；预检固定query/filter下结果至少150，目标第3页须在执行时官方合法检索窗口内，否则BLOCKED而非改查询；同次外呼日志和缓存证据可用。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "同次ESearch/批元数据日志、三页PMID清单、URL截图；动态库变化仅依同次证据判断，不用陈旧固定总数；不要求突破NCBI官方检索窗口（包括适用的10000条上限），也不因不可达超上限页判产品失败。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory.",
+      "query_count_preflight": [
+        {
+          "query": "(diabetes AND therapy) AND (\"2020/01/01\"[Date - Publication] : \"2025/12/31\"[Date - Publication]) AND review[Publication Type] AND english[Language]",
+          "count": 35725,
+          "prerequisite_ready": true
+        }
+      ]
+    },
+    "T098": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 独立PostgreSQL实例与按交付说明启动的应用；可受控停止/启动服务且不清DB；只读DB配置/索引审计；不部署公网、不读写生产库。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "独立PostgreSQL实例与按交付说明启动的应用；可受控停止/启动服务且不清DB；只读DB配置/索引审计；不部署公网、不读写生产库。"
+      ],
+      "pending_preconditions": [
+        "isolated_postgresql",
+        "controlled_app_restart_without_database_reset",
+        "postgres_readonly_state_auditor"
+      ],
+      "grading_dependencies": [
+        "启动/重启日志、脱敏DB类型/索引审计、前后只读数据及CUA截图；框架栈/全部架构/源码发布另作工件审计，不凭此一例宣称全覆盖。"
+      ],
+      "reason": "Pending setup: isolated_postgresql, controlled_app_restart_without_database_reset, postgres_readonly_state_auditor"
+    },
+    "T099": {
+      "ready": false,
+      "ready_for_actor": false,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts",
+        "trusted_browser_navigation"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "instructions": "Execute only the frozen task. Preconditions: 交付说明能提供API文档/health入口；所有导航由CUA浏览器完成；独立抓包oracle可关联用户动作与API。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "交付说明能提供API文档/health入口；所有导航由CUA浏览器完成；独立抓包oracle可关联用户动作与API。"
+      ],
+      "pending_preconditions": [
+        "api_contract_network_auditor"
+      ],
+      "grading_dependencies": [
+        "CUA页面/下载证据、文档内容快照及脱敏实际API响应；具体endpoint路径由交付文档取得，不预设实现路径。"
+      ],
+      "reason": "Pending setup: api_contract_network_auditor"
+    },
+    "T100": {
+      "ready": true,
+      "ready_for_actor": true,
+      "ready_for_final_grading": false,
+      "reviewed_against_frozen_suite": true,
+      "mode": "standard",
+      "fixture": "accounts",
+      "requires": [
+        "anonymous",
+        "synthetic_accounts"
+      ],
+      "start_path": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "instructions": "Execute only the frozen task. Preconditions: VIEWPORT手机390×844；匿名起始；已存在eva_a；真实查询至少两篇；可下载文件并做语义/焦点独立审计。",
+      "frozen_preconditions": [
+        "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+        "VIEWPORT手机390×844；匿名起始；已存在eva_a；真实查询至少两篇；可下载文件并做语义/焦点独立审计。"
+      ],
+      "pending_preconditions": [],
+      "grading_dependencies": [
+        "完整CUA键盘日志/手机截图、独立DOM语义、URL、只读研究数据与RIS文件；不以桌面代跑手机例。"
+      ],
+      "reason": "Core local actor setup supported; independent grading remains mandatory."
+    }
+  },
+  "official_manifest_file": "evaluation/data/manifest.json",
+  "official_manifest_sha256": "1c5e25a410df9ee97f07847211e28806bbaffad3e01c680a4438997ad70d41fd",
+  "query_preflight_sha256": "a2388d1ee16a72e6617ad5eff06f588044d9bd8b8e20d256eb6f97c4279be921"
+}

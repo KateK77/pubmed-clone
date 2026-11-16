@@ -1,0 +1,74 @@
+{
+  "type": "infrastructure_preflight_only",
+  "application_commit": "03a7dc2a349a3f26bc1712c79d77957cf9338a1a",
+  "application_code_modified": false,
+  "production_database_accessed": false,
+  "production_accounts_created": 0,
+  "cua_model_requests": 0,
+  "cua_actions": 0,
+  "formal_acceptance_tests_executed": 0,
+  "checks": [
+    {
+      "name": "Pinned git archive and verified frontend rebuild",
+      "status": "PASS"
+    },
+    {
+      "name": "Standard mode migrations and local synthetic account fixtures",
+      "status": "PASS"
+    },
+    {
+      "name": "Standard mode local health endpoint",
+      "status": "PASS"
+    },
+    {
+      "name": "Mail mode migrations and local health endpoint",
+      "status": "PASS"
+    },
+    {
+      "name": "Read-only allowlisted SQLite captures in both modes",
+      "status": "PASS"
+    },
+    {
+      "name": "Loopback mailbox viewer with empty synthetic mailbox",
+      "status": "PASS"
+    },
+    {
+      "name": "Only spawned evaluation children stopped; no persistent listener left",
+      "status": "PASS"
+    },
+    {
+      "name": "Application repository tracked working tree remains clean",
+      "status": "PASS"
+    },
+    {
+      "name": "Original application cookie names preserved in synthetic preauthenticated session",
+      "status": "PASS"
+    },
+    {
+      "name": "Two canonical verified synthetic users and real NCBI-based private bookmark fixture",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent read-only snapshot confirms preauthenticated user identity without exposing session secrets",
+      "status": "PASS"
+    },
+    {
+      "name": "Trusted navigation fixture and disallowed-destination rejection on loopback 8126",
+      "status": "PASS"
+    },
+    {
+      "name": "Real Django SMTP backend transport to synthetic-only loopback receiver on 8127",
+      "status": "PASS"
+    },
+    {
+      "name": "Lifecycle module syntax plus missing/unsupported-profile guards without model requests",
+      "status": "PASS"
+    }
+  ],
+  "infrastructure_retry": "The first local health check was blocked by sandbox socket permission WinError 10013. It was retried with the explicit localhost-health-check sandbox escalation and succeeded. This is not an application test or result.",
+  "runtime_handling": "Runtime source, credentials, databases, mail and browser directories are local-only and excluded by .gitignore. Do not copy .runtime into repository evidence.",
+  "native_cua_status": "Not executed; paid execution requires the owner's explicit budget approval.",
+  "actor_setup_supported_cases": 75,
+  "actor_setup_pending_cases": 25,
+  "independent_grading_completed_cases": 0
+}

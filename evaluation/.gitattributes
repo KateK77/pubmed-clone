@@ -2,3 +2,7 @@
 final_test_cases_100.json -text
 requirements.json -text
 FINAL_TEST_CASES.md -text
+
+data/** -text
+case_preconditions.json -text
+run-config.json -text

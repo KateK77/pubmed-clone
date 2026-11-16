@@ -91,7 +91,7 @@ def main():
     lines += [f'- {status}: **{counts[status]}**' for status in STATUSES]
     lines += ['', f'Overall Pass Rate: **{primary if primary is not None else "未计算（未执行）"}{"%" if primary is not None else ""}**',
               f'Validly evaluated pass rate: **{valid_rate if valid_rate is not None else "N/A（无有效评估）"}{"%" if valid_rate is not None else ""}**', '',
-              '主分母固定 100；有效评估分母为 PASS+FAIL。零执行不应被解读为软件 0% 通过或 100% 失败。', '',
+              '主分母固定 100；有效评估分母为 PASS+FAIL。难度和领域通过率分母为该组固定用例总数，包含受阻、错误及未运行项。零执行不应被解读为软件 0% 通过或 100% 失败。', '',
               '## B. Difficulty-Based Results', '',
               '| Difficulty | Total | Passed | Failed | Blocked | Error | Not run | Pass Rate |',
               '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |']
@@ -100,6 +100,8 @@ def main():
         c = Counter(r['status'] for r in subset)
         rate = f'{c["PASS"]/total*100:.2f}%' if executed else '—'
         lines.append(f'| {level} | {total} | {c["PASS"]} | {c["FAIL"]} | {c["BLOCKED"]} | {c["ERROR"]} | {c["NOT_RUN"]} | {rate} |')
+    total_rate = f'{counts["PASS"]:.2f}%' if executed else '—'
+    lines.append('| Total | 100 | '+' | '.join(str(counts[s]) for s in STATUSES)+' | '+total_rate+' |')
     lines += ['', '### 按功能领域', '', '| 领域 | 总数 | PASS | FAIL | BLOCKED | ERROR | NOT_RUN | 通过率 |',
               '| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |']
     for category in dict.fromkeys(t['category'] for t in tests):

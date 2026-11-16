@@ -1,0 +1,301 @@
+{
+  "purpose": "Official query prerequisites only; not application tests; does not alter M1 candidate pool",
+  "created_at_utc": "2026-11-16T05:05:28.305795+00:00",
+  "queries": [
+    {
+      "query": "diabetes",
+      "test_ids": [
+        "T018",
+        "T056"
+      ],
+      "count": 1153759,
+      "required_minimum": 100,
+      "required_maximum": null,
+      "prerequisite_ready": true,
+      "source": {
+        "utility": "esearch",
+        "request_parameters": [
+          [
+            "db",
+            "pubmed"
+          ],
+          [
+            "term",
+            "diabetes"
+          ],
+          [
+            "retmax",
+            "0"
+          ],
+          [
+            "sort",
+            "pub_date"
+          ],
+          [
+            "retmode",
+            "xml"
+          ],
+          [
+            "tool",
+            "medresearch_final_evaluation"
+          ]
+        ],
+        "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=diabetes&retmax=0&sort=pub_date&retmode=xml&tool=medresearch_final_evaluation",
+        "retrieved_at_utc": "2026-11-16T05:02:58.414485+00:00",
+        "completed_at_utc": "2026-11-16T05:02:58.678748+00:00",
+        "http_status": 200,
+        "raw_file": "rawcache/esearch-5131b37ef971c89173bf.xml",
+        "sha256": "c3559ef04ceac0d132e676ab65ae686e9389e424a98beacd49c83dbf77625a4d",
+        "bytes": 1173,
+        "redacted_request_parameters": [
+          "email (operator contact; exact value retained only in ignored local cache)"
+        ]
+      }
+    },
+    {
+      "query": "cancer",
+      "test_ids": [
+        "T056"
+      ],
+      "count": 5744376,
+      "required_minimum": 1,
+      "required_maximum": null,
+      "prerequisite_ready": true,
+      "source": {
+        "utility": "esearch",
+        "request_parameters": [
+          [
+            "db",
+            "pubmed"
+          ],
+          [
+            "term",
+            "cancer"
+          ],
+          [
+            "retmax",
+            "0"
+          ],
+          [
+            "sort",
+            "pub_date"
+          ],
+          [
+            "retmode",
+            "xml"
+          ],
+          [
+            "tool",
+            "medresearch_final_evaluation"
+          ]
+        ],
+        "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=cancer&retmax=0&sort=pub_date&retmode=xml&tool=medresearch_final_evaluation",
+        "retrieved_at_utc": "2026-11-16T05:02:59.014865+00:00",
+        "completed_at_utc": "2026-11-16T05:02:59.411773+00:00",
+        "http_status": 200,
+        "raw_file": "rawcache/esearch-15e8bcda69e9a56f02c2.xml",
+        "sha256": "16ba4ec60546c2b64d54e1da437ec883329c1fe32e9a98ffbe67e1fc880d45f0",
+        "bytes": 951,
+        "redacted_request_parameters": [
+          "email (operator contact; exact value retained only in ignored local cache)"
+        ]
+      }
+    },
+    {
+      "query": "hypertension",
+      "test_ids": [
+        "T056"
+      ],
+      "count": 731455,
+      "required_minimum": 1,
+      "required_maximum": null,
+      "prerequisite_ready": true,
+      "source": {
+        "utility": "esearch",
+        "request_parameters": [
+          [
+            "db",
+            "pubmed"
+          ],
+          [
+            "term",
+            "hypertension"
+          ],
+          [
+            "retmax",
+            "0"
+          ],
+          [
+            "sort",
+            "pub_date"
+          ],
+          [
+            "retmode",
+            "xml"
+          ],
+          [
+            "tool",
+            "medresearch_final_evaluation"
+          ]
+        ],
+        "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=hypertension&retmax=0&sort=pub_date&retmode=xml&tool=medresearch_final_evaluation",
+        "retrieved_at_utc": "2026-11-16T05:02:59.615169+00:00",
+        "completed_at_utc": "2026-11-16T05:02:59.822849+00:00",
+        "http_status": 200,
+        "raw_file": "rawcache/esearch-82720e6a544ed195a775.xml",
+        "sha256": "03450221c20648ffcf747996d919c355960a8f0b3abd3d90ef1ddacc0406708d",
+        "bytes": 900,
+        "redacted_request_parameters": [
+          "email (operator contact; exact value retained only in ignored local cache)"
+        ]
+      }
+    },
+    {
+      "query": "\"medresearch_evaluation_20261115_zero_7f4d99\"[Title]",
+      "test_ids": [
+        "T020"
+      ],
+      "count": 0,
+      "required_minimum": 0,
+      "required_maximum": 0,
+      "prerequisite_ready": true,
+      "source": {
+        "utility": "esearch",
+        "request_parameters": [
+          [
+            "db",
+            "pubmed"
+          ],
+          [
+            "term",
+            "\"medresearch_evaluation_20261115_zero_7f4d99\"[Title]"
+          ],
+          [
+            "retmax",
+            "0"
+          ],
+          [
+            "sort",
+            "pub_date"
+          ],
+          [
+            "retmode",
+            "xml"
+          ],
+          [
+            "tool",
+            "medresearch_final_evaluation"
+          ]
+        ],
+        "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%22medresearch_evaluation_20261115_zero_7f4d99%22%5BTitle%5D&retmax=0&sort=pub_date&retmode=xml&tool=medresearch_final_evaluation",
+        "retrieved_at_utc": "2026-11-16T05:03:00.215326+00:00",
+        "completed_at_utc": "2026-11-16T05:03:00.423692+00:00",
+        "http_status": 200,
+        "raw_file": "rawcache/esearch-68ace90acfca54e2f713.xml",
+        "sha256": "aae704d0f76d5c48d0a667516fe8cac026ef5b97d04df4f8766e9275ec127da7",
+        "bytes": 546,
+        "redacted_request_parameters": [
+          "email (operator contact; exact value retained only in ignored local cache)"
+        ]
+      }
+    },
+    {
+      "query": "electronic health records",
+      "test_ids": [
+        "T063"
+      ],
+      "count": 98671,
+      "required_minimum": 10,
+      "required_maximum": null,
+      "prerequisite_ready": true,
+      "source": {
+        "utility": "esearch",
+        "request_parameters": [
+          [
+            "db",
+            "pubmed"
+          ],
+          [
+            "term",
+            "electronic health records"
+          ],
+          [
+            "retmax",
+            "0"
+          ],
+          [
+            "sort",
+            "pub_date"
+          ],
+          [
+            "retmode",
+            "xml"
+          ],
+          [
+            "tool",
+            "medresearch_final_evaluation"
+          ]
+        ],
+        "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=electronic+health+records&retmax=0&sort=pub_date&retmode=xml&tool=medresearch_final_evaluation",
+        "retrieved_at_utc": "2026-11-16T05:03:00.815487+00:00",
+        "completed_at_utc": "2026-11-16T05:03:01.154778+00:00",
+        "http_status": 200,
+        "raw_file": "rawcache/esearch-c5c3df2ce4d69a63ce91.xml",
+        "sha256": "876faa02ce3291658e2aa7da4aa73dadddd226738a602c89f0bce9b0b0b1e869",
+        "bytes": 758,
+        "redacted_request_parameters": [
+          "email (operator contact; exact value retained only in ignored local cache)"
+        ]
+      }
+    },
+    {
+      "query": "(diabetes AND therapy) AND (\"2020/01/01\"[Date - Publication] : \"2025/12/31\"[Date - Publication]) AND review[Publication Type] AND english[Language]",
+      "test_ids": [
+        "T097"
+      ],
+      "count": 35725,
+      "required_minimum": 150,
+      "required_maximum": null,
+      "prerequisite_ready": true,
+      "source": {
+        "utility": "esearch",
+        "request_parameters": [
+          [
+            "db",
+            "pubmed"
+          ],
+          [
+            "term",
+            "(diabetes AND therapy) AND (\"2020/01/01\"[Date - Publication] : \"2025/12/31\"[Date - Publication]) AND review[Publication Type] AND english[Language]"
+          ],
+          [
+            "retmax",
+            "0"
+          ],
+          [
+            "sort",
+            "pub_date"
+          ],
+          [
+            "retmode",
+            "xml"
+          ],
+          [
+            "tool",
+            "medresearch_final_evaluation"
+          ]
+        ],
+        "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=%28diabetes+AND+therapy%29+AND+%28%222020%2F01%2F01%22%5BDate+-+Publication%5D+%3A+%222025%2F12%2F31%22%5BDate+-+Publication%5D%29+AND+review%5BPublication+Type%5D+AND+english%5BLanguage%5D&retmax=0&sort=pub_date&retmode=xml&tool=medresearch_final_evaluation",
+        "retrieved_at_utc": "2026-11-16T05:03:01.415958+00:00",
+        "completed_at_utc": "2026-11-16T05:03:01.718723+00:00",
+        "http_status": 200,
+        "raw_file": "rawcache/esearch-0a31efed5870dcf56ee1.xml",
+        "sha256": "a4314e3c16819fae636aab7b239ba96ec60c3902a25db30b89422270049cd38d",
+        "bytes": 1728,
+        "redacted_request_parameters": [
+          "email (operator contact; exact value retained only in ignored local cache)"
+        ]
+      }
+    }
+  ]
+}

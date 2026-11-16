@@ -1,0 +1,15 @@
+# Official PubMed prerequisite data
+
+These artifacts prepare independent oracle/test fixtures. They are not application results and not native CUA execution.
+
+The eight fixed M1 queries produced 1,103 distinct candidate PMIDs. Each query was limited to 200 records and sorted by publication date. The contract's `pub date` wording maps to NCBI's currently documented `pub_date` API parameter; no query, bound or sort semantics were changed to favor application results. The two literal author-suffix queries returned zero; these actual results were preserved. Suffix fixtures came from other permitted candidates.
+
+`data-manifest-selection.json` records deterministic rules, including exact minimum set cover with numeric PMID tuple tie-breaks. `manifest.json` records chosen slots and official provenance; the ignored local `candidate-metadata.json` contains independent bibliographic fields and presence flags for the full candidate pool. `source-responses.json` records public request parameters, UTC retrieval times and SHA-256 hashes. `query-preflight.json` separately checks frozen test-query prerequisites; those queries do not enlarge the M1 candidate pool.
+
+`rawcache/` contains original ESearch/EFetch/ELink XML and complete independent metadata, including abstracts, for local oracle review. It is intentionally ignored and should not be committed as a bulk republication of abstracts. Public JSON excludes abstract text and full reference citation text, retaining presence, counts and hashes. No application normalizer or application API is used. Full-text distinctions are grounded in official LinkOut categories/attributes and PMC identifiers, never in absent DOI alone. Provider URLs are official published links; network reachability remains a separate observed browser condition.
+
+Run the standalone script with Python and `requests`, supplying the approved contact through the `NCBI_EMAIL` process environment. Public source provenance omits that operator's email; complete request parameters remain in the ignored local cache. It throttles requests to at most one every 0.6 seconds and batches EFetch/ELink IDs. Existing raw responses are reused with hash checks. `--baseline-only` retrieves the fixed baseline; `--query-preflight` prepares the independent query prerequisite counts. An existing final manifest is preserved unless `--rebuild` is explicitly passed. Rebuilding from cache is a preparation operation; after the suite and manifest are frozen and application execution begins, do not regenerate to change fixtures. A fresh uncached run can naturally differ because PubMed updates.
+
+The first exploratory 200-separate-ID ELink call was stopped because it was slow, without changing candidate content; the completed run uses official comma-separated batches for `acheck`/`llinks`. Relationship confirmation retains per-record IDs. This is infrastructure preparation, not a test retry.
+
+Official API documentation: [E-utilities parameters](https://www.ncbi.nlm.nih.gov/sites/books/NBK25499/). Application outcomes and pass rates must come from the separately frozen native CUA evaluation.

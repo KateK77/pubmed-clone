@@ -1,0 +1,8 @@
+{
+  "kind": "synthetic_local_browser_adapter_selftest_only",
+  "checks": 7,
+  "passed": 7,
+  "model_requests": 0,
+  "medresearch_tests_executed": 0,
+  "api_cost_usd": 0
+}

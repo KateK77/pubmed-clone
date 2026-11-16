@@ -17,7 +17,7 @@ Total: **100**
 Overall Pass Rate: **未计算（未执行）**
 Validly evaluated pass rate: **N/A（无有效评估）**
 
-主分母固定 100；有效评估分母为 PASS+FAIL。零执行不应被解读为软件 0% 通过或 100% 失败。
+主分母固定 100；有效评估分母为 PASS+FAIL。难度和领域通过率分母为该组固定用例总数，包含受阻、错误及未运行项。零执行不应被解读为软件 0% 通过或 100% 失败。
 
 ## B. Difficulty-Based Results
 
@@ -27,6 +27,7 @@ Validly evaluated pass rate: **N/A（无有效评估）**
 | Medium | 40 | 0 | 0 | 0 | 0 | 40 | — |
 | Hard | 20 | 0 | 0 | 0 | 0 | 20 | — |
 | Expert | 10 | 0 | 0 | 0 | 0 | 10 | — |
+| Total | 100 | 0 | 0 | 0 | 0 | 100 | — |
 
 ### 按功能领域
 

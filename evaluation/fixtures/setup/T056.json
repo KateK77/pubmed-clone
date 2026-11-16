@@ -1,0 +1,38 @@
+{
+  "reviewed_preconditions": true,
+  "suite_sha256": "b9b1007098c297acb58158c21eb442a97deb49b835e893eda71c0dcab700ac37",
+  "history": [
+    {
+      "owner": "eva_a",
+      "query": "diabetes",
+      "filters": {},
+      "sort": "publication",
+      "count": 1153759,
+      "created_at": "2026-11-12T12:00:00+00:00"
+    },
+    {
+      "owner": "eva_a",
+      "query": "cancer",
+      "filters": {},
+      "sort": "publication",
+      "count": 5744376,
+      "created_at": "2026-11-13T12:00:00+00:00"
+    },
+    {
+      "owner": "eva_a",
+      "query": "hypertension",
+      "filters": {},
+      "sort": "publication",
+      "count": 731455,
+      "created_at": "2026-11-14T12:00:00+00:00"
+    },
+    {
+      "owner": "eva_b",
+      "query": "cancer",
+      "filters": {},
+      "sort": "publication",
+      "count": 5744376,
+      "created_at": "2026-11-14T12:00:00+00:00"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "kind": "adapter_unit_selftest_only",
+  "checks": 44,
+  "passed": 44,
+  "model_requests": 0,
+  "website_tests_executed": 0,
+  "api_cost_usd": 0
+}

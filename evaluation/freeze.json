@@ -15,5 +15,5 @@
     "FINAL_TEST_CASES.md": "6fa9d7d9014370e9b6e924a9d58b4e9e4970bbad5d86c5649f52c4044d9454b3"
   },
   "native_execution_started": false,
-  "policy": "Do not alter tasks or expected outcomes after execution starts. All previous Playwright outcomes are excluded."
+  "policy": "Do not alter tasks or expected outcomes after freezing. All previous Playwright outcomes are excluded."
 }

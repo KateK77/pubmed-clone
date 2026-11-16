@@ -1,0 +1,127 @@
+{
+  "status": "ready",
+  "pmid": "31452104",
+  "metadata": {
+    "pmid": "31452104",
+    "record_kind": "PubmedArticle",
+    "title": "Molegro Virtual Docker for Docking.",
+    "authors": [
+      {
+        "last_name": "Bitencourt-Ferreira",
+        "fore_name": "Gabriela",
+        "initials": "G",
+        "suffix": "",
+        "collective_name": "",
+        "affiliations": [
+          "Escola de Ciências da Saúde, Pontifícia Universidade Católica do Rio Grande do Sul-PUCRS, Porto Alegre, RS, Brazil."
+        ]
+      },
+      {
+        "last_name": "de Azevedo",
+        "fore_name": "Walter Filgueira",
+        "initials": "WF",
+        "suffix": "Jr",
+        "collective_name": "",
+        "affiliations": [
+          "Escola de Ciências da Saúde, Pontifícia Universidade Católica do Rio Grande do Sul-PUCRS, Porto Alegre, RS, Brazil. walter@azevedolab.net."
+        ]
+      }
+    ],
+    "journal": "Methods in molecular biology (Clifton, N.J.)",
+    "journal_abbreviation": "Methods Mol Biol",
+    "publication_date": {
+      "Year": "2019"
+    },
+    "year": "2019",
+    "volume": "2053",
+    "issue": "",
+    "pages": "149-167",
+    "doi": "10.1007/978-1-4939-9752-7_10",
+    "pmcid": "",
+    "publication_types": [
+      "Journal Article",
+      "Research Support, Non-U.S. Gov't"
+    ],
+    "languages": [
+      "eng"
+    ],
+    "keywords": [
+      "Cyclin-dependent kinase 2",
+      "Drug design",
+      "MolDock",
+      "Molecular docking",
+      "Molegro Virtual Docker",
+      "Protein-ligand interactions"
+    ],
+    "mesh": [
+      "Binding Sites",
+      "Cyclin-Dependent Kinase 2",
+      "Drug Design",
+      "Humans",
+      "Ligands",
+      "Molecular Docking Simulation",
+      "Molecular Dynamics Simulation",
+      "Protein Binding",
+      "Proteins",
+      "Software",
+      "User-Computer Interface"
+    ],
+    "electronic_dates": [],
+    "source_response_sha256": "72e4b3f9672b5a685d3f9752cdeee351b871cf1dbd0a21af4a99cac30e84646a",
+    "source_raw_file": "rawcache/efetch-0f3774f5d84eae807adb.xml",
+    "record_xml_serialization_sha256": "9abe6e8cd27b1d52661df89d88766f7ee07452ebcc004b5016c152fa2c17b4d1",
+    "presence": {
+      "title": true,
+      "authors": true,
+      "affiliations": true,
+      "journal": true,
+      "publication_date": true,
+      "volume": true,
+      "issue": false,
+      "pages": true,
+      "pmid": true,
+      "pmcid": false,
+      "doi": true,
+      "abstract": true,
+      "keywords": true,
+      "mesh_terms": true,
+      "publication_types": true,
+      "full_text_links": false
+    },
+    "abstract_section_count": 1,
+    "abstract_sha256": "7bc15f730cc8bce7ca277145b3e4f9ebf53fedbef4af5eb3dcfa64d70e318c4d",
+    "reference_count": 0,
+    "reference_pmids": []
+  },
+  "source": {
+    "utility": "efetch",
+    "request_parameters": [
+      [
+        "db",
+        "pubmed"
+      ],
+      [
+        "id",
+        "31452104"
+      ],
+      [
+        "retmode",
+        "xml"
+      ],
+      [
+        "tool",
+        "medresearch_final_evaluation"
+      ]
+    ],
+    "request_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=31452104&retmode=xml&tool=medresearch_final_evaluation",
+    "retrieved_at_utc": "2026-11-16T04:56:13.287117+00:00",
+    "completed_at_utc": "2026-11-16T04:56:13.554308+00:00",
+    "http_status": 200,
+    "raw_file": "rawcache/efetch-0f3774f5d84eae807adb.xml",
+    "sha256": "72e4b3f9672b5a685d3f9752cdeee351b871cf1dbd0a21af4a99cac30e84646a",
+    "bytes": 6081,
+    "redacted_request_parameters": [
+      "email (operator contact; exact value retained only in ignored local cache)"
+    ]
+  }
+}
