@@ -1,0 +1,869 @@
+{
+  "specification": "outputs/medresearch/experiments/round-03/description.md",
+  "evaluation_instruction": "C:/Users/jiawe/.codex/attachments/9121abbf-5cc0-4517-8a4b-ea8809152085/Pasted text.txt",
+  "authority_rule": "V3最新账号要求覆盖冲突的嵌入基线；同一最终合并Description内的其余基线功能继续有效；历史执行/发布指令仅是交付审计对象，不是本次修改应用或发布的授权。",
+  "design_independence": "只读取最终合并Description、最终评估附件及允许的AGENTS.md；未读取应用代码、已有测试或旧代理输出；未执行应用。",
+  "execution_boundary": "原生CUA负责实际浏览器用户工作流；reset/真实官方metadata preflight/独立oracle/负向代理故障辅助不能冒充CUA任务执行。应用功能缺失FAIL；不可得必需fixture/oracle BLOCKED；CUA或基础设施执行错误ERROR；未执行NOT_RUN。",
+  "freeze_rule": "父代理审查后冻结这三个文件并登记SHA256；测试冻结后不得根据执行结果改用例/期望。真实fixture manifest在任何应用用例开始前按本契约一次构建、登记hash；不可看应用表现再调整选择。前置依赖不足记录BLOCKED，不改变用例。",
+  "fixture_contracts": {
+    "G0": "冻结测试后、应用执行前，在隔离实例配置合成账户/库；所有浏览器操作由原生CUA观察截图后点击/输入/按键完成。脚本可重置fixture、只读oracle、抓包和故障注入，不可代替UI工作流。每例独立重置，记录原始截图/动作和验证证据。缺必需测试环境→BLOCKED；所需产品功能缺失→FAIL；CUA误操作/工具故障→ERROR，不据此改预期或静默重试。",
+    "AUTH": "固定合成用户名 eva_a / eva_b；邮箱 eva_a@medresearch.test / eva_b@medresearch.test；初始密码 AlphaResearch8；新密码 87654321。注册用 eva_tNNN 序号账号及同名@medresearch.test地址。均指向隔离捕获邮箱，不投递真人。执行日志/仓库证据屏蔽凭证、会话和完整验证令牌。",
+    "MAIL": "通用验证流程使用隔离捕获邮箱/只读本地邮件查看UI与测试域名；允许开发filemail或SMTP捕获，但消息必须由应用实际账号流程生成，不能由测试器伪造。CUA读取验证码或链接，按应用机制填写或打开验证信息；独立记录消息生成时间/收件地址。消息捕获不可用则依赖邮件的用例BLOCKED。filemail只证明验证流程，不证明实际SMTP传输；真实传输由MAIL_SMTP与T031单独验证。",
+    "MAIL_SMTP": "T031单独要求已配置且获准使用的隔离SMTP捕获服务及本地收件箱UI。必须观察应用实际SMTP传输，不投递真人。只有filemail/控制台消息时T031为BLOCKED，不得声称实际SMTP可用；其他通用MAIL流程仍可评估。",
+    "LIVE": "每例主检索直接用真实NCBI，不注入成功假响应。预先抓取官方ESearch/ESummary/EFetch/ELink原始响应并记录URL参数、UTC时间、PMID列表与SHA256供oracle。基础记录固定PMID31452104，先验证存在；需要词/作者/期刊/DOI时只从冻结清单的真实元数据派生。动态结果比较以相邻时间窗口或同次后端外部响应为准，不能写死不断变化的总数。",
+    "M1": "在任何应用执行结果出现前冻结真实元数据manifest。候选分别用 PubMed 固定查询 cancer、diabetes、clinical trial、journal article、\"Jr\"[Author]、\"III\"[Author]、\"electronic publication\"、\"preprint\"[Publication Type]；每条查询最多前200条，sort=pub date，retmax=200。只抓真实官方元数据；各谓词选择候选中数值最小PMID，同分按查询固定顺序。未找到则该条件测试BLOCKED，不在看见应用结果后换有利文献。所需槽位：BASE=31452104；META=可用metadata字段覆盖的确定性最小记录集合；DOI=具有DOI；ABSENT_ABSTRACT=无摘要；ABSENT_FIELDS=分别无DOI/issue/pages的最小集合；SUFFIX=结构化Suffix非空；LONG=作者至少20人；UNICODE=作者或标题含非ASCII字母；EDATE=明确电子发表日期；FREE=官方有免费全文链接；PUBLISHER=出版商链接且不标免费；ABSTRACT_ONLY=有摘要但无全文链接；RELATED=ELink有相关记录；NO_RELATED=无相关关系；REFERENCES=官方提供参考文献关系；CITED_BY=官方提供被引关系；PREPRINT=官方确认为预印本。manifest每槽记录PMID、原始元数据和选中谓词。",
+    "LEGACY": "合成legacy_eva账号有6位合法历史密码246810、原先first_name/last_name值、保存文献/集合/历史，历史SUFFIX记录来自冻结官方元数据。只在独立测试DB预置，按被测版本支持的原有数据迁移导入历史fixture，不修改应用代码或把未来结构冒充旧结构；若无可信旧数据兼容fixture，本历史迁移部分BLOCKED。",
+    "FAULT": "代理/隔离网络层仅对指定请求注入timeout/429/503/截断/非法XML或把原始浏览器提交变为负向输入；不改应用源码，不替换正常主检索成功响应。预先固定触发序号、持续时间、恢复条件与日志。CUA仍执行用户输入和提交。验证服务器的独立oracle可读DB、抓包、下载文件/剪贴板/DOM；针对API确认、CSRF、对象授权的负向请求由CUA提交后代理只改指定字段，不是脚本代替UI任务。",
+    "VERIFY": "引用oracle只读冻结真实元数据并核查各格式对应的作者/后缀/标题/刊名/日期/标识及结构，不固定规格未指定的版本或标点风格。安全属性不能凭UI推断：哈希/权限/持久化/cache需独立只读DB或后端审计日志证据；oracle不可用→相关测试BLOCKED。验证器不读取实现来更改期望。",
+    "VIEWPORT": "桌面1440×900；手机390×844；可访问性用CUA Tab/Shift+Tab/Enter/Escape及读屏/DOM独立语义核查。截图证据包含控件当前焦点。"
+  },
+  "requirements": [
+    {
+      "id": "R001",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Show password rules directly below the password input, before submission.",
+      "requirement": "注册及修改密码前，在密码输入框正下方可见规则。",
+      "scope": "runtime",
+      "test_ids": [
+        "T031",
+        "T032",
+        "T037"
+      ]
+    },
+    {
+      "id": "R002",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Use a simple 8–128-character rule.",
+      "requirement": "新密码长度含边界8–128；不得附加大小写、数字、符号或常见密码、纯数字、用户名相似度限制。",
+      "scope": "runtime",
+      "test_ids": [
+        "T031",
+        "T032",
+        "T033",
+        "T034",
+        "T037"
+      ]
+    },
+    {
+      "id": "R003",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Require an exact match in both browser and API",
+      "requirement": "注册及修改密码均有确认密码；浏览器和API都严格匹配，并提供明确纠正信息；登录不需确认或按新规则重新验证旧密码。",
+      "scope": "runtime",
+      "test_ids": [
+        "T021",
+        "T031",
+        "T032",
+        "T033",
+        "T035",
+        "T037",
+        "T079",
+        "T096"
+      ]
+    },
+    {
+      "id": "R004",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Remove First name and Last name from the account UI.",
+      "requirement": "移除账号UI姓、名，不要求完善资料；保存现有数据库记录及登录凭证。",
+      "scope": "runtime",
+      "test_ids": [
+        "T023",
+        "T079",
+        "T096"
+      ]
+    },
+    {
+      "id": "R005",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "limited to username, email, password change and sign out",
+      "requirement": "账号页仅保留用户名、邮箱、修改密码及退出相关内容。",
+      "scope": "runtime",
+      "test_ids": [
+        "T023",
+        "T036"
+      ]
+    },
+    {
+      "id": "R006",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "After ordinary registration or sign-in, go directly to search.",
+      "requirement": "普通注册/登录直达搜索；研究页触发认证则返回该已知内部页并保留查询/筛选；禁止任意外部回跳。",
+      "scope": "runtime",
+      "test_ids": [
+        "T021",
+        "T031",
+        "T039",
+        "T077",
+        "T078",
+        "T091",
+        "T093",
+        "T100"
+      ]
+    },
+    {
+      "id": "R007",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Preserve an unsaved email edit when a session expires",
+      "requirement": "仍开着的账号页会话过期后，同一用户重新登录应恢复未保存邮箱编辑。",
+      "scope": "runtime",
+      "test_ids": [
+        "T040",
+        "T093",
+        "T094"
+      ]
+    },
+    {
+      "id": "R008",
+      "source_section": "Round 2 / Required revisions",
+      "source_quote": "Fix profile saving with empty password inputs",
+      "requirement": "不改密码时允许保存账号字段；清除冲突陈旧成功信息，字段错误明确；刷新及重新登录后保存值持久化。",
+      "scope": "runtime",
+      "test_ids": [
+        "T036",
+        "T037",
+        "T093"
+      ]
+    },
+    {
+      "id": "R009",
+      "source_section": "Round 2 / Required revisions",
+      "source_quote": "Handle lost sessions consistently and isolate MedResearch cookies",
+      "requirement": "一致处理会话丢失；本应用cookie与其他本地应用隔离。",
+      "scope": "runtime",
+      "test_ids": [
+        "T040",
+        "T076",
+        "T077",
+        "T093",
+        "T094"
+      ]
+    },
+    {
+      "id": "R010",
+      "source_section": "Round 2 / Required revisions",
+      "source_quote": "Preserve author name suffixes in article display and all citation formats",
+      "requirement": "展示与所有引用格式保留作者后缀，包括Round 1保存的元数据。",
+      "scope": "runtime",
+      "test_ids": [
+        "T065",
+        "T079",
+        "T096"
+      ]
+    },
+    {
+      "id": "R011",
+      "source_section": "Round 2 / Required revisions",
+      "source_quote": "Add configurable real email verification for registration.",
+      "requirement": "注册支持可配置真实邮件验证；既有账号继续访问保存研究；无邮件服务时提供明确本地开发行为。",
+      "scope": "runtime",
+      "test_ids": [
+        "T031",
+        "T038",
+        "T079",
+        "T091",
+        "T096"
+      ]
+    },
+    {
+      "id": "R012",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Do not claim that a public website or real email delivery has been provisioned.",
+      "requirement": "未提供托管/外部SMTP时不得声称已开通公网或真人邮件投递。",
+      "scope": "artifact_audit",
+      "test_ids": [
+        "T038"
+      ]
+    },
+    {
+      "id": "R013",
+      "source_section": "Master §3 Product Objective",
+      "source_quote": "The application must not fabricate scientific publications.",
+      "requirement": "主搜索使用官方真实PubMed数据，不能虚构出版物。",
+      "scope": "runtime",
+      "test_ids": [
+        "T002",
+        "T003",
+        "T084",
+        "T095",
+        "T097"
+      ]
+    },
+    {
+      "id": "R014",
+      "source_section": "Master §4 Technology Stack",
+      "source_quote": "React",
+      "requirement": "保留React、TypeScript、Vite、Tailwind CSS、React Router、TanStack Query及Python、Django、DRF；生产PostgreSQL、本地SQLite；测试栈pytest/pytest-django、Vitest、React Testing Library、Playwright；模块边界与栈需独立工件审计。",
+      "scope": "artifact_audit",
+      "test_ids": [
+        "T098"
+      ]
+    },
+    {
+      "id": "R015",
+      "source_section": "Master §5 Visual Design",
+      "source_quote": "Primary navigation:",
+      "requirement": "提供Home/Search/Advanced Search/Saved Articles/Collections/Search History/Profile及手机响应式导航；白底、深蓝主导航、浅灰次级表面、清晰字体、可访问表单/按钮、少干扰且一致的原创界面。",
+      "scope": "runtime",
+      "test_ids": [
+        "T001",
+        "T030",
+        "T100"
+      ]
+    },
+    {
+      "id": "R016",
+      "source_section": "Master §5 Visual Design",
+      "source_quote": "Loading indicators",
+      "requirement": "有加载、空态、错误、校验、分页、筛选标记及适用确认对话框。",
+      "scope": "runtime",
+      "test_ids": [
+        "T019",
+        "T020",
+        "T056",
+        "T059",
+        "T068",
+        "T070"
+      ]
+    },
+    {
+      "id": "R017",
+      "source_section": "Master §6 Home Page",
+      "source_quote": "The homepage should include:",
+      "requirement": "首页有主搜索、搜索按钮、高级搜索、介绍、真实精选/热门文献、登录用户最近搜索、主题快捷链接、研究集合入口。",
+      "scope": "runtime",
+      "test_ids": [
+        "T001",
+        "T008"
+      ]
+    },
+    {
+      "id": "R018",
+      "source_section": "Master §7 Core Literature Search",
+      "source_quote": "Keywords",
+      "requirement": "支持关键词、标题、作者、期刊、PMID、DOI、疾病、主题、医学术语及常见PubMed语法搜索。",
+      "scope": "runtime",
+      "test_ids": [
+        "T002",
+        "T003",
+        "T004",
+        "T005",
+        "T006",
+        "T007",
+        "T008",
+        "T091",
+        "T097"
+      ]
+    },
+    {
+      "id": "R019",
+      "source_section": "Master §7 Core Literature Search",
+      "source_quote": "Total result count",
+      "requirement": "结果页显示总数、查询、当前筛选、排序、分页；文献卡片有标题、作者、期刊、年份、PMID、可用DOI、摘要预览、可用文献类型、全文可用性，并可进入详情。",
+      "scope": "runtime",
+      "test_ids": [
+        "T002",
+        "T003",
+        "T009",
+        "T067"
+      ]
+    },
+    {
+      "id": "R020",
+      "source_section": "Master §7 Core Literature Search",
+      "source_quote": "10",
+      "requirement": "支持10/20/50每页及服务端分页；不得把小子集误当全部结果。",
+      "scope": "runtime",
+      "test_ids": [
+        "T018",
+        "T063",
+        "T069",
+        "T090",
+        "T092",
+        "T097"
+      ]
+    },
+    {
+      "id": "R021",
+      "source_section": "Master §8 Sorting",
+      "source_quote": "Best Match",
+      "requirement": "支持三个真实PubMed语义排序模式，明确显示当前模式，通过API参数或有文档依据的检索行为作用于实际全集。",
+      "scope": "runtime",
+      "test_ids": [
+        "T015",
+        "T016",
+        "T017",
+        "T097"
+      ]
+    },
+    {
+      "id": "R022",
+      "source_section": "Master §9 Publication Date",
+      "source_quote": "Last 1 Year",
+      "requirement": "支持近1/5/10年及自定义日期范围筛选。",
+      "scope": "runtime",
+      "test_ids": [
+        "T041",
+        "T042",
+        "T091",
+        "T097"
+      ]
+    },
+    {
+      "id": "R023",
+      "source_section": "Master §9 Article Type",
+      "source_quote": "Clinical Trial",
+      "requirement": "支持Clinical Trial、Randomized Controlled Trial、Review、Systematic Review、Meta-Analysis、Case Report六种文章类型。",
+      "scope": "runtime",
+      "test_ids": [
+        "T043",
+        "T091",
+        "T097"
+      ]
+    },
+    {
+      "id": "R024",
+      "source_section": "Master §9 Text Availability",
+      "source_quote": "Abstract Available",
+      "requirement": "支持摘要、免费全文及全文可用性筛选。",
+      "scope": "runtime",
+      "test_ids": [
+        "T044"
+      ]
+    },
+    {
+      "id": "R025",
+      "source_section": "Master §9 Additional Filters",
+      "source_quote": "Language",
+      "requirement": "支持语言、人类、其他动物、MEDLINE，及上游支持时排除预印本。",
+      "scope": "runtime",
+      "test_ids": [
+        "T045",
+        "T046",
+        "T047",
+        "T097"
+      ]
+    },
+    {
+      "id": "R026",
+      "source_section": "Master §9 Requirements",
+      "source_quote": "Individual filters can be removed.",
+      "requirement": "多个筛选可组合，单独移除与全部清空，显示状态并更新全集搜索；有效PubMed查询，不只筛当前页。",
+      "scope": "runtime",
+      "test_ids": [
+        "T041",
+        "T043",
+        "T044",
+        "T045",
+        "T046",
+        "T047",
+        "T048",
+        "T067",
+        "T069",
+        "T097"
+      ]
+    },
+    {
+      "id": "R027",
+      "source_section": "Master §9 Requirements",
+      "source_quote": "Filter state is reflected in the URL.",
+      "requirement": "筛选写入URL，刷新/复制URL及浏览器前进后退保持对应搜索状态。",
+      "scope": "runtime",
+      "test_ids": [
+        "T039",
+        "T048",
+        "T049",
+        "T055",
+        "T093",
+        "T097",
+        "T100"
+      ]
+    },
+    {
+      "id": "R028",
+      "source_section": "Master §10 Advanced Search Builder",
+      "source_quote": "AND",
+      "requirement": "高级搜索页可增删条件、选字段、选AND/OR/NOT、填词、预览、执行及保存搜索。",
+      "scope": "runtime",
+      "test_ids": [
+        "T050",
+        "T051",
+        "T052",
+        "T054",
+        "T092",
+        "T100"
+      ]
+    },
+    {
+      "id": "R029",
+      "source_section": "Master §10 Advanced Search Builder",
+      "source_quote": "All Fields",
+      "requirement": "高级搜索支持七种指定字段；生成兼容PubMed查询。",
+      "scope": "runtime",
+      "test_ids": [
+        "T051"
+      ]
+    },
+    {
+      "id": "R030",
+      "source_section": "Master §10 Advanced Search Builder",
+      "source_quote": "Preserve parentheses and logical operator precedence.",
+      "requirement": "维护括号和逻辑运算优先级；可行时支持嵌套/分组；畸形表达式有清晰校验反馈。",
+      "scope": "runtime",
+      "test_ids": [
+        "T050",
+        "T052",
+        "T053",
+        "T092",
+        "T100"
+      ]
+    },
+    {
+      "id": "R031",
+      "source_section": "Master §11 Publication Detail Page",
+      "source_quote": "Display all available metadata:",
+      "requirement": "详情显示可用标题、作者、单位、期刊、日期、卷、期、页、PMID、PMCID、DOI、摘要、关键词、MeSH、类型、全文、相关文献、可用参考文献及被引信息；不编造缺失字段。",
+      "scope": "runtime",
+      "test_ids": [
+        "T009",
+        "T010",
+        "T011",
+        "T065",
+        "T067",
+        "T081",
+        "T091",
+        "T096"
+      ]
+    },
+    {
+      "id": "R032",
+      "source_section": "Master §11 Publication Detail Page",
+      "source_quote": "Save Article",
+      "requirement": "详情提供保存、复制引用、导出、打开PubMed及全文；区分免费全文、出版商链接、仅摘要，不绕付费墙。",
+      "scope": "runtime",
+      "test_ids": [
+        "T013",
+        "T014",
+        "T025",
+        "T099"
+      ]
+    },
+    {
+      "id": "R033",
+      "source_section": "Master §12 Related Articles",
+      "source_quote": "Clearly identify the relationship type.",
+      "requirement": "用ELink等真实关系显示相关文献的标题、作者、年份、期刊、PMID、关系类型及可访问详情；无关系空态，不伪造相似度或被引次数。",
+      "scope": "runtime",
+      "test_ids": [
+        "T012",
+        "T081"
+      ]
+    },
+    {
+      "id": "R034",
+      "source_section": "Master §13 Citation Management",
+      "source_quote": "APA",
+      "requirement": "支持五种引用格式，复制/导出单篇、导出多选及完整集合，以核实元数据生成。",
+      "scope": "runtime",
+      "test_ids": [
+        "T029",
+        "T058",
+        "T061",
+        "T062",
+        "T063",
+        "T064",
+        "T065",
+        "T080",
+        "T091",
+        "T092",
+        "T095",
+        "T096",
+        "T099",
+        "T100"
+      ]
+    },
+    {
+      "id": "R035",
+      "source_section": "Master §13 Citation Management",
+      "source_quote": "Missing DOI",
+      "requirement": "引用能处理缺DOI/期/页、长作者名单、特殊字符、电子发表日期，不虚构字段。",
+      "scope": "runtime",
+      "test_ids": [
+        "T064",
+        "T080"
+      ]
+    },
+    {
+      "id": "R036",
+      "source_section": "Master §14 Saved Articles",
+      "source_quote": "Save article",
+      "requirement": "支持保存、移除、查看、搜索、排序、详情及导出；跨会话持久化，同一用户PMID不重复。",
+      "scope": "runtime",
+      "test_ids": [
+        "T025",
+        "T026",
+        "T057",
+        "T058",
+        "T071",
+        "T077",
+        "T091",
+        "T095",
+        "T096",
+        "T098",
+        "T100"
+      ]
+    },
+    {
+      "id": "R037",
+      "source_section": "Master §15 Research Collections",
+      "source_quote": "Create collection",
+      "requirement": "支持集合创建、改名、删除、加/删文献、查看、集合内搜索、完整集合引用导出。",
+      "scope": "runtime",
+      "test_ids": [
+        "T027",
+        "T059",
+        "T060",
+        "T086",
+        "T091",
+        "T092",
+        "T095",
+        "T096",
+        "T098",
+        "T099",
+        "T100"
+      ]
+    },
+    {
+      "id": "R038",
+      "source_section": "Master §15 Research Collections",
+      "source_quote": "A user must not access another user's private collections.",
+      "requirement": "集合属于用户；不得访问其他用户私有集合。",
+      "scope": "runtime",
+      "test_ids": [
+        "T072",
+        "T073",
+        "T074",
+        "T094"
+      ]
+    },
+    {
+      "id": "R039",
+      "source_section": "Master §16 Search History",
+      "source_quote": "Query",
+      "requirement": "登录用户搜索历史持久化、按时间顺序显示查询/时间/筛选/排序/结果数；可重执行、删单条、清空、保存常用查询。",
+      "scope": "runtime",
+      "test_ids": [
+        "T028",
+        "T054",
+        "T055",
+        "T056",
+        "T072",
+        "T091",
+        "T092",
+        "T093",
+        "T095",
+        "T098"
+      ]
+    },
+    {
+      "id": "R040",
+      "source_section": "Master §17 User Accounts",
+      "source_quote": "Registration",
+      "requirement": "提供注册登录退出和账号管理，保护私人保存文献、集合及历史。",
+      "scope": "runtime",
+      "test_ids": [
+        "T021",
+        "T022",
+        "T031",
+        "T072",
+        "T088",
+        "T094"
+      ]
+    },
+    {
+      "id": "R041",
+      "source_section": "Master §17 Security",
+      "source_quote": "Password hashing",
+      "requirement": "密码哈希、会话安全、CSRF保护、输入验证、用户授权、对象级访问控制，不暴露私人数据。",
+      "scope": "runtime",
+      "test_ids": [
+        "T022",
+        "T035",
+        "T037",
+        "T058",
+        "T072",
+        "T073",
+        "T074",
+        "T075",
+        "T076",
+        "T077",
+        "T078",
+        "T088",
+        "T094"
+      ]
+    },
+    {
+      "id": "R042",
+      "source_section": "Master §17 User Accounts",
+      "source_quote": "Create a clearly labeled local demo account.",
+      "requirement": "提供清楚标为本地演示的账号。",
+      "scope": "runtime",
+      "test_ids": [
+        "T024"
+      ]
+    },
+    {
+      "id": "R043",
+      "source_section": "Master §18 PubMed API Integration",
+      "source_quote": "ESearch",
+      "requirement": "以官方E-utilities执行搜索/统计、元数据、详情/摘要及可用相关关系；保留后端服务边界。",
+      "scope": "runtime",
+      "test_ids": [
+        "T012",
+        "T069",
+        "T089",
+        "T097",
+        "T099"
+      ]
+    },
+    {
+      "id": "R044",
+      "source_section": "Master §18 PubMed API Integration",
+      "source_quote": "Use appropriate batch requests",
+      "requirement": "适当批量获取元数据，限流/重试/缓存，不产生不必要逐篇请求；遵守执行时官方NCBI限额。",
+      "scope": "runtime",
+      "test_ids": [
+        "T082",
+        "T083",
+        "T087",
+        "T089",
+        "T097"
+      ]
+    },
+    {
+      "id": "R045",
+      "source_section": "Master §18 PubMed API Integration",
+      "source_quote": "Keep optional API keys on the server.",
+      "requirement": "可选API密钥仅服务器持有，不出现在浏览器资源、请求或错误中。",
+      "scope": "runtime",
+      "test_ids": [
+        "T076",
+        "T088"
+      ]
+    },
+    {
+      "id": "R046",
+      "source_section": "Master §18 Important",
+      "source_quote": "An explicitly labeled offline demonstration mode may use verified fixtures.",
+      "requirement": "主搜索失败不能用虚构数据补位；只有明确标注离线模式可用核实的fixture。",
+      "scope": "runtime",
+      "test_ids": [
+        "T082",
+        "T084",
+        "T095"
+      ]
+    },
+    {
+      "id": "R047",
+      "source_section": "Master §19 Data Models",
+      "source_quote": "Use PMID as the canonical PubMed identifier.",
+      "requirement": "PMID为规范标识，避免不必要重复出版物，规范化常查字段；数据实体清单为建议而非强制表结构。",
+      "scope": "runtime",
+      "test_ids": [
+        "T071",
+        "T096"
+      ]
+    },
+    {
+      "id": "R048",
+      "source_section": "Master §20 REST API",
+      "source_quote": "Provide generated API documentation.",
+      "requirement": "提供认证、搜索、详情、相关、高级搜索、收藏、集合、历史、引用、账号、健康检查API与生成文档；响应一致，校验查询参数、PMID和畸形检索。",
+      "scope": "runtime",
+      "test_ids": [
+        "T066",
+        "T090",
+        "T099"
+      ]
+    },
+    {
+      "id": "R049",
+      "source_section": "Master §21 Caching and Performance",
+      "source_quote": "Cache appropriate API responses using normalized request parameters.",
+      "requirement": "服务端缓存规范化请求，过期可配置并适当失效；安全处理不完整响应、批量和高效分页，避免重复网络调用，支持大结果集。",
+      "scope": "runtime",
+      "test_ids": [
+        "T069",
+        "T085",
+        "T087",
+        "T092",
+        "T095",
+        "T097",
+        "T098"
+      ]
+    },
+    {
+      "id": "R050",
+      "source_section": "Master §22 Error Handling",
+      "source_quote": "Empty search query",
+      "requirement": "友好处理空搜索、无结果、非法PMID、非法DOI和畸形高级检索。",
+      "scope": "runtime",
+      "test_ids": [
+        "T019",
+        "T020",
+        "T042",
+        "T053",
+        "T066",
+        "T090"
+      ]
+    },
+    {
+      "id": "R051",
+      "source_section": "Master §22 Error Handling",
+      "source_quote": "PubMed API timeout",
+      "requirement": "友好处理超时、429限流及外部服务不可用，重试/恢复不伪造结果。",
+      "scope": "runtime",
+      "test_ids": [
+        "T070",
+        "T082",
+        "T083",
+        "T084",
+        "T089",
+        "T095"
+      ]
+    },
+    {
+      "id": "R052",
+      "source_section": "Master §22 Error Handling",
+      "source_quote": "Missing publication metadata",
+      "requirement": "安全处理缺字段和部分外部响应，错误不导致虚构元数据或缓存污染。",
+      "scope": "runtime",
+      "test_ids": [
+        "T011",
+        "T081",
+        "T085",
+        "T089"
+      ]
+    },
+    {
+      "id": "R053",
+      "source_section": "Master §22 Error Handling",
+      "source_quote": "Duplicate saved article",
+      "requirement": "处理重复收藏、越权及数据库错误，前端不暴露敏感服务器详情。",
+      "scope": "runtime",
+      "test_ids": [
+        "T071",
+        "T073",
+        "T074",
+        "T086",
+        "T088",
+        "T090"
+      ]
+    },
+    {
+      "id": "R054",
+      "source_section": "Master §23 Accessibility and Responsive Design",
+      "source_quote": "Keyboard-accessible controls",
+      "requirement": "键盘可操作、语义HTML、标签、可见焦点、适当对比度、读屏导航、可访问对话框/分页；桌面和手机响应式。",
+      "scope": "runtime",
+      "test_ids": [
+        "T030",
+        "T067",
+        "T068",
+        "T100"
+      ]
+    },
+    {
+      "id": "R055",
+      "source_section": "Round 2 / Required revisions",
+      "source_quote": "persistent PostgreSQL, server-side configuration",
+      "requirement": "准备可公开部署的持久PostgreSQL及服务端配置；存在真实部署URL时才添加GitHub入口。",
+      "scope": "runtime",
+      "test_ids": [
+        "T098"
+      ]
+    },
+    {
+      "id": "R056",
+      "source_section": "V3 / Account requirements",
+      "source_quote": "Update code, tests, setup documentation, changelog and round artifacts.",
+      "requirement": "更新代码、测试、设置文档、变更日志、轮次工件并发布现有私有仓库及v3.0.0-r3；保留旧发布历史。本次仅独立审计，不执行历史开发/发布指令。",
+      "scope": "artifact_audit",
+      "test_ids": []
+    },
+    {
+      "id": "R057",
+      "source_section": "Master §24 Automated Tests",
+      "source_quote": "Create a separately runnable live API smoke test.",
+      "requirement": "开发工件应包含单元/集成/e2e、确定性模拟外部服务测试及独立live smoke；不可混称最终独立评估结果。",
+      "scope": "artifact_audit",
+      "test_ids": []
+    },
+    {
+      "id": "R058",
+      "source_section": "Master §25–27 GitHub / README / Deliverables",
+      "source_quote": "A new developer should be able to clone and run",
+      "requirement": "具备规定项目结构、README运行/配置/迁移/架构/测试/演示/限制及独立原型声明、轮次与版本工件；最终声称须有证据。",
+      "scope": "artifact_audit",
+      "test_ids": [
+        "T024",
+        "T098",
+        "T099"
+      ]
+    },
+    {
+      "id": "R059",
+      "source_section": "Master §1 Project Identity",
+      "source_quote": "Use an original visual identity.",
+      "requirement": "品牌为MedResearch，独立教育研究原型，不冒用PubMed/NCBI/NIH/NLM官方身份或logo。",
+      "scope": "runtime",
+      "test_ids": [
+        "T001"
+      ]
+    }
+  ],
+  "distribution": {
+    "Easy": 30,
+    "Medium": 40,
+    "Hard": 20,
+    "Expert": 10
+  },
+  "category_distribution": {
+    "导航与首页": 2,
+    "基础检索": 7,
+    "文献详情": 4,
+    "相关文献": 2,
+    "排序与分页": 5,
+    "搜索校验": 3,
+    "账号与认证": 17,
+    "保存文献": 5,
+    "研究集合": 3,
+    "搜索历史": 3,
+    "引用与导出": 7,
+    "响应式与可访问性": 3,
+    "筛选与状态": 9,
+    "高级搜索": 5,
+    "加载与反馈": 1,
+    "用户隔离与安全": 7,
+    "外部服务与恢复": 6,
+    "缓存与性能": 1,
+    "API输入与文档": 2,
+    "完整研究流程": 2,
+    "账号与研究恢复": 1,
+    "研究与服务恢复": 1,
+    "旧数据兼容与引用": 1,
+    "真实检索一致性": 1,
+    "持久化与部署准备": 1,
+    "移动与无障碍研究流程": 1
+  },
+  "non_runtime_audit_boundary": "架构/依赖、所有开发测试、私有仓库发布与版本历史、全套文档/轮次工件不可能由100个用户端e2e完整证明。R012/R014/R056/R057/R058含工件审计义务；关联用例只证明其明确列出的局部，不把未审计部分宣称PASS。需在最终报告单列审计范围；不得据此前置擅自修改应用/发布版本。",
+  "resolved_interpretations": [
+    "账号页面移除姓名、密码简单规则、登录不重校验、回跳与草稿规则按V3覆盖旧基线。",
+    "where available/where supported以执行前真实官方元数据或官方能力证据判断；缺记录前置BLOCKED，不能把产品缺失改称不适用。",
+    "高级分组的特定UI仅where feasible，但最终传给PubMed的括号/优先级必须保持；不强制某种树形编辑器。",
+    "普通注册完成（含应用需要的验证）后直达搜索；不限定验证码或链接机制。T031单独检验真实隔离SMTP，其他MAIL流程可用实际生成的本地filemail；不强制未在规格写明的验证前权限限制/令牌具体有效期。",
+    "Most Recent与Publication Date必须按官方支持行为区分，不凭日期展示表面排序替代API验证。",
+    "未指定排序选项细节、引用版本标点、日期时区边界、错误文案和具体端点路径不额外强制。",
+    "没有公共托管/外部SMTP账号是既定范围限制；独立评估只用隔离本地捕获邮件，不要求真人投递或公网服务。"
+  ]
+}

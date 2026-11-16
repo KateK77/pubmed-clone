@@ -1,0 +1,19 @@
+{
+  "frozen_at": "2026-11-15T22:53:42.411958-06:00",
+  "description": "experiments/round-03/description.md",
+  "application_commit": "03a7dc2a349a3f26bc1712c79d77957cf9338a1a",
+  "tests": 100,
+  "difficulty_distribution": {
+    "Easy": 30,
+    "Medium": 40,
+    "Hard": 20,
+    "Expert": 10
+  },
+  "files": {
+    "requirements.json": "daf89693f1c438bb1526625aae100b188b0a59e51dea92bab7d6f39957894696",
+    "final_test_cases_100.json": "b9b1007098c297acb58158c21eb442a97deb49b835e893eda71c0dcab700ac37",
+    "FINAL_TEST_CASES.md": "6fa9d7d9014370e9b6e924a9d58b4e9e4970bbad5d86c5649f52c4044d9454b3"
+  },
+  "native_execution_started": false,
+  "policy": "Do not alter tasks or expected outcomes after execution starts. All previous Playwright outcomes are excluded."
+}

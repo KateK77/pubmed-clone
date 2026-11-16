@@ -1,0 +1,3501 @@
+[
+  {
+    "id": "T001",
+    "difficulty": "Easy",
+    "category": "导航与首页",
+    "requirement_ids": [
+      "R015",
+      "R017",
+      "R059"
+    ],
+    "task": "从首页访问所有主导航并确认研究入口及原创身份。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "匿名；桌面视口；首页主数据真实可用。"
+    ],
+    "test_data": {
+      "start": "首页",
+      "navigation": [
+        "Home",
+        "Search",
+        "Advanced Search",
+        "Saved Articles",
+        "Collections",
+        "Search History",
+        "Profile"
+      ]
+    },
+    "workflow": [
+      "打开首页",
+      "查看介绍、主搜索、高级入口、主题快捷入口、精选文献和集合入口",
+      "逐个访问主导航；需登录项可显示认证入口后返回首页"
+    ],
+    "expected_result": "每个规定入口可发现可达；首页内容完整，精选为真实文献，品牌/说明不冒充官方。",
+    "pass_criteria": [
+      "七个导航目的可达或合理请求登录",
+      "首页列明内容均存在",
+      "白底、深蓝主导航、浅灰次级表面，界面清楚一致",
+      "精选PMID可由官方核实",
+      "无官方logo冒用、无虚假隶属声明"
+    ],
+    "independent_oracle": "截图、导航URL；精选PMID与官方清单核对。"
+  },
+  {
+    "id": "T002",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R013",
+      "R018",
+      "R019"
+    ],
+    "task": "用首页关键词检索并核对第一页结果。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "匿名；正常实时PubMed。"
+    ],
+    "test_data": {
+      "query": "type 2 diabetes"
+    },
+    "workflow": [
+      "在首页输入查询",
+      "点击搜索",
+      "等待加载结束并观察结果总数、查询和文献卡片"
+    ],
+    "expected_result": "显示真实匹配文献、当前查询、总数、筛选/排序/分页入口和规定卡片信息。",
+    "pass_criteria": [
+      "查询为所输入文本",
+      "显示总数与可用卡片字段",
+      "返回PMID与同次官方响应一致",
+      "没有演示数据替代"
+    ],
+    "independent_oracle": "截图、同次官方ESearch/元数据记录。"
+  },
+  {
+    "id": "T003",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R013",
+      "R018",
+      "R019"
+    ],
+    "task": "以固定PMID找到准确文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "基础记录已通过LIVE预检。"
+    ],
+    "test_data": {
+      "pmid": "31452104"
+    },
+    "workflow": [
+      "打开搜索",
+      "输入31452104并提交",
+      "打开匹配文献"
+    ],
+    "expected_result": "准确返回并打开PMID31452104对应真实记录。",
+    "pass_criteria": [
+      "结果包含准确PMID",
+      "详情URL或详情标识为31452104",
+      "标题与官方记录一致"
+    ],
+    "independent_oracle": "官方BASE元数据与截图。"
+  },
+  {
+    "id": "T004",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R018"
+    ],
+    "task": "通过真实DOI检索已知文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1的DOI槽位已冻结。"
+    ],
+    "test_data": {
+      "query": "manifest.DOI.doi"
+    },
+    "workflow": [
+      "复制冻结清单DOI到搜索框",
+      "执行搜索",
+      "打开对应结果"
+    ],
+    "expected_result": "真实DOI能够定位对应PubMed文献。",
+    "pass_criteria": [
+      "结果包含manifest.DOI.pmid",
+      "打开详情的DOI等于输入DOI"
+    ],
+    "independent_oracle": "官方manifest与搜索响应。"
+  },
+  {
+    "id": "T005",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R018"
+    ],
+    "task": "通过完整文章标题定位真实文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE标题在清单固定。"
+    ],
+    "test_data": {
+      "query": "manifest.BASE.title"
+    },
+    "workflow": [
+      "输入完整标题",
+      "提交",
+      "打开对应结果"
+    ],
+    "expected_result": "返回与完整标题相符的记录。",
+    "pass_criteria": [
+      "结果含BASE的PMID",
+      "标题文本与官方记录一致，允许仅HTML实体/空白规范化"
+    ],
+    "independent_oracle": "同次官方检索与BASE元数据。"
+  },
+  {
+    "id": "T006",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R018"
+    ],
+    "task": "检索指定作者的文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE作者列表存在；取首位个人作者，无个人作者则前置阻塞。"
+    ],
+    "test_data": {
+      "query": "manifest.BASE.first_personal_author + [Author]"
+    },
+    "workflow": [
+      "在搜索框输入带Author字段的冻结作者查询",
+      "搜索",
+      "查看至少两条结果，若总数仅一则查看该条"
+    ],
+    "expected_result": "Author语法被支持并返回官方匹配文献。",
+    "pass_criteria": [
+      "查询没有丢失字段限定",
+      "可见PMID与官方Author查询响应一致"
+    ],
+    "independent_oracle": "官方同查询结果及作者元数据。"
+  },
+  {
+    "id": "T007",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R018"
+    ],
+    "task": "用期刊字段搜索出版物。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE期刊字段已核实。"
+    ],
+    "test_data": {
+      "query": "manifest.BASE.journal + [Journal]"
+    },
+    "workflow": [
+      "输入带Journal限定的期刊查询",
+      "提交",
+      "打开一篇结果"
+    ],
+    "expected_result": "期刊字段检索正确。",
+    "pass_criteria": [
+      "结果非空且属于官方查询返回集合",
+      "打开记录期刊与输入的官方期刊对应"
+    ],
+    "independent_oracle": "官方查询响应和截图。"
+  },
+  {
+    "id": "T008",
+    "difficulty": "Easy",
+    "category": "导航与首页",
+    "requirement_ids": [
+      "R017",
+      "R018"
+    ],
+    "task": "使用首页研究主题快捷入口发起查询。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "首页；实时检索可用。"
+    ],
+    "test_data": {
+      "topic": "按页面顺序第一个与医学研究相关的主题快捷链接；文本在执行前截图固定"
+    },
+    "workflow": [
+      "查看首页主题入口",
+      "点击第一个主题",
+      "核对搜索框、结果标题及官方查询"
+    ],
+    "expected_result": "快捷链接执行其标注主题搜索。",
+    "pass_criteria": [
+      "至少有一个主题快捷入口",
+      "落地查询与所点主题一致",
+      "结果来自同次真实PubMed查询"
+    ],
+    "independent_oracle": "首页截图记录选中入口，实际出站查询及结果。"
+  },
+  {
+    "id": "T009",
+    "difficulty": "Easy",
+    "category": "基础检索",
+    "requirement_ids": [
+      "R019",
+      "R031"
+    ],
+    "task": "从结果卡片打开出版物详情并保持文献身份。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "实时查询可返回结果。"
+    ],
+    "test_data": {
+      "query": "electronic health records"
+    },
+    "workflow": [
+      "搜索查询",
+      "记录首张卡片PMID、标题、作者、年份",
+      "点击标题",
+      "核对详情身份"
+    ],
+    "expected_result": "卡片正确链接同篇出版物详情。",
+    "pass_criteria": [
+      "卡片有全部可用规定字段",
+      "详情PMID与点击卡片一致",
+      "共有字段不矛盾"
+    ],
+    "independent_oracle": "卡片、详情截图与官方元数据。"
+  },
+  {
+    "id": "T010",
+    "difficulty": "Easy",
+    "category": "文献详情",
+    "requirement_ids": [
+      "R031"
+    ],
+    "task": "检查有可用元数据的真实文献详情，包括关系型信息。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1的META最小覆盖集合及REFERENCES/CITED_BY已冻结；找不到某条件时对应检查BLOCKED，不判不存在功能通过。"
+    ],
+    "test_data": {
+      "records": "manifest.META + REFERENCES + CITED_BY"
+    },
+    "workflow": [
+      "逐一打开清单详情",
+      "展开可用摘要、作者信息与术语区域",
+      "查看参考文献和被引信息"
+    ],
+    "expected_result": "对所选官方已提供字段完整展示，所有关系与官方数据相符。",
+    "pass_criteria": [
+      "19种详情字段中每个在oracle存在的字段均可见或可展开",
+      "引用/被引可用前提下能看到真实信息",
+      "缺失值没有被编造"
+    ],
+    "independent_oracle": "官方EFetch及ELink清单与截图逐字段核对。"
+  },
+  {
+    "id": "T011",
+    "difficulty": "Easy",
+    "category": "文献详情",
+    "requirement_ids": [
+      "R031",
+      "R052"
+    ],
+    "task": "打开没有摘要的文献并继续使用详情。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1的ABSENT_ABSTRACT固定。"
+    ],
+    "test_data": {
+      "pmid": "manifest.ABSENT_ABSTRACT.pmid"
+    },
+    "workflow": [
+      "打开该PMID详情",
+      "查看摘要区域",
+      "使用Open in PubMed"
+    ],
+    "expected_result": "缺摘要被如实表达，其他详情和外链仍正常。",
+    "pass_criteria": [
+      "无伪造摘要或undefined/null错误文本",
+      "PMID和标题正确",
+      "PubMed入口可用"
+    ],
+    "independent_oracle": "官方无摘要证据与截图。"
+  },
+  {
+    "id": "T012",
+    "difficulty": "Easy",
+    "category": "相关文献",
+    "requirement_ids": [
+      "R033",
+      "R043"
+    ],
+    "task": "从真实相关文献进入另一篇详情。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1的RELATED以及其ELink结果冻结。"
+    ],
+    "test_data": {
+      "pmid": "manifest.RELATED.pmid"
+    },
+    "workflow": [
+      "打开详情",
+      "找到相关文献区域",
+      "记录首条相关记录身份与关系标签",
+      "点击其标题"
+    ],
+    "expected_result": "相关项身份、标签和可用元数据正确，打开对应详情。",
+    "pass_criteria": [
+      "相关项有标题、作者、年份、期刊、PMID的可用字段",
+      "关系类型明确",
+      "目标PMID属于官方关系集且详情一致"
+    ],
+    "independent_oracle": "ELink证据及目标元数据。"
+  },
+  {
+    "id": "T013",
+    "difficulty": "Easy",
+    "category": "文献详情",
+    "requirement_ids": [
+      "R032"
+    ],
+    "task": "打开文献的官方PubMed原始页面。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE记录可用。"
+    ],
+    "test_data": {
+      "pmid": "31452104"
+    },
+    "workflow": [
+      "打开BASE详情",
+      "点击Open in PubMed",
+      "检查外部页面地址与文献身份"
+    ],
+    "expected_result": "进入官方PubMed该记录。",
+    "pass_criteria": [
+      "目标主机为pubmed.ncbi.nlm.nih.gov",
+      "目标PMID31452104",
+      "未误导为MedResearch官方隶属"
+    ],
+    "independent_oracle": "原生浏览器地址及截图；不依赖外站反爬页面是否可加载判应用错误。"
+  },
+  {
+    "id": "T014",
+    "difficulty": "Easy",
+    "category": "文献详情",
+    "requirement_ids": [
+      "R032"
+    ],
+    "task": "区分免费全文、出版商链接及仅摘要记录。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1的FREE/PUBLISHER/ABSTRACT_ONLY槽位可用。"
+    ],
+    "test_data": {
+      "records": [
+        "FREE",
+        "PUBLISHER",
+        "ABSTRACT_ONLY"
+      ]
+    },
+    "workflow": [
+      "分别打开三类详情",
+      "检查全文状态标签",
+      "对有链接的记录点击Open Full Text并观察目标域名",
+      "返回查看仅摘要记录"
+    ],
+    "expected_result": "正确标注可用性并指向真实授权全文来源，缺链接不伪造全文。",
+    "pass_criteria": [
+      "免费和出版商状态清晰区分",
+      "目标链接与官方元数据相符",
+      "仅摘要记录不谎称全文免费",
+      "没有绕付费墙的应用流程"
+    ],
+    "independent_oracle": "官方全文链接与浏览器目标；不要求外部出版商允许免费访问。"
+  },
+  {
+    "id": "T015",
+    "difficulty": "Easy",
+    "category": "排序与分页",
+    "requirement_ids": [
+      "R021"
+    ],
+    "task": "使用Best Match进行真实检索。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "正常PubMed；外部请求可观察。"
+    ],
+    "test_data": {
+      "query": "cancer immunotherapy",
+      "sort": "Best Match"
+    },
+    "workflow": [
+      "执行查询",
+      "选择Best Match",
+      "查看当前排序指示和首个结果页"
+    ],
+    "expected_result": "以PubMed支持的相关性行为检索并指示Best Match。",
+    "pass_criteria": [
+      "活动排序正确",
+      "出站参数或预先登记的检索行为符合Best Match",
+      "可见PMID/顺序与同次官方响应一致"
+    ],
+    "independent_oracle": "出站请求日志与ESearch结果；只看标签不足以通过。"
+  },
+  {
+    "id": "T016",
+    "difficulty": "Easy",
+    "category": "排序与分页",
+    "requirement_ids": [
+      "R021"
+    ],
+    "task": "切换Most Recent排序并核实实际检索行为。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "正常PubMed；查询已执行。"
+    ],
+    "test_data": {
+      "query": "cancer immunotherapy",
+      "sort": "Most Recent"
+    },
+    "workflow": [
+      "搜索",
+      "改为Most Recent",
+      "查看当前模式与结果"
+    ],
+    "expected_result": "对真实匹配全集执行最近记录的PubMed排序。",
+    "pass_criteria": [
+      "活动模式明确",
+      "请求或文档行为支持Most Recent",
+      "第一页顺序与同次官方响应一致"
+    ],
+    "independent_oracle": "请求与响应oracle；不自行把Most Recent等同出版日期。"
+  },
+  {
+    "id": "T017",
+    "difficulty": "Easy",
+    "category": "排序与分页",
+    "requirement_ids": [
+      "R021"
+    ],
+    "task": "切换Publication Date排序。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "正常PubMed。"
+    ],
+    "test_data": {
+      "query": "cancer immunotherapy",
+      "sort": "Publication Date"
+    },
+    "workflow": [
+      "执行查询",
+      "选择Publication Date",
+      "核对结果更新"
+    ],
+    "expected_result": "使用PubMed出版日期排序并明确当前模式。",
+    "pass_criteria": [
+      "模式与出站检索语义一致",
+      "真实返回顺序与官方本次响应一致"
+    ],
+    "independent_oracle": "同次ESearch顺序与元数据。"
+  },
+  {
+    "id": "T018",
+    "difficulty": "Easy",
+    "category": "排序与分页",
+    "requirement_ids": [
+      "R020"
+    ],
+    "task": "在10、20、50条每页之间切换。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "query官方匹配总数大于100。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "page_sizes": [
+        10,
+        20,
+        50
+      ]
+    },
+    "workflow": [
+      "搜索diabetes",
+      "依次选择10、20、50每页",
+      "每次记录可见卡片数和总数"
+    ],
+    "expected_result": "每页设置生效，显示正确数量且总数保持真实全集统计。",
+    "pass_criteria": [
+      "各档第一页分别有10/20/50篇",
+      "总数非当前页长度",
+      "后端请求使用对应分页而非加载全部库"
+    ],
+    "independent_oracle": "截图卡片计数和出站分页记录。"
+  },
+  {
+    "id": "T019",
+    "difficulty": "Easy",
+    "category": "搜索校验",
+    "requirement_ids": [
+      "R016",
+      "R050"
+    ],
+    "task": "提交空字符串和仅空格的检索。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "匿名；搜索框初始为空。"
+    ],
+    "test_data": {
+      "queries": [
+        "",
+        "   "
+      ]
+    },
+    "workflow": [
+      "清空搜索框提交",
+      "输入三个空格再次提交"
+    ],
+    "expected_result": "友好说明需输入查询，不出现无意义错误或伪造结果。",
+    "pass_criteria": [
+      "两种输入都安全处理",
+      "有可理解的输入反馈",
+      "无堆栈或服务器秘密泄露"
+    ],
+    "independent_oracle": "截图与出站日志；规范未要求特定错误文案。"
+  },
+  {
+    "id": "T020",
+    "difficulty": "Easy",
+    "category": "搜索校验",
+    "requirement_ids": [
+      "R016",
+      "R050"
+    ],
+    "task": "执行没有匹配文献的精确查询。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "预检官方查询为0；若非0则前置BLOCKED，不临场改词。"
+    ],
+    "test_data": {
+      "query": "\"medresearch_evaluation_20261115_zero_7f4d99\"[Title]"
+    },
+    "workflow": [
+      "输入固定查询",
+      "执行并等待",
+      "查看结果空态"
+    ],
+    "expected_result": "显示0结果及清晰空态，保留查询可继续修改。",
+    "pass_criteria": [
+      "总数0",
+      "没有虚构记录",
+      "可修改查询重新使用搜索"
+    ],
+    "independent_oracle": "官方0结果与截图。"
+  },
+  {
+    "id": "T021",
+    "difficulty": "Easy",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R003",
+      "R006",
+      "R040"
+    ],
+    "task": "正常登录后直接进入搜索。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a存在且已验证；匿名启动。"
+    ],
+    "test_data": {
+      "username": "eva_a",
+      "password_ref": "AUTH.initial"
+    },
+    "workflow": [
+      "从普通登录入口进入",
+      "观察登录字段",
+      "输入凭证并提交"
+    ],
+    "expected_result": "登录成功直达搜索，不要求确认密码或完善姓名资料。",
+    "pass_criteria": [
+      "登录只有所需凭证，无确认密码要求",
+      "落地为搜索页",
+      "无额外资料完成阻挡"
+    ],
+    "independent_oracle": "登录前后截图/URL及只读用户会话状态。"
+  },
+  {
+    "id": "T022",
+    "difficulty": "Easy",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R040",
+      "R041"
+    ],
+    "task": "退出登录后验证私人研究访问被保护。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录且有一篇保存文献。"
+    ],
+    "test_data": {
+      "account": "eva_a"
+    },
+    "workflow": [
+      "从账号页退出",
+      "返回Saved Articles",
+      "尝试浏览器后退并刷新私人页面"
+    ],
+    "expected_result": "会话退出，私人页面不会继续提供已退出用户研究数据。",
+    "pass_criteria": [
+      "服务端会话不可用于新请求",
+      "受保护入口要求登录",
+      "刷新不暴露旧用户私人列表"
+    ],
+    "independent_oracle": "截图及只读会话/响应状态；不把浏览器瞬间旧画面当作服务端泄露。"
+  },
+  {
+    "id": "T023",
+    "difficulty": "Easy",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R004",
+      "R005"
+    ],
+    "task": "检查精简账号页面。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录。"
+    ],
+    "test_data": {
+      "account": "eva_a"
+    },
+    "workflow": [
+      "打开Profile/账号页",
+      "查看所有账号可编辑区域"
+    ],
+    "expected_result": "账号管理仅提供用户名、邮箱、修改密码、退出，不要求姓名或资料补全。",
+    "pass_criteria": [
+      "不存在First name/Last name输入或必填项",
+      "所列四类管理能力可发现",
+      "可直接返回搜索"
+    ],
+    "independent_oracle": "完整账号页截图及独立DOM字段清单。"
+  },
+  {
+    "id": "T024",
+    "difficulty": "Easy",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R042",
+      "R058"
+    ],
+    "task": "使用明确标注的本地演示账号访问应用。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "隔离本地实例；从交付说明获取演示账号，不从真实用户获取。"
+    ],
+    "test_data": {
+      "credentials": "本地演示说明中提供的账号，执行证据脱敏"
+    },
+    "workflow": [
+      "打开本地演示账号说明",
+      "按说明在UI登录",
+      "进入搜索和自己的库"
+    ],
+    "expected_result": "演示账号被清楚标注并可登录，不指向真实用户资料。",
+    "pass_criteria": [
+      "说明明确为本地demo",
+      "所示凭证可登录隔离实例",
+      "可到达研究功能"
+    ],
+    "independent_oracle": "说明截图、登录与库截图，脱敏。"
+  },
+  {
+    "id": "T025",
+    "difficulty": "Easy",
+    "category": "保存文献",
+    "requirement_ids": [
+      "R032",
+      "R036"
+    ],
+    "task": "从详情保存一篇文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a已登录，BASE未保存。"
+    ],
+    "test_data": {
+      "pmid": "31452104"
+    },
+    "workflow": [
+      "打开BASE详情",
+      "点击Save Article",
+      "进入Saved Articles"
+    ],
+    "expected_result": "文献成功加入该用户持久书签。",
+    "pass_criteria": [
+      "列表出现准确PMID",
+      "打开保存项仍是同篇",
+      "独立DB仅eva_a新增长该书签"
+    ],
+    "independent_oracle": "截图与只读书签记录。"
+  },
+  {
+    "id": "T026",
+    "difficulty": "Easy",
+    "category": "保存文献",
+    "requirement_ids": [
+      "R036"
+    ],
+    "task": "移除一篇已保存文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a库中仅有BASE；其他用户无关记录预置。"
+    ],
+    "test_data": {
+      "pmid": "31452104"
+    },
+    "workflow": [
+      "打开Saved Articles",
+      "移除BASE；若有确认则确认",
+      "刷新列表"
+    ],
+    "expected_result": "该用户的书签被移除且其他用户数据不受影响。",
+    "pass_criteria": [
+      "刷新不再有该书签",
+      "只删除eva_a对应关系，不误删其他用户数据"
+    ],
+    "independent_oracle": "截图与只读书签/出版物身份核查。"
+  },
+  {
+    "id": "T027",
+    "difficulty": "Easy",
+    "category": "研究集合",
+    "requirement_ids": [
+      "R037"
+    ],
+    "task": "创建一个空研究集合。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；无同名集合。"
+    ],
+    "test_data": {
+      "name": "EVA Cardiology"
+    },
+    "workflow": [
+      "打开Collections",
+      "创建EVA Cardiology",
+      "打开新集合"
+    ],
+    "expected_result": "新集合归当前用户，名称正确并有清楚空态。",
+    "pass_criteria": [
+      "集合存在且名称准确",
+      "可打开空集合",
+      "拥有者eva_a"
+    ],
+    "independent_oracle": "截图与只读集合记录。"
+  },
+  {
+    "id": "T028",
+    "difficulty": "Easy",
+    "category": "搜索历史",
+    "requirement_ids": [
+      "R039"
+    ],
+    "task": "完成一次搜索后查看历史记录。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；历史为空。"
+    ],
+    "test_data": {
+      "query": "cardiovascular disease"
+    },
+    "workflow": [
+      "搜索固定查询",
+      "打开Search History",
+      "查看新条目",
+      "返回首页检查登录用户最近搜索入口"
+    ],
+    "expected_result": "记录该搜索查询、时间、筛选、排序及结果数；首页能看到最近搜索。",
+    "pass_criteria": [
+      "条目查询正确",
+      "时间落在本次操作窗口",
+      "默认/当前筛选与排序可解释",
+      "结果数与原搜索一致",
+      "首页最近搜索包含刚完成的query"
+    ],
+    "independent_oracle": "截图、出站搜索响应及只读历史。"
+  },
+  {
+    "id": "T029",
+    "difficulty": "Easy",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R034"
+    ],
+    "task": "复制单篇APA引用。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE元数据固定；系统允许读取本地剪贴板oracle。"
+    ],
+    "test_data": {
+      "pmid": "31452104",
+      "format": "APA"
+    },
+    "workflow": [
+      "打开BASE详情",
+      "选择APA",
+      "点击Copy Citation",
+      "将剪贴板粘贴至隔离纯文本查看区"
+    ],
+    "expected_result": "剪贴板包含该篇的APA结构引用及真实元数据。",
+    "pass_criteria": [
+      "复制成功且非空",
+      "作者、标题、发表年、刊名/可用标识与官方一致",
+      "没有拼入另一篇文献"
+    ],
+    "independent_oracle": "剪贴板文本与冻结元数据；不凭成功提示认定复制完成。"
+  },
+  {
+    "id": "T030",
+    "difficulty": "Easy",
+    "category": "响应式与可访问性",
+    "requirement_ids": [
+      "R015",
+      "R054"
+    ],
+    "task": "在手机视口使用主要导航。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "VIEWPORT手机390×844；匿名。"
+    ],
+    "test_data": {
+      "viewport": "390x844"
+    },
+    "workflow": [
+      "打开首页",
+      "展开手机导航",
+      "依次进入搜索和高级搜索",
+      "关闭导航并输入查询"
+    ],
+    "expected_result": "手机导航可发现可操作，页面主体没有阻挡输入的横向溢出。",
+    "pass_criteria": [
+      "导航能展开/收起并到达目标",
+      "关键搜索控件可见可点",
+      "不存在导致任务不可完成的重叠或裁切"
+    ],
+    "independent_oracle": "手机全页截图与原生触控/鼠标动作。"
+  },
+  {
+    "id": "T031",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R001",
+      "R002",
+      "R003",
+      "R006",
+      "R011",
+      "R040"
+    ],
+    "task": "注册新用户并通过实际SMTP捕获邮件完成验证。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "MAIL_SMTP可用；eva_t031不存在；匿名；普通注册入口无return参数。"
+    ],
+    "test_data": {
+      "username": "eva_t031",
+      "email": "eva_t031@medresearch.test",
+      "password": "abcdefgh"
+    },
+    "workflow": [
+      "打开注册页并在未提交前查看密码说明及确认字段",
+      "输入用户名、邮箱、abcdefgh及同样确认密码",
+      "提交注册并记录流程状态",
+      "在隔离邮箱UI读取实际收到的验证码或链接，按应用机制完成验证",
+      "普通注册完成后记录落地页面与账户状态，再退出并登录"
+    ],
+    "expected_result": "8位无复杂字符密码可注册；普通注册完成（含应用所需验证）后直达搜索；邮件验证真实完成且账号可登录。",
+    "pass_criteria": [
+      "密码规则在输入框正下方且提交前显示",
+      "注册无姓名或资料补全要求",
+      "普通注册完成后直达搜索",
+      "SMTP捕获到该次应用实际发出的对应收件地址邮件",
+      "验证完成的服务端状态有独立证据",
+      "再次登录成功"
+    ],
+    "independent_oracle": "截图、隔离邮箱邮件原始记录、只读用户/验证状态；邮箱基础设施不可用则BLOCKED，不能只用控制台链接判PASS。"
+  },
+  {
+    "id": "T032",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R001",
+      "R002",
+      "R003"
+    ],
+    "task": "验证密码下界：7字符拒绝，8字符接受。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "MAIL开发/捕获配置明确；eva_t032未存在；不需要声称实际投递。"
+    ],
+    "test_data": {
+      "username": "eva_t032",
+      "email": "eva_t032@medresearch.test",
+      "invalid_password": "aaaaaaa",
+      "valid_password": "aaaaaaaa"
+    },
+    "workflow": [
+      "注册页查看规则",
+      "输入7字符密码及相同确认并提交",
+      "记录字段错误和未创建账户",
+      "改为8字符及相同确认再提交"
+    ],
+    "expected_result": "7字符有明确长度提示且不创建用户；8字符按正常注册流程接受。",
+    "pass_criteria": [
+      "规则明确8–128",
+      "7字符拒绝且没有用户记录",
+      "8字符不是因复杂度被拒绝",
+      "8字符注册成功无重复用户"
+    ],
+    "independent_oracle": "截图与只读用户存在性。"
+  },
+  {
+    "id": "T033",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R002",
+      "R003"
+    ],
+    "task": "验证密码上界：129字符拒绝，128字符接受。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_t033不存在；注册可用。"
+    ],
+    "test_data": {
+      "username": "eva_t033",
+      "email": "eva_t033@medresearch.test",
+      "invalid_password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "valid_password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "workflow": [
+      "输入129字符密码及确认并尝试提交",
+      "查看输入实际长度和错误",
+      "清空后输入128字符及相同确认",
+      "提交并重新登录确认所存密码"
+    ],
+    "expected_result": "129不能作为有效新密码被静默截断创建；128字符可完整保存并登录。",
+    "pass_criteria": [
+      "129被明确限制/提示且未以静默截断方式创建用户",
+      "128完整长度被接受",
+      "128密码可登录",
+      "不附加复杂度限制"
+    ],
+    "independent_oracle": "独立DOM仅核长度、只读用户状态及CUA重新登录；不记录完整密码。"
+  },
+  {
+    "id": "T034",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R002"
+    ],
+    "task": "分别用常见、纯数字和用户名相似密码注册。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "三个合成用户均不存在；注册可用。"
+    ],
+    "test_data": {
+      "variants": [
+        {
+          "username": "eva_t034a",
+          "password": "password"
+        },
+        {
+          "username": "eva_t034b",
+          "password": "12345678"
+        },
+        {
+          "username": "eva_t034c",
+          "password": "eva_t034c"
+        }
+      ],
+      "email_rule": "username@medresearch.test"
+    },
+    "workflow": [
+      "依次为三个合成账户打开注册",
+      "填写对应8–128字符密码与相同确认",
+      "提交，完成必要的隔离邮件步骤",
+      "退出并用相同密码登录"
+    ],
+    "expected_result": "三个有效长度密码都被接受，不受常见/纯数字/相似度隐藏规则拒绝。",
+    "pass_criteria": [
+      "三组均注册并登录成功",
+      "不存在未在V3要求中的复杂度/常见密码限制",
+      "每个账号仅创建一次"
+    ],
+    "independent_oracle": "截图、只读账号清单和登录结果；三个变体必须全部满足才PASS。"
+  },
+  {
+    "id": "T035",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R003",
+      "R041"
+    ],
+    "task": "验证注册确认密码的浏览器及API精确匹配。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT请求代理已独立自测；eva_t035不存在。"
+    ],
+    "test_data": {
+      "username": "eva_t035",
+      "password": "abcdefgh",
+      "browser_mismatch": "abcdefgH",
+      "proxy_mismatch": "abcdefgh "
+    },
+    "workflow": [
+      "输入密码abcdefgh与不同大小写确认abcdefgH并提交",
+      "观察明确匹配错误",
+      "改为完全一致并点击注册，由已登记代理仅把该次确认值增加一个末尾空格",
+      "观察服务端拒绝",
+      "关闭注入后输入完全一致值再注册"
+    ],
+    "expected_result": "浏览器和服务器均拒绝不精确相等，纠正后正常注册。",
+    "pass_criteria": [
+      "大小写不匹配有明确错误",
+      "代理证据证明不匹配请求到达服务端",
+      "服务端拒绝且未创建用户",
+      "纠正后注册成功且不残留错误成功提示"
+    ],
+    "independent_oracle": "代理原始/变更请求差异脱敏记录、响应与只读DB。代理只改confirmation，CUA执行所有表单提交。"
+  },
+  {
+    "id": "T036",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R005",
+      "R008"
+    ],
+    "task": "密码字段为空时保存邮箱，并检查持久化和错误消息。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；初始邮箱已验证；MAIL可用以处理应用实际要求的邮箱变更验证。"
+    ],
+    "test_data": {
+      "new_email": "eva_a_updated@medresearch.test",
+      "invalid_email": "not-an-email"
+    },
+    "workflow": [
+      "账号页保留所有密码字段为空",
+      "修改邮箱为新合成邮箱并保存",
+      "按实际要求在隔离邮箱完成验证",
+      "刷新页面并退出重登核对邮箱",
+      "再次编辑成非法邮箱并保存",
+      "核对字段错误且之前成功提示不再误导"
+    ],
+    "expected_result": "邮箱可以独立保存且跨会话保持；非法邮箱有字段提示，旧成功提示不与错误冲突。",
+    "pass_criteria": [
+      "空密码不阻挡邮箱保存",
+      "刷新/重登显示新邮箱",
+      "原密码仍可登录",
+      "非法邮箱不被保存",
+      "出现清晰邮箱错误且无冲突旧成功信息"
+    ],
+    "independent_oracle": "截图、只读用户邮箱与凭证状态；不要求规格未指定的邮箱唯一性。"
+  },
+  {
+    "id": "T037",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R001",
+      "R002",
+      "R003",
+      "R008",
+      "R041"
+    ],
+    "task": "修改密码时验证确认字段、服务端校验和新旧凭证行为。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；FAULT确认字段代理可用。"
+    ],
+    "test_data": {
+      "old_password_ref": "AUTH.initial",
+      "new_password": "87654321",
+      "wrong_confirm": "8765432A"
+    },
+    "workflow": [
+      "账号页查看新密码下方规则",
+      "填入新密码与不匹配确认，提交并观察错误",
+      "填一致确认再提交，由代理仅修改确认值为8765432A",
+      "确认服务端拒绝",
+      "关闭注入后以完全一致确认修改",
+      "退出，先用旧密码登录，再用新密码登录"
+    ],
+    "expected_result": "两个校验层都拒绝不匹配；符合简单规则的新密码成功替换旧凭证。",
+    "pass_criteria": [
+      "页面提交前规则和确认字段可见",
+      "浏览器/服务端不匹配均拒绝且密码不变",
+      "合法变更完成",
+      "旧密码无法登录，新密码可登录",
+      "错误后不显示误导成功提示"
+    ],
+    "independent_oracle": "代理证据、只读密码哈希变更时间及CUA两次登录结果；不输出哈希。"
+  },
+  {
+    "id": "T038",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R011",
+      "R012"
+    ],
+    "task": "在未配置SMTP的本地环境确认开发行为及已有账号可用性。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "独立无SMTP配置实例；eva_a原有保存文献/集合；不向任何外部邮箱发送。"
+    ],
+    "test_data": {
+      "new_user": "eva_t038",
+      "email": "eva_t038@medresearch.test"
+    },
+    "workflow": [
+      "阅读本地账号/开发提示",
+      "用已有eva_a登录并访问保存研究",
+      "退出后尝试注册新合成账号",
+      "观察邮件不可用时的明确说明和可用开发流程"
+    ],
+    "expected_result": "SMTP缺失的行为有明确说明；已有账户研究仍可访问，不谎称实际发送或已配置外部服务。",
+    "pass_criteria": [
+      "已有账号可登录并打开原研究",
+      "开发行为有明确可见说明或可达设置文档",
+      "注册结果与该明确行为一致",
+      "未将控制台/本地验证说成真人收件成功"
+    ],
+    "independent_oracle": "UI/设置文档截图及SMTP关闭审计；具体开发策略不在规格中固定，禁止按结果临场放宽是否明确。"
+  },
+  {
+    "id": "T039",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R006",
+      "R027"
+    ],
+    "task": "研究页面触发登录后返回原查询与筛选。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "匿名；正常PubMed；固定查询已用日期及Review筛选；需要保存等认证动作。"
+    ],
+    "test_data": {
+      "query": "type 2 diabetes",
+      "filters": [
+        "Last 5 Years",
+        "Review"
+      ],
+      "sort": "Publication Date"
+    },
+    "workflow": [
+      "执行固定查询并应用筛选、排序",
+      "对结果使用需认证的研究动作",
+      "在认证界面登录eva_a",
+      "检查返回页面及查询筛选"
+    ],
+    "expected_result": "回到触发认证的研究页面，保留查询/筛选状态，不丢回普通默认搜索。",
+    "pass_criteria": [
+      "返回已知内部研究页",
+      "查询文本与两个筛选保留",
+      "可继续原研究任务",
+      "URL状态与UI一致"
+    ],
+    "independent_oracle": "认证前后截图/URL及最终查询请求。"
+  },
+  {
+    "id": "T040",
+    "difficulty": "Medium",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R007",
+      "R009"
+    ],
+    "task": "会话过期后在仍打开的账号页恢复未保存邮箱草稿。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录，账号页保持打开；外部fixture可使其服务端session过期，不清浏览器页面。"
+    ],
+    "test_data": {
+      "draft_email": "eva_a_draft@medresearch.test"
+    },
+    "workflow": [
+      "将邮箱编辑为草稿但不保存",
+      "由前置辅助使该会话过期",
+      "点击保存触发失效处理",
+      "按提示以同一个eva_a重新登录",
+      "回到仍打开的账号页观察编辑框",
+      "保存草稿并刷新核对"
+    ],
+    "expected_result": "同用户重认证后未保存草稿恢复，用户主动保存后才持久化。",
+    "pass_criteria": [
+      "过期前DB没有草稿邮箱",
+      "认证后输入框仍有完整草稿",
+      "恢复不误保存到其他账号",
+      "主动保存后持久化"
+    ],
+    "independent_oracle": "会话fixture日志、截图、只读邮箱状态；不得通过测试工具把草稿重新填回。"
+  },
+  {
+    "id": "T041",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R022",
+      "R026"
+    ],
+    "task": "依次使用近1年、5年、10年筛选。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "真实查询结果存在；评估UTC日期在fixture记录。"
+    ],
+    "test_data": {
+      "query": "cardiovascular disease",
+      "windows": [
+        1,
+        5,
+        10
+      ]
+    },
+    "workflow": [
+      "搜索",
+      "选择Last 1 Year并查看标记、请求、结果",
+      "移除后选择Last 5 Years",
+      "移除后选择Last 10 Years"
+    ],
+    "expected_result": "每种日期窗口准确映射官方有效日期约束并作用于全集。",
+    "pass_criteria": [
+      "三个窗口各自显示且更新结果",
+      "出站日期语义与所选窗口一致",
+      "结果/总数对应同次官方日期查询",
+      "没有仅过滤现有页"
+    ],
+    "independent_oracle": "当前UTC时间、请求和官方响应；允许PubMed合法的年度边界定义，不强制未指定时区细节。"
+  },
+  {
+    "id": "T042",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R022",
+      "R050"
+    ],
+    "task": "提交有效及倒置的自定义发表日期范围。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "正常PubMed。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "valid_range": [
+        "2020-01-01",
+        "2020-12-31"
+      ],
+      "invalid_range": [
+        "2021-01-01",
+        "2020-01-01"
+      ]
+    },
+    "workflow": [
+      "搜索并设置有效日期范围",
+      "观察结果和标记",
+      "改为开始晚于结束并应用",
+      "纠正为有效范围"
+    ],
+    "expected_result": "有效范围约束结果；倒置范围明确提示或阻止，不展示误导结果。",
+    "pass_criteria": [
+      "有效范围请求/结果与官方对应",
+      "倒置输入有可理解反馈",
+      "纠正后可继续使用",
+      "URL没有残留不适用范围"
+    ],
+    "independent_oracle": "截图、URL、官方日期查询oracle。"
+  },
+  {
+    "id": "T043",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R023",
+      "R026"
+    ],
+    "task": "逐项使用六种规定文章类型筛选。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "正常PubMed，固定广义查询。"
+    ],
+    "test_data": {
+      "query": "cancer",
+      "types": [
+        "Clinical Trial",
+        "Randomized Controlled Trial",
+        "Review",
+        "Systematic Review",
+        "Meta-Analysis",
+        "Case Report"
+      ]
+    },
+    "workflow": [
+      "搜索cancer",
+      "依序选择一种类型并记录结果，移除该类型后再测下一种",
+      "最后清除类型筛选"
+    ],
+    "expected_result": "每个指定类型可用且转换为有效PubMed筛选。",
+    "pass_criteria": [
+      "六种类型均可选择",
+      "每次标记与出站查询对应",
+      "PMID与官方同次响应一致",
+      "不因个别结果类型展示简写而忽略查询正确性"
+    ],
+    "independent_oracle": "逐型请求日志及截图；全部六种通过才PASS。"
+  },
+  {
+    "id": "T044",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R024",
+      "R026"
+    ],
+    "task": "分别筛选摘要、免费全文和全文可用文献。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "固定查询可返回结果。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "availability": [
+        "Abstract Available",
+        "Free Full Text",
+        "Full Text Available"
+      ]
+    },
+    "workflow": [
+      "搜索",
+      "依次单独应用三个全文/摘要筛选，每次先清掉上一项",
+      "打开每种筛选的一篇结果核对状态"
+    ],
+    "expected_result": "三个可用性筛选均作用于官方全集并如实标注。",
+    "pass_criteria": [
+      "三项控件存在且可应用",
+      "出站PubMed筛选语义正确",
+      "结果标识与官方响应一致",
+      "选中免费全文的记录有官方支持的免费状态"
+    ],
+    "independent_oracle": "官方查询、EFetch/链接与截图。"
+  },
+  {
+    "id": "T045",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R025",
+      "R026"
+    ],
+    "task": "将检索限定为指定语言后恢复全部语言。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "PubMed正常；语言English为固定测试值。"
+    ],
+    "test_data": {
+      "query": "hypertension",
+      "language": "English"
+    },
+    "workflow": [
+      "搜索",
+      "打开语言筛选选择English",
+      "观察标记、URL和结果",
+      "移除语言筛选"
+    ],
+    "expected_result": "语言筛选有效，移除后恢复未限定语言的查询。",
+    "pass_criteria": [
+      "语言值正确进入有效PubMed查询",
+      "结果对应官方English查询",
+      "移除后请求不含该限制"
+    ],
+    "independent_oracle": "截图与前后官方请求。"
+  },
+  {
+    "id": "T046",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R025",
+      "R026"
+    ],
+    "task": "分别检索人类及其他动物研究。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "真实PubMed正常。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "species": [
+        "Humans",
+        "Other Animals"
+      ]
+    },
+    "workflow": [
+      "搜索",
+      "单独选Humans，核对请求及结果",
+      "移除后单独选Other Animals，核对请求及结果"
+    ],
+    "expected_result": "两种物种筛选各自使用真实有效PubMed语义。",
+    "pass_criteria": [
+      "两种选择均可操作",
+      "Humans与Other Animals的查询语义可区分",
+      "结果与对应官方请求一致"
+    ],
+    "independent_oracle": "抓包及官方响应，不只根据文献标题推断物种。"
+  },
+  {
+    "id": "T047",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R025",
+      "R026"
+    ],
+    "task": "使用MEDLINE子集，并在上游支持时排除预印本。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "官方查询语法预检记录排除预印本是否受支持；M1 PREPRINT存在用于比较。"
+    ],
+    "test_data": {
+      "query": "COVID-19",
+      "filters": [
+        "MEDLINE subset",
+        "Exclude preprints"
+      ]
+    },
+    "workflow": [
+      "搜索",
+      "应用MEDLINE并核对结果",
+      "移除MEDLINE",
+      "若官方支持排除预印本则应用该项并核对查询及预印本排除情况"
+    ],
+    "expected_result": "MEDLINE筛选有效；官方支持时必须提供正确排除预印本行为。",
+    "pass_criteria": [
+      "MEDLINE转为有效subset约束",
+      "支持排除预印本时该控件/功能存在并影响实际查询",
+      "匹配关系与官方一致",
+      "若官方不支持，记录条件不适用证据；不得仅因产品缺少而宣称不支持"
+    ],
+    "independent_oracle": "官方支持性预检、ESearch响应与manifest.PREPRINT。"
+  },
+  {
+    "id": "T048",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R026",
+      "R027"
+    ],
+    "task": "组合多个筛选，单独移除，再全部清空。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "真实PubMed正常。"
+    ],
+    "test_data": {
+      "query": "cancer immunotherapy",
+      "filters": [
+        "Last 5 Years",
+        "Review",
+        "English",
+        "Abstract Available"
+      ]
+    },
+    "workflow": [
+      "搜索后应用四项筛选",
+      "核对四个状态标记和结果",
+      "单独移除Review",
+      "核对其余三项仍在",
+      "点击Clear All"
+    ],
+    "expected_result": "多筛选共同约束全集；单删不破坏其他条件，清空彻底恢复基础查询。",
+    "pass_criteria": [
+      "每阶段URL/UI/出站查询一致",
+      "单删只去掉Review",
+      "清空后无残留过滤条件",
+      "各阶段总数来自真实全集"
+    ],
+    "independent_oracle": "截图、URL和三个阶段官方请求。"
+  },
+  {
+    "id": "T049",
+    "difficulty": "Medium",
+    "category": "筛选与状态",
+    "requirement_ids": [
+      "R027"
+    ],
+    "task": "通过刷新、复制URL与浏览器前进后退恢复搜索状态。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "浏览器允许第二标签；正常PubMed。"
+    ],
+    "test_data": {
+      "query": "electronic health records",
+      "filters": [
+        "Review",
+        "Last 5 Years"
+      ],
+      "sort": "Publication Date"
+    },
+    "workflow": [
+      "创建查询状态A：Review",
+      "增加Last 5 Years及排序形成B",
+      "刷新B",
+      "复制B的URL到新标签打开",
+      "回原标签按浏览器后退，再前进"
+    ],
+    "expected_result": "每种导航恢复对应查询与过滤状态，UI和URL一致。",
+    "pass_criteria": [
+      "刷新/复制URL后保持B",
+      "后退回到前一实际历史状态，前进恢复B",
+      "不展示与URL冲突的筛选结果"
+    ],
+    "independent_oracle": "各阶段URL/截图与出站查询；浏览器历史新增粒度按实际导航记录，不强制每次状态更新都另建记录。"
+  },
+  {
+    "id": "T050",
+    "difficulty": "Medium",
+    "category": "高级搜索",
+    "requirement_ids": [
+      "R028",
+      "R030"
+    ],
+    "task": "构建AND、OR、NOT混合条件并增删行。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "高级搜索页可用。"
+    ],
+    "test_data": {
+      "conditions": [
+        "diabetes",
+        "insulin",
+        "metformin",
+        "gestational"
+      ],
+      "operators": [
+        "AND",
+        "OR",
+        "NOT"
+      ]
+    },
+    "workflow": [
+      "添加四行条件及指定运算符",
+      "检查查询预览",
+      "删除第四行并观察预览",
+      "重新添加NOT gestational",
+      "执行搜索"
+    ],
+    "expected_result": "新增/删除与运算符变化正确进入兼容PubMed表达式。",
+    "pass_criteria": [
+      "行增删不留下幽灵条件",
+      "三个运算符均可选择并保留",
+      "预览与提交查询语义一致",
+      "结果来自对应官方检索"
+    ],
+    "independent_oracle": "生成表达式、出站请求和官方结果核对；具体混合优先级另在T052测。"
+  },
+  {
+    "id": "T051",
+    "difficulty": "Medium",
+    "category": "高级搜索",
+    "requirement_ids": [
+      "R028",
+      "R029"
+    ],
+    "task": "通过七种字段分别生成并执行字段限定查询。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE及M1元数据有相应字段；无MeSH则前置BLOCKED。"
+    ],
+    "test_data": {
+      "fields": {
+        "All Fields": "diabetes",
+        "Title": "diabetes",
+        "Author": "manifest.BASE.first_personal_author",
+        "Journal": "manifest.BASE.journal",
+        "Abstract": "diabetes",
+        "MeSH Terms": "Diabetes Mellitus",
+        "Publication Date": "2020"
+      }
+    },
+    "workflow": [
+      "对每个规定字段新建单行查询并填写固定词",
+      "检查预览字段标签",
+      "执行并返回构造器继续下一字段"
+    ],
+    "expected_result": "七种字段都产生语义正确的PubMed查询。",
+    "pass_criteria": [
+      "七字段可选择",
+      "字段限制没有丢失/错映射",
+      "每次执行与预览一致",
+      "总数和PMID对应官方查询"
+    ],
+    "independent_oracle": "七次预览/请求/响应；允许合法PubMed等价字段别名。"
+  },
+  {
+    "id": "T052",
+    "difficulty": "Medium",
+    "category": "高级搜索",
+    "requirement_ids": [
+      "R028",
+      "R030"
+    ],
+    "task": "保留括号并正确执行有OR分组的AND表达式。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "高级页提供可行的分组UI或可编辑完整表达式入口。"
+    ],
+    "test_data": {
+      "query": "(\"large language models\" OR \"LLM\") AND \"electronic health records\""
+    },
+    "workflow": [
+      "在高级页用可用分组/表达式输入构建固定查询",
+      "查看预览",
+      "执行并检查实际查询",
+      "返回并编辑组内一项后再次预览"
+    ],
+    "expected_result": "括号和逻辑优先级始终保持，不改成不同语义查询。",
+    "pass_criteria": [
+      "提交语义等于固定表达式",
+      "括号没有被扁平化丢失",
+      "结果对应官方同表达式",
+      "编辑不损坏分组"
+    ],
+    "independent_oracle": "预览、外部请求和官方结果；不要求规格仅称where feasible的特定拖拽/树形编辑器。"
+  },
+  {
+    "id": "T053",
+    "difficulty": "Medium",
+    "category": "高级搜索",
+    "requirement_ids": [
+      "R030",
+      "R050"
+    ],
+    "task": "校验畸形高级检索表达式并纠正。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "高级查询可手动输入或由界面触发对应错误。"
+    ],
+    "test_data": {
+      "invalid": [
+        "(diabetes OR cancer",
+        "diabetes AND"
+      ],
+      "valid": "(diabetes OR cancer) AND humans[MeSH Terms]"
+    },
+    "workflow": [
+      "提交未闭合括号表达式",
+      "记录反馈",
+      "提交悬空AND表达式",
+      "记录反馈",
+      "改成有效表达式并执行"
+    ],
+    "expected_result": "两种畸形输入有明确反馈；有效表达式可继续检索。",
+    "pass_criteria": [
+      "错误不能伪装为成功匹配",
+      "反馈解释表达式问题或需修正位置",
+      "修正后调用真实PubMed并显示结果"
+    ],
+    "independent_oracle": "截图与请求日志；可在前端或服务端校验，不限定实现。"
+  },
+  {
+    "id": "T054",
+    "difficulty": "Medium",
+    "category": "高级搜索",
+    "requirement_ids": [
+      "R028",
+      "R039"
+    ],
+    "task": "保存高级查询并在重新登录后再次运行。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；无同名已保存查询。"
+    ],
+    "test_data": {
+      "query": "diabetes[Title] AND insulin[All Fields]",
+      "name": "EVA insulin title study"
+    },
+    "workflow": [
+      "构建固定高级查询",
+      "选择Save a search并填写名称（若支持名称）",
+      "退出并重新登录",
+      "打开已保存查询并执行"
+    ],
+    "expected_result": "常用查询持久化，可再次执行相同语义检索。",
+    "pass_criteria": [
+      "保存条目在重登录后存在",
+      "查询内容未变",
+      "重执行使用真实官方查询",
+      "不会仅保存当前可见结果作为查询"
+    ],
+    "independent_oracle": "截图与只读SavedSearch记录、出站请求。"
+  },
+  {
+    "id": "T055",
+    "difficulty": "Medium",
+    "category": "搜索历史",
+    "requirement_ids": [
+      "R027",
+      "R039"
+    ],
+    "task": "从历史恢复带筛选和排序的查询。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a历史初始为空；正常PubMed。"
+    ],
+    "test_data": {
+      "query": "clinical natural language processing",
+      "filters": [
+        "Last 5 Years",
+        "Review"
+      ],
+      "sort": "Publication Date"
+    },
+    "workflow": [
+      "执行固定筛选排序搜索",
+      "再执行另一查询diabetes",
+      "打开历史并检查时间顺序和记录字段",
+      "重执行第一条研究查询"
+    ],
+    "expected_result": "历史按时间排列并完整保存/恢复研究状态。",
+    "pass_criteria": [
+      "两条时间可区分且排序一致",
+      "目标记录查询/时间/筛选/排序/结果数正确",
+      "重执行恢复目标状态",
+      "当前新结果数允许随PubMed变化，不覆盖历史原统计"
+    ],
+    "independent_oracle": "历史截图、初次/重执行请求、只读历史元数据。"
+  },
+  {
+    "id": "T056",
+    "difficulty": "Medium",
+    "category": "搜索历史",
+    "requirement_ids": [
+      "R016",
+      "R039"
+    ],
+    "task": "删除一个历史项后清空其余历史。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a预置三条固定真实搜索历史；eva_b历史另存。"
+    ],
+    "test_data": {
+      "queries": [
+        "diabetes",
+        "cancer",
+        "hypertension"
+      ]
+    },
+    "workflow": [
+      "打开历史",
+      "删除中间一条",
+      "刷新确认仅该条消失",
+      "使用Clear History，若出现确认先取消检查无变化，再重新确认清空",
+      "刷新并重新登录"
+    ],
+    "expected_result": "删除及清空持久化且不影响他人历史；有确认时取消无副作用。",
+    "pass_criteria": [
+      "单删只删除选中记录",
+      "清空后eva_a历史为空并跨登录保持",
+      "eva_b历史不变",
+      "若有确认，取消时无删除"
+    ],
+    "independent_oracle": "截图与只读历史集合；具体哪些操作使用确认由全局可访问确认用例另外检查。"
+  },
+  {
+    "id": "T057",
+    "difficulty": "Medium",
+    "category": "保存文献",
+    "requirement_ids": [
+      "R036"
+    ],
+    "task": "在保存库中搜索、排序并打开详情。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a保存BASE、DOI及FREE三个不同PMID，若槽位重复则按M1候选数值顺序补至三个；含各自真实年份/标题。"
+    ],
+    "test_data": {
+      "search_term": "manifest.BASE.title中的第一个长度至少5的非停用词",
+      "saved_pmids": "冻结的三个不同PMID"
+    },
+    "workflow": [
+      "打开Saved Articles",
+      "使用保存库搜索词",
+      "检查匹配与非匹配项",
+      "清空搜索并选择一个可用排序",
+      "打开一项详情"
+    ],
+    "expected_result": "查询仅作用于个人保存库，排序与其明确标签一致，详情身份正确。",
+    "pass_criteria": [
+      "过滤集合等于冻结库中匹配项",
+      "清空后恢复全部三个",
+      "至少提供可操作排序且顺序符合选项",
+      "详情PMID正确"
+    ],
+    "independent_oracle": "只读个人库与独立排序/标题匹配oracle；排序种类未指定不强制特定选项。"
+  },
+  {
+    "id": "T058",
+    "difficulty": "Medium",
+    "category": "保存文献",
+    "requirement_ids": [
+      "R034",
+      "R036",
+      "R041"
+    ],
+    "task": "导出个人保存库的引用并核对用户数据边界。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a库内恰好两篇不同真实记录；eva_b另保存第三篇不在A库的真实记录；下载目录隔离。"
+    ],
+    "test_data": {
+      "saved_set": "冻结的eva_a两个真实PMID",
+      "other_user_only": "冻结第三个不同真实PMID",
+      "format": "RIS"
+    },
+    "workflow": [
+      "打开Saved Articles核对两篇",
+      "使用保存文献引用导出能力，若为逐篇导出则依次导出两篇",
+      "打开所有下载文件进行独立审计"
+    ],
+    "expected_result": "当前用户两篇保存引用均可导出，文件合计内容准确且不包含B的独有书签。",
+    "pass_criteria": [
+      "每篇均有非空可解析RIS输出",
+      "合计文献集合准确等于A的两篇",
+      "不混入B独有文献或私人书签信息",
+      "字段来自真实元数据"
+    ],
+    "independent_oracle": "下载文件SHA256、独立RIS解析与两用户保存库oracle；不要求保存库必须支持特定子集多选UI，通用多选另由T063验证。"
+  },
+  {
+    "id": "T059",
+    "difficulty": "Medium",
+    "category": "研究集合",
+    "requirement_ids": [
+      "R016",
+      "R037"
+    ],
+    "task": "重命名集合并执行有确认保护的删除。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a集合EVA Rename已有BASE。"
+    ],
+    "test_data": {
+      "old_name": "EVA Rename",
+      "new_name": "EVA Renamed"
+    },
+    "workflow": [
+      "重命名集合并保存",
+      "刷新确认名称",
+      "发起删除，检查确认对话框",
+      "取消并确认集合保留",
+      "再次删除并确认"
+    ],
+    "expected_result": "改名持久化；删除有可理解确认且取消安全，确认后仅移除目标集合。",
+    "pass_criteria": [
+      "新名称刷新后仍在",
+      "存在可访问的删除确认",
+      "取消不删集合",
+      "确认后集合消失",
+      "公共文献/他人集合不被误删"
+    ],
+    "independent_oracle": "截图与只读集合/关联记录；删除集合不规定是否保留个人独立书签，但不能删无关数据。"
+  },
+  {
+    "id": "T060",
+    "difficulty": "Medium",
+    "category": "研究集合",
+    "requirement_ids": [
+      "R037"
+    ],
+    "task": "向集合添加两篇、搜索并移除其中一篇。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a有空集合EVA Working；两篇不同真实PMID已固定。"
+    ],
+    "test_data": {
+      "collection": "EVA Working",
+      "articles": [
+        "manifest.BASE",
+        "manifest.DOI（若相同则清单下一不同PMID）"
+      ]
+    },
+    "workflow": [
+      "从详情或保存库把两篇加入集合",
+      "打开集合核对两篇",
+      "输入唯一匹配首篇的冻结标题词搜索",
+      "清空搜索并移除首篇",
+      "刷新"
+    ],
+    "expected_result": "集合收录、集合内检索和移除均按目标文献工作。",
+    "pass_criteria": [
+      "初始加入两篇准确记录",
+      "搜索结果不混入集合外文章",
+      "移除后仅剩第二篇",
+      "刷新状态保持"
+    ],
+    "independent_oracle": "截图与只读集合成员集合。"
+  },
+  {
+    "id": "T061",
+    "difficulty": "Medium",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R034"
+    ],
+    "task": "复制同一文献的MLA与Vancouver引用。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE元数据固定；剪贴板oracle可用。"
+    ],
+    "test_data": {
+      "pmid": "31452104",
+      "formats": [
+        "MLA",
+        "Vancouver"
+      ]
+    },
+    "workflow": [
+      "打开详情",
+      "选择MLA并复制到隔离文本区",
+      "再选择Vancouver并复制",
+      "比较两个实际剪贴板内容"
+    ],
+    "expected_result": "两个格式各自生成对应结构，文献信息准确。",
+    "pass_criteria": [
+      "两次剪贴板确实更新",
+      "作者、标题、刊名、日期及可用标识正确",
+      "格式结构可区分且符合命名风格",
+      "没有undefined/null或虚构字段"
+    ],
+    "independent_oracle": "剪贴板文本及独立格式/元数据核查。"
+  },
+  {
+    "id": "T062",
+    "difficulty": "Medium",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R034"
+    ],
+    "task": "分别导出单篇BibTeX与RIS。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "BASE真实元数据；独立下载目录。"
+    ],
+    "test_data": {
+      "pmid": "31452104",
+      "formats": [
+        "BibTeX",
+        "RIS"
+      ]
+    },
+    "workflow": [
+      "打开详情",
+      "导出BibTeX",
+      "再导出RIS",
+      "查看两个文件"
+    ],
+    "expected_result": "两个文件可各自按目标格式解析，均只有该篇。",
+    "pass_criteria": [
+      "两个下载存在且非空",
+      "BibTeX有有效条目结构，RIS有记录结构",
+      "恰好一篇且标识/标题正确",
+      "可用字段无编造"
+    ],
+    "independent_oracle": "文件SHA256及独立解析器，截图记录点击。"
+  },
+  {
+    "id": "T063",
+    "difficulty": "Medium",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R020",
+      "R034"
+    ],
+    "task": "在搜索结果中选择多篇导出。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "query有至少10条真实结果；不预设跨页选择是必需功能。"
+    ],
+    "test_data": {
+      "query": "electronic health records",
+      "selected_positions": [
+        1,
+        3,
+        5
+      ],
+      "format": "BibTeX"
+    },
+    "workflow": [
+      "执行查询并固定当前页",
+      "选择第1、3、5条",
+      "选择BibTeX导出",
+      "独立解析下载"
+    ],
+    "expected_result": "导出准确的三篇选中真实文献。",
+    "pass_criteria": [
+      "UI支持多选",
+      "下载恰好三篇且与选择PMID一致",
+      "未选文章不混入",
+      "每条可解析且元数据正确"
+    ],
+    "independent_oracle": "选择前后截图、同次官方元数据及文件解析。"
+  },
+  {
+    "id": "T064",
+    "difficulty": "Medium",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R034",
+      "R035"
+    ],
+    "task": "对缺DOI、缺期号和缺页码文献生成五种引用。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1 ABSENT_FIELDS最小覆盖集固定，逐字段有官方缺失证据。"
+    ],
+    "test_data": {
+      "records": "manifest.ABSENT_FIELDS",
+      "formats": [
+        "APA",
+        "MLA",
+        "Vancouver",
+        "BibTeX",
+        "RIS"
+      ]
+    },
+    "workflow": [
+      "依序打开覆盖缺失字段的真实记录",
+      "对每篇生成五格式引用/导出",
+      "审计生成文本及文件"
+    ],
+    "expected_result": "缺字段被安全省略/按格式合法处理，其他字段正常保留。",
+    "pass_criteria": [
+      "每种格式可生成",
+      "无虚构DOI/期号/页码",
+      "无null/undefined/空模板污染",
+      "有的作者标题刊名标识不丢失"
+    ],
+    "independent_oracle": "五格式文本/文件与官方缺失字段oracle；不可拿本来有字段的记录冒充缺失。"
+  },
+  {
+    "id": "T065",
+    "difficulty": "Medium",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R010",
+      "R031",
+      "R034"
+    ],
+    "task": "验证作者后缀在详情和全部五种引用中保留。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1 SUFFIX真实结构化Suffix非空。"
+    ],
+    "test_data": {
+      "pmid": "manifest.SUFFIX.pmid",
+      "suffix": "manifest.SUFFIX.author_suffix",
+      "formats": [
+        "APA",
+        "MLA",
+        "Vancouver",
+        "BibTeX",
+        "RIS"
+      ]
+    },
+    "workflow": [
+      "打开详情并查看含后缀作者",
+      "依次生成APA、MLA、Vancouver、BibTeX、RIS",
+      "审计该作者身份"
+    ],
+    "expected_result": "后缀在展示及五格式中均保留，不与名/姓丢失合并成另一身份。",
+    "pass_criteria": [
+      "详情该作者后缀可见",
+      "五格式均保留规范化后缀内容",
+      "作者顺序/归属正确"
+    ],
+    "independent_oracle": "官方结构化作者与格式输出；标点标准差异不当作后缀丢失。"
+  },
+  {
+    "id": "T066",
+    "difficulty": "Medium",
+    "category": "搜索校验",
+    "requirement_ids": [
+      "R048",
+      "R050"
+    ],
+    "task": "访问非法PMID并搜索格式错误的DOI。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "正常浏览器；非法值固定，不能替换为仅不存在但格式合法的标识。"
+    ],
+    "test_data": {
+      "invalid_pmid": "not-a-pmid",
+      "invalid_doi": "10.invalid/@@@"
+    },
+    "workflow": [
+      "在应用文献路由中把PMID替换为not-a-pmid并导航",
+      "观察错误和返回搜索能力",
+      "在标识检索入口输入10.invalid/@@@并提交",
+      "纠正为真实DOI再搜索"
+    ],
+    "expected_result": "错误输入得到友好反馈或明确无效/无结果处理，纠正后可继续。",
+    "pass_criteria": [
+      "非法PMID不导致未处理崩溃",
+      "非法DOI不产生虚构文章",
+      "无敏感堆栈",
+      "真实DOI纠正后可以定位记录"
+    ],
+    "independent_oracle": "截图、HTTP响应状态与官方真实DOI核查；不要求存在独立DOI专用输入。"
+  },
+  {
+    "id": "T067",
+    "difficulty": "Medium",
+    "category": "响应式与可访问性",
+    "requirement_ids": [
+      "R019",
+      "R026",
+      "R031",
+      "R054"
+    ],
+    "task": "在手机视口筛选搜索并读完整文献详情。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "VIEWPORT手机；实时查询。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "filters": [
+        "Review",
+        "Last 5 Years"
+      ],
+      "viewport": "390x844"
+    },
+    "workflow": [
+      "手机首页执行检索",
+      "打开筛选入口应用两项",
+      "滚动结果并打开详情",
+      "阅读摘要和作者区域",
+      "返回结果"
+    ],
+    "expected_result": "手机上能完成筛选和阅读，不因布局遮挡丢失重要操作。",
+    "pass_criteria": [
+      "筛选可打开应用与关闭",
+      "活动标记可见",
+      "卡片和详情主要信息可读",
+      "返回后保留查询及筛选"
+    ],
+    "independent_oracle": "手机各阶段截图、URL与官方查询。"
+  },
+  {
+    "id": "T068",
+    "difficulty": "Medium",
+    "category": "响应式与可访问性",
+    "requirement_ids": [
+      "R016",
+      "R054"
+    ],
+    "task": "仅用键盘操作搜索、分页及集合删除对话框。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；有EVA Keyboard集合及可分页真实查询；独立语义审计可用。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "collection": "EVA Keyboard"
+    },
+    "workflow": [
+      "只用Tab/Shift+Tab定位搜索框和按钮并执行",
+      "键盘到下一页并激活",
+      "进入集合删除确认",
+      "检查初始焦点、遍历按钮并取消",
+      "独立检查相关标签、导航/分页/对话框语义和对比度"
+    ],
+    "expected_result": "关键控件键盘可用、焦点可见，表单和对话框具有明确可访问含义。",
+    "pass_criteria": [
+      "全程无需鼠标即可完成",
+      "焦点可见且顺序不阻断任务",
+      "输入有标签，导航/分页/对话框有可理解名称/语义",
+      "确认可取消且未删数据",
+      "相关文本/控件视觉清楚可辨，记录对比度测量用于解释，规格未给出的AA数值不单独作为硬失败门槛"
+    ],
+    "independent_oracle": "CUA键盘日志/截图及独立DOM/对比计算；不能仅由截图推断ARIA正确。"
+  },
+  {
+    "id": "T069",
+    "difficulty": "Medium",
+    "category": "排序与分页",
+    "requirement_ids": [
+      "R020",
+      "R026",
+      "R043",
+      "R049"
+    ],
+    "task": "在大结果集上翻页并核对服务端分页和筛选全集计数。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "真实query计数大于100；服务器出站日志可观察。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "page_size": 20,
+      "filter": "Review"
+    },
+    "workflow": [
+      "执行query设20条每页",
+      "记录第一页PMID",
+      "进入下一页并记录",
+      "应用Review并查看第一页和下一页",
+      "比较各次官方分页请求与总数"
+    ],
+    "expected_result": "正确向官方/后端请求对应页，结果计数为实际筛选全集。",
+    "pass_criteria": [
+      "页1/2对应正确偏移且各20条",
+      "没有前端把第一页副本当第二页",
+      "Review总数来自全集查询",
+      "实际请求不下载全部结果库"
+    ],
+    "independent_oracle": "同次ESearch retstart/retmax或等价后端缓存索引证据、结果PMID与页面截图。"
+  },
+  {
+    "id": "T070",
+    "difficulty": "Medium",
+    "category": "加载与反馈",
+    "requirement_ids": [
+      "R016",
+      "R051"
+    ],
+    "task": "在可控慢网络中观察加载并完成查询。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT仅为一条实时外部请求增加3秒延迟，最终透传真实响应；不改响应内容。"
+    ],
+    "test_data": {
+      "query": "cardiovascular disease",
+      "delay_ms": 3000
+    },
+    "workflow": [
+      "打开搜索提交query",
+      "在延迟期间截图观察",
+      "等待真实响应结束",
+      "核对加载状态结束及结果可用"
+    ],
+    "expected_result": "等待时提供可见加载反馈，完成后呈现真实结果且不残留卡住状态。",
+    "pass_criteria": [
+      "延迟窗口存在可理解加载提示",
+      "成功后提示结束",
+      "结果与真实响应一致",
+      "后续可继续打开详情"
+    ],
+    "independent_oracle": "注入开始/结束时间、截图与实际官方响应。"
+  },
+  {
+    "id": "T071",
+    "difficulty": "Hard",
+    "category": "保存文献",
+    "requirement_ids": [
+      "R036",
+      "R047",
+      "R053"
+    ],
+    "task": "从不同入口重复保存同一PMID，并检查跨会话持久化。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a无BASE书签；真实BASE存在；可同时打开搜索与详情标签。"
+    ],
+    "test_data": {
+      "pmid": "31452104"
+    },
+    "workflow": [
+      "搜索BASE并从结果保存",
+      "进入详情再次尝试保存",
+      "打开第二标签重复已保存动作（如果按钮表示移除则不点击移除）",
+      "刷新保存库",
+      "退出并重新登录再查看"
+    ],
+    "expected_result": "重复保存被幂等处理或明确提示，不产生重复书签，跨会话保持一条。",
+    "pass_criteria": [
+      "保存库只有一条BASE",
+      "DB对eva_a与BASE只有一个保存关系",
+      "重新登录后仍有该条",
+      "共享出版物身份不无谓重复"
+    ],
+    "independent_oracle": "截图及只读用户-PMID书签/规范出版物计数；不把已保存状态下的取消按钮当作第二次保存。"
+  },
+  {
+    "id": "T072",
+    "difficulty": "Hard",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R038",
+      "R039",
+      "R040",
+      "R041"
+    ],
+    "task": "同一浏览器切换两个用户，核查私人数据隔离。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a/eva_b各有不同合成邮箱、独有保存PMID、集合和历史；共享公共文献允许。"
+    ],
+    "test_data": {
+      "accounts": [
+        "eva_a",
+        "eva_b"
+      ],
+      "private_names": [
+        "EVA A Private",
+        "EVA B Private"
+      ]
+    },
+    "workflow": [
+      "用eva_a访问账号、保存库、集合、历史并记录身份",
+      "退出",
+      "用eva_b登录并访问同四区域",
+      "后退/前进并刷新",
+      "退出重登eva_a"
+    ],
+    "expected_result": "各账户只看到自己的私人研究和账号信息，不沿用前一用户缓存。",
+    "pass_criteria": [
+      "B不出现A专属邮箱/集合/书签关系/历史",
+      "A重新登录后数据完整",
+      "私人响应归属与当前用户一致",
+      "公共PubMed文献本身不误当私人泄露"
+    ],
+    "independent_oracle": "两用户截图、只读归属清单与实际响应；任何缺环境数据则BLOCKED。"
+  },
+  {
+    "id": "T073",
+    "difficulty": "Hard",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R038",
+      "R041",
+      "R053"
+    ],
+    "task": "直接访问另一用户的私有集合URL。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a集合EVA A Private含BASE；预先仅在fixture登记其合法URL/ID；eva_b登录。"
+    ],
+    "test_data": {
+      "target": "eva_a.private_collection_url"
+    },
+    "workflow": [
+      "以eva_b打开A的集合URL",
+      "观察拒绝/不存在状态",
+      "尝试浏览器刷新",
+      "回自己的Collections正常访问"
+    ],
+    "expected_result": "即使知道对象地址也不能读取他人集合。",
+    "pass_criteria": [
+      "页面及响应均无A集合名称/成员/私有属性",
+      "有友好拒绝/不存在反馈",
+      "B自己的集合仍可用",
+      "A数据不改变"
+    ],
+    "independent_oracle": "CUA导航截图及读响应oracle；401/403/404均可符合不泄露要求，不强制状态码。"
+  },
+  {
+    "id": "T074",
+    "difficulty": "Hard",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R038",
+      "R041",
+      "R053"
+    ],
+    "task": "阻止通过篡改集合对象ID执行他人集合写操作。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a、eva_b各有集合；B有合法改名操作；FAULT代理可以仅替换对象ID；只读DB快照已保存。"
+    ],
+    "test_data": {
+      "victim_collection": "eva_a.private_collection_id",
+      "legitimate_collection": "eva_b.private_collection_id",
+      "attempted_name": "EVA unauthorized rename"
+    },
+    "workflow": [
+      "以eva_b打开自己的集合并输入新名称",
+      "点击保存，由代理把目标ID替为A集合ID，其他认证保持B",
+      "观察失败反馈",
+      "关闭注入，在自己的集合正常改名",
+      "重新登录A核对原集合"
+    ],
+    "expected_result": "服务端对象权限拒绝跨用户写入，合法自己操作可完成。",
+    "pass_criteria": [
+      "被篡改请求确实抵达后端",
+      "A集合任何属性未变",
+      "越权请求无成功写入",
+      "B合法请求可成功",
+      "错误不泄露A私有详情"
+    ],
+    "independent_oracle": "代理差异日志、响应及两用户只读前后快照；只注入合成对象。"
+  },
+  {
+    "id": "T075",
+    "difficulty": "Hard",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R041"
+    ],
+    "task": "用缺少CSRF保护的实际浏览器提交验证服务端防护。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；同一隔离实例cookie会话认证；FAULT可删CSRF相关值并标记跨站Origin；独立确认请求抵达服务端。"
+    ],
+    "test_data": {
+      "operation": "create collection",
+      "name": "EVA CSRF Probe",
+      "injected_origin": "https://untrusted.medresearch.test"
+    },
+    "workflow": [
+      "通过CUA填写创建集合表单",
+      "点击创建，代理只移除本次CSRF证明并将Origin改为隔离不可信域",
+      "观察拒绝",
+      "关闭注入，按正常UI再次创建"
+    ],
+    "expected_result": "伪造跨站写请求不能创建集合；正常同站请求可创建。",
+    "pass_criteria": [
+      "负向请求服务端拒绝且无DB变更",
+      "不能仅凭浏览器CORS拦截宣称服务端CSRF通过",
+      "正常请求成功",
+      "会话和其他用户数据未损坏"
+    ],
+    "independent_oracle": "入站/响应日志及只读集合计数；若非cookie认证，按预先登记等价CSRF威胁模型验证且不能运行后免除要求。"
+  },
+  {
+    "id": "T076",
+    "difficulty": "Hard",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R009",
+      "R041",
+      "R045"
+    ],
+    "task": "验证密码存储与本地应用cookie隔离。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a已有账户；只读安全oracle能在隔离DB核验密码算法而不导出散列；另一个受控本地测试应用具有同名会话cookie场景；本机HTTPS仅在配置存在时检查Secure属性。"
+    ],
+    "test_data": {
+      "app_account": "eva_a",
+      "other_app": "隔离本地cookie冲突探针，不访问真实其他应用"
+    },
+    "workflow": [
+      "登录MedResearch并打开私人库",
+      "在另一个标签登录受控本地探针并写其session/CSRF cookie",
+      "返回MedResearch刷新并保存一篇文献",
+      "退出MedResearch后检查探针会话仍存在",
+      "在后台只读核验密码存储和会话cookie属性"
+    ],
+    "expected_result": "双方会话不会互相覆盖；密码以可识别的安全哈希形式保存，密钥不出现在客户端。",
+    "pass_criteria": [
+      "MedResearch登录在探针操作后仍有效",
+      "退出不误清探针会话",
+      "DB不存明文/可逆密码，哈希格式及验证与标准算法一致",
+      "会话cookie安全属性与实际HTTP/HTTPS环境适当，JS不能读取HttpOnly会话值",
+      "客户端无服务端API密钥"
+    ],
+    "independent_oracle": "CUA截图、脱敏cookie名称/域/属性、只读哈希算法验证布尔结果；不能由登录成功推断哈希正确。"
+  },
+  {
+    "id": "T077",
+    "difficulty": "Hard",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R006",
+      "R009",
+      "R036",
+      "R041"
+    ],
+    "task": "在会话失效后从文献保存动作重新认证并完成研究。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；BASE未保存；session expiry fixture可用；含查询和筛选的结果页仍开着。"
+    ],
+    "test_data": {
+      "query": "31452104",
+      "filter": "Abstract Available"
+    },
+    "workflow": [
+      "打开目标结果并停留",
+      "由辅助使会话失效",
+      "点击Save Article触发认证",
+      "以eva_a登录",
+      "核对返回研究状态",
+      "若动作未自动完成则由用户再次点击保存",
+      "到库中核对"
+    ],
+    "expected_result": "过期状态一致被识别；回到原研究页并可完成保存，避免误写匿名/他人数据。",
+    "pass_criteria": [
+      "失效后不静默声称已保存",
+      "重新认证返回正确页及query/filter",
+      "最终恰好一条eva_a书签",
+      "允许用户显式重做保存，不强制规格未承诺自动重放"
+    ],
+    "independent_oracle": "会话expiry日志、认证前后截图与只读书签。"
+  },
+  {
+    "id": "T078",
+    "difficulty": "Hard",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R006",
+      "R041"
+    ],
+    "task": "检验登录回跳只允许已知内部页面。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "登录入口实际return参数名称由UI导航日志预先确定，不依据执行结果选择；FAULT可替换该参数；匿名。"
+    ],
+    "test_data": {
+      "malicious_destinations": [
+        "https://evil.medresearch.test/collect",
+        "//evil.medresearch.test/collect",
+        "/unknown-evaluation-route"
+      ],
+      "allowed_destination": "带diabetes及Review筛选的已知搜索页"
+    },
+    "workflow": [
+      "通过需认证动作进入登录页",
+      "依次用隔离代理把return参数换成三个固定异常目的并正常CUA登录，每次独立重置",
+      "观察落地地址",
+      "最后在正常内部return目的完成登录"
+    ],
+    "expected_result": "外部、协议相对及未知内部目标不会被当作允许回跳；已知内部目的可返回并保留研究状态。",
+    "pass_criteria": [
+      "三种异常目标均未发生跳转/外部数据请求",
+      "异常目标被安全拒绝或落到已知内部页",
+      "正常内部回跳保留query/filter",
+      "不将unknown内部404当作已知白名单通过"
+    ],
+    "independent_oracle": "CUA登录日志、地址、网络导航记录；仅隔离保留域名，禁止真实外传。"
+  },
+  {
+    "id": "T079",
+    "difficulty": "Hard",
+    "category": "账号与认证",
+    "requirement_ids": [
+      "R003",
+      "R004",
+      "R010",
+      "R011"
+    ],
+    "task": "旧账号使用原短密码登录并访问历史研究，不要求姓名补全。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "LEGACY真实兼容fixture可用；其六位密码/旧姓名称值及保存研究在启动前固定。"
+    ],
+    "test_data": {
+      "account": "legacy_eva",
+      "legacy_password": "246810"
+    },
+    "workflow": [
+      "用旧凭证登录",
+      "查看账号页",
+      "访问原保存文献、集合和历史",
+      "在密码字段空白的情况下保存合成邮箱",
+      "退出后仍用旧密码登录"
+    ],
+    "expected_result": "新密码规则不用于拒绝既有登录；旧数据保持，UI无姓名/资料完成强制。",
+    "pass_criteria": [
+      "6位旧密码可登录",
+      "无确认密码或新规则复核阻挡登录",
+      "旧姓名字段在DB保留但不出现账号UI",
+      "历史研究仍可用",
+      "仅改邮箱不重置原凭证"
+    ],
+    "independent_oracle": "旧fixture哈希/快照、CUA截图和只读数据前后比较；缺可信旧fixture为BLOCKED。"
+  },
+  {
+    "id": "T080",
+    "difficulty": "Hard",
+    "category": "引用与导出",
+    "requirement_ids": [
+      "R034",
+      "R035"
+    ],
+    "task": "对长作者名单、特殊字符和电子发表日期生成可解析引用。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1 LONG、UNICODE、EDATE真实记录固定；独立格式解析器支持Unicode。"
+    ],
+    "test_data": {
+      "records": [
+        "manifest.LONG",
+        "manifest.UNICODE",
+        "manifest.EDATE"
+      ],
+      "formats": [
+        "APA",
+        "MLA",
+        "Vancouver",
+        "BibTeX",
+        "RIS"
+      ]
+    },
+    "workflow": [
+      "分别打开固定记录核对真实元数据",
+      "逐种生成五格式引用并下载适用文件",
+      "将结果导入隔离独立解析器核对字段"
+    ],
+    "expected_result": "格式处理长名单、特殊字符及电子日期而不乱码或编造信息。",
+    "pass_criteria": [
+      "五格式可生成并保留有效作者身份",
+      "按格式允许et al.等正规截断，不误要求全部作者展示",
+      "Unicode字符正确或合法可还原转义",
+      "日期取自真实电子/出版元数据，无伪造卷页",
+      "下载可解析"
+    ],
+    "independent_oracle": "官方结构化数据、剪贴板/文件及独立解析；不强制规格未指定引用格式版本。"
+  },
+  {
+    "id": "T081",
+    "difficulty": "Hard",
+    "category": "相关文献",
+    "requirement_ids": [
+      "R031",
+      "R033",
+      "R052"
+    ],
+    "task": "打开没有相关关系的数据记录并检查不虚构指标。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "M1 NO_RELATED官方ELink为空；BASE相关详情正常可用对照。"
+    ],
+    "test_data": {
+      "pmid": "manifest.NO_RELATED.pmid"
+    },
+    "workflow": [
+      "打开无相关关系的详情",
+      "查看相关/相似区域和任何被引/相似度显示",
+      "尝试继续打开PubMed或其他详情功能"
+    ],
+    "expected_result": "相关内容为空时有清楚空态；没有未经官方证实的相似度或引用次数。",
+    "pass_criteria": [
+      "明确无相关数据而非永远加载",
+      "不制造相关文章/分数/计数",
+      "详情其他真实内容可用"
+    ],
+    "independent_oracle": "官方空ELink与截图；若真实参考/被引关系另有数据，只允许展示该独立证据支持的内容。"
+  },
+  {
+    "id": "T082",
+    "difficulty": "Hard",
+    "category": "外部服务与恢复",
+    "requirement_ids": [
+      "R044",
+      "R046",
+      "R051"
+    ],
+    "task": "在PubMed超时后看到可理解反馈并恢复真实检索。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT让本次未缓存查询的全部上游尝试超时，直到UI显示失败或达到预登记请求/运行限额；随后完全解除；限额预先设置不改期望。"
+    ],
+    "test_data": {
+      "query": "\"mitochondrial quality control\" AND diabetes",
+      "fault": "upstream timeout until explicit release"
+    },
+    "workflow": [
+      "提交固定未缓存查询",
+      "观察加载、有限重试及最终提示",
+      "解除网络故障",
+      "由CUA点击重试或重新搜索",
+      "打开一篇真实结果"
+    ],
+    "expected_result": "超时不无限卡住或伪造文章；故障解除后可恢复真实查询。",
+    "pass_criteria": [
+      "失败阶段有清楚友好超时/不可用反馈",
+      "重试次数/等待有界且不超预先记录的安全限额",
+      "无虚构成功结果",
+      "解除后结果与官方响应一致"
+    ],
+    "independent_oracle": "代理时序、请求计数、截图与恢复后的官方响应；若CUA预算先耗尽且不足判断上界，ERROR/BLOCKED不能草率FAIL。"
+  },
+  {
+    "id": "T083",
+    "difficulty": "Hard",
+    "category": "外部服务与恢复",
+    "requirement_ids": [
+      "R044",
+      "R051"
+    ],
+    "task": "处理上游429并遵守限流后恢复。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT对固定查询前两次上游请求返回429及Retry-After:2，之后透传；记录执行时官方限额与配置key状态，真实请求受速率保护。"
+    ],
+    "test_data": {
+      "query": "\"cardiac rehabilitation\"",
+      "fault_sequence": [
+        "429 Retry-After=2",
+        "429 Retry-After=2",
+        "real response"
+      ]
+    },
+    "workflow": [
+      "CUA执行查询",
+      "观察等待/友好限流提示",
+      "让应用按其策略重试或由用户在提示后重试",
+      "确认最终真实结果"
+    ],
+    "expected_result": "不会忙循环撞限额；限流后仍能恢复且UI不泄露秘密。",
+    "pass_criteria": [
+      "没有超过官方当前限额的实际外呼",
+      "没有在Retry-After窗口内无节制重试",
+      "最终经合法重试获得真实结果或有明确可重试限流状态后用户重试成功",
+      "不伪造数据"
+    ],
+    "independent_oracle": "外呼时间戳、官方限额预检及截图；不固定规格未要求的重试次数。"
+  },
+  {
+    "id": "T084",
+    "difficulty": "Hard",
+    "category": "外部服务与恢复",
+    "requirement_ids": [
+      "R013",
+      "R046",
+      "R051"
+    ],
+    "task": "外部服务不可用时主搜索不能伪装成功或转入未标注演示。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT对未缓存查询所有上游请求返回503直到解除；若产品提供offline模式，清单已预先登记其入口。"
+    ],
+    "test_data": {
+      "query": "\"renal denervation\" AND hypertension",
+      "fault": "503"
+    },
+    "workflow": [
+      "执行未缓存实时搜索",
+      "查看最终错误和任何出现的文献",
+      "如存在明确离线入口，由CUA主动进入并检查标签/数据来源",
+      "退出离线模式并解除503后重搜"
+    ],
+    "expected_result": "主搜索明确失败/不可用，不用虚构文章顶替；只有主动明确离线模式可展示已核实fixtures。",
+    "pass_criteria": [
+      "主模式无伪造成功结果",
+      "错误不含服务器敏感细节",
+      "存在离线模式时标签持续明确且记录可官方验证",
+      "恢复后真实查询成功"
+    ],
+    "independent_oracle": "代理响应、截图及任何展示PMID的官方核实；不要求必须实现offline模式。"
+  },
+  {
+    "id": "T085",
+    "difficulty": "Hard",
+    "category": "外部服务与恢复",
+    "requirement_ids": [
+      "R049",
+      "R052"
+    ],
+    "task": "部分元数据返回时安全展示并避免污染后续完整结果。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "固定真实搜索页至少10篇；FAULT只在首次对应ESummary/EFetch批响应移除第3篇记录或其摘要字段，其余字节对应真实记录；记录原始与注入差异；cache可观察。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "page_size": 10,
+      "fault": "first metadata batch omits third PMID"
+    },
+    "workflow": [
+      "CUA执行查询",
+      "检查部分响应后的卡片/错误提示",
+      "关闭故障",
+      "按应用提供的重试/刷新途径再次访问缺失文献",
+      "核对完整官方详情"
+    ],
+    "expected_result": "其他记录不被错配；缺失信息不编造；后续可获得真实完整数据而非永久污染缓存。",
+    "pass_criteria": [
+      "第3篇缺失不被另一篇替代身份",
+      "可理解缺字段/部分失败状态",
+      "没有虚构摘要或错误作者",
+      "故障解除及正常cache失效/重试后可恢复完整数据",
+      "cache不会把不完整响应当作永久完整真相"
+    ],
+    "independent_oracle": "原始官方批响应、注入差异、只读cache状态及恢复响应；可等待预登记TTL，不临场修改期待。"
+  },
+  {
+    "id": "T086",
+    "difficulty": "Hard",
+    "category": "外部服务与恢复",
+    "requirement_ids": [
+      "R037",
+      "R053"
+    ],
+    "task": "集合保存遇到数据库错误后安全恢复。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT可仅中断隔离测试DB连接或将本次写事务回滚，不改代码；eva_a集合EVA DB Original已有两篇。"
+    ],
+    "test_data": {
+      "old_name": "EVA DB Original",
+      "new_name": "EVA DB Recovered",
+      "fault": "one collection rename transaction cannot commit"
+    },
+    "workflow": [
+      "打开集合改名",
+      "在已安排DB故障期间点击保存",
+      "观察错误并刷新",
+      "恢复数据库",
+      "由CUA再次改名保存并重开集合"
+    ],
+    "expected_result": "失败不伪称持久化成功，原数据安全；恢复后操作成功。",
+    "pass_criteria": [
+      "失败时友好提示且无SQL/凭证/堆栈",
+      "失败事务没有半写或成员丢失",
+      "恢复后名称准确并持久化",
+      "两篇成员完整"
+    ],
+    "independent_oracle": "只读DB前后快照、故障日志和截图；基础设施必须可控恢复，否则BLOCKED。"
+  },
+  {
+    "id": "T087",
+    "difficulty": "Hard",
+    "category": "缓存与性能",
+    "requirement_ids": [
+      "R044",
+      "R049"
+    ],
+    "task": "检查重复查询缓存、参数隔离及配置过期后的重新检索。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "隔离环境TTL预先设为60秒；外呼/cache观察器可读；任何查询正常成功；fixture不改应用代码。"
+    ],
+    "test_data": {
+      "query": "diabetes",
+      "same_query_variant": "  diabetes  ",
+      "changed_filter": "Review",
+      "ttl_seconds": 60
+    },
+    "workflow": [
+      "CUA搜索diabetes并记录结果",
+      "60秒内再次搜索diabetes及前后空格变体",
+      "加入Review搜索",
+      "在缓存TTL过期后重新执行初始无筛选查询"
+    ],
+    "expected_result": "等价规范化请求复用适当缓存，不混用不同筛选；过期后重新验证上游。",
+    "pass_criteria": [
+      "重复等价查询没有不必要重复上游元数据请求",
+      "Review与无筛选缓存隔离且结果正确",
+      "60秒配置被应用，过期后可观察必要刷新",
+      "不因cache返回错误用户私人数据"
+    ],
+    "independent_oracle": "外呼次数/参数/时间戳、cache只读条目及同次官方响应；不要求精确零请求，允许合理重新验证。"
+  },
+  {
+    "id": "T088",
+    "difficulty": "Hard",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R040",
+      "R041",
+      "R045",
+      "R053"
+    ],
+    "task": "在认证失败和外部故障中核查客户端不泄露凭证与私人数据。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "两合成账户与服务器测试API key配置可用；独立审计器知道敏感值但输出仅命中布尔/字段名；FAULT可制造503。"
+    ],
+    "test_data": {
+      "login_attempt": {
+        "username": "eva_a",
+        "password": "incorrect-password"
+      },
+      "other_user": "eva_b",
+      "fault_query": "\"biomedical informatics\""
+    },
+    "workflow": [
+      "以错误密码登录并查看错误",
+      "用eva_a正确登录",
+      "执行注入503的查询",
+      "查看错误和自己的账号/研究页",
+      "独立审计此次浏览器可见资源、网络及错误正文"
+    ],
+    "expected_result": "失败消息友好，客户端没有服务器key、数据库连接串、密码/会话秘密或B私人数据。",
+    "pass_criteria": [
+      "错误密码不会登录",
+      "UI错误不含敏感内部信息",
+      "浏览器响应/静态资源无服务器API key/数据库秘密",
+      "不出现B私人数据",
+      "审计不把正常HttpOnly Set-Cookie响应误判为前端泄露"
+    ],
+    "independent_oracle": "脱敏网络/资源审计、截图及敏感匹配结果；无法审计只能BLOCKED，不能以未看见UI泄漏当PASS。"
+  },
+  {
+    "id": "T089",
+    "difficulty": "Hard",
+    "category": "外部服务与恢复",
+    "requirement_ids": [
+      "R043",
+      "R044",
+      "R051",
+      "R052"
+    ],
+    "task": "处理格式损坏的PubMed响应并在恢复后继续打开真实详情。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT对首次BASE EFetch响应返回不可解析的截断XML，后续保持故障到友好提示，解除后透传；BASE缓存从隔离环境清理。"
+    ],
+    "test_data": {
+      "pmid": "31452104",
+      "fault": "malformed truncated XML"
+    },
+    "workflow": [
+      "CUA打开BASE详情",
+      "观察错误/重试状态",
+      "解除故障",
+      "通过UI重试或刷新",
+      "核对完整详情"
+    ],
+    "expected_result": "解析失败不暴露堆栈、不生成半真半假详情，恢复后真实数据可用。",
+    "pass_criteria": [
+      "格式错误有可理解反馈",
+      "无未经核实拼接字段或虚构内容",
+      "不把畸形响应写成可复用完整cache",
+      "恢复后PMID/标题/摘要与官方一致"
+    ],
+    "independent_oracle": "故障代理日志、响应hash、只读cache和恢复详情截图。"
+  },
+  {
+    "id": "T090",
+    "difficulty": "Hard",
+    "category": "API输入与文档",
+    "requirement_ids": [
+      "R020",
+      "R048",
+      "R050",
+      "R053"
+    ],
+    "task": "通过真实搜索UI提交被篡改的非法分页参数并恢复。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "FAULT可仅修改CUA触发搜索请求的page/page_size等实际等价参数；先记录正常参数名；DB/上游请求可观察。"
+    ],
+    "test_data": {
+      "variants": [
+        {
+          "page": -1
+        },
+        {
+          "page_size": 0
+        },
+        {
+          "page_size": "not-a-number"
+        }
+      ],
+      "valid_size": 20
+    },
+    "workflow": [
+      "正常搜索diabetes确认界面可用",
+      "依次点击下一页/分页设置，每次由代理仅替换指定参数为固定非法值",
+      "记录用户反馈和服务器返回",
+      "关闭注入恢复20条第一页"
+    ],
+    "expected_result": "后台校验非法参数，不发生异常全集加载、敏感错误或错配状态；恢复后正常分页。",
+    "pass_criteria": [
+      "三组非法参数均明确拒绝或以文档定义安全默认值规范化",
+      "无未处理500/敏感内部信息",
+      "不因异常参数下载整个结果集",
+      "正常参数恢复后20条结果准确"
+    ],
+    "independent_oracle": "修改前后请求差异、响应与官方外呼日志；合法默认行为必须在执行前文档登记。"
+  },
+  {
+    "id": "T091",
+    "difficulty": "Expert",
+    "category": "完整研究流程",
+    "requirement_ids": [
+      "R006",
+      "R011",
+      "R018",
+      "R022",
+      "R023",
+      "R031",
+      "R034",
+      "R036",
+      "R037",
+      "R039"
+    ],
+    "task": "新研究者完成注册、主题筛选、选文、建库及导出综述资料。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "MAIL可用；eva_t091不存在；查询真实结果至少三篇；下载/剪贴板oracle就绪。"
+    ],
+    "test_data": {
+      "username": "eva_t091",
+      "email": "eva_t091@medresearch.test",
+      "password": "research",
+      "query": "type 2 diabetes",
+      "filters": [
+        "Last 5 Years",
+        "Review"
+      ],
+      "collection": "EVA Diabetes Review",
+      "selection": "筛选后同次官方第一页前三个不同PMID",
+      "export_format": "Vancouver"
+    },
+    "workflow": [
+      "通过UI注册，并按应用验证码或链接机制完成隔离邮件验证；普通注册完成后核对直达搜索",
+      "执行主题检索并应用两个筛选",
+      "打开前三篇检查真实详情并各自保存",
+      "创建研究集合并把三篇加入",
+      "从完整集合导出Vancouver引用",
+      "退出并重新登录",
+      "从历史重开研究，再检查库和集合"
+    ],
+    "expected_result": "整个新用户研究链路身份与查询状态一致，选定文章、集合和导出跨会话完整保存。",
+    "pass_criteria": [
+      "注册符合V3且实际生成消息的验证流程成功",
+      "三篇PMID等于官方选中集合",
+      "保存库和集合重登录后均含三篇",
+      "集合导出三篇完整真实引用",
+      "历史恢复原query/filter",
+      "无跨用户混入"
+    ],
+    "independent_oracle": "端到端截图/动作、邮件捕获及验证证据、官方响应、只读用户/研究数据及下载审计。"
+  },
+  {
+    "id": "T092",
+    "difficulty": "Expert",
+    "category": "完整研究流程",
+    "requirement_ids": [
+      "R020",
+      "R028",
+      "R030",
+      "R034",
+      "R037",
+      "R039",
+      "R049"
+    ],
+    "task": "维护超过一页的大型文献集合并导出完整集合。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a有EVA Evidence Set，预置LIBRARY55真实记录；M1扩展清单LIBRARY55由固定diabetes查询sort=pub date的前55个不同PMID构成，在执行前取官方元数据冻结；下载审计可用。"
+    ],
+    "test_data": {
+      "collection": "EVA Evidence Set",
+      "initial_count": 55,
+      "advanced_query": "(diabetes[Title] OR insulin[Title]) AND therapy[All Fields]",
+      "formats": [
+        "BibTeX",
+        "RIS"
+      ]
+    },
+    "workflow": [
+      "从高级搜索构建固定表达式并保存查询",
+      "执行并选择预检固定的新增PMID（固定高级查询官方第一页20篇中顺序第一篇未在LIBRARY55的记录；整页无合格记录则前置BLOCKED）",
+      "把该篇加入EVA Evidence Set",
+      "打开集合并按标题搜索刚加入文章",
+      "清除集合内搜索",
+      "分别导出整个集合为BibTeX和RIS",
+      "重登录后运行已保存查询"
+    ],
+    "expected_result": "大型集合搜索正常，完整导出跨越当前可见页且包含新加入记录；保存查询持久。",
+    "pass_criteria": [
+      "最终集合56个唯一PMID",
+      "两种完整集合导出都恰好56篇，与集合全集相等",
+      "导出不受之前集合内搜索/当前可见页截断",
+      "保存查询重登录可再执行",
+      "无全库下载行为"
+    ],
+    "independent_oracle": "冻结55+1真实清单、只读集合全集及独立导出解析；若无56篇真实预检数据则BLOCKED。"
+  },
+  {
+    "id": "T093",
+    "difficulty": "Expert",
+    "category": "账号与研究恢复",
+    "requirement_ids": [
+      "R006",
+      "R007",
+      "R008",
+      "R009",
+      "R027",
+      "R039"
+    ],
+    "task": "保持两标签研究工作并从账号会话过期中恢复未保存邮箱。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a登录；两标签分别为带筛选研究结果与账号页；session expiry fixture/MAIL可用；账号页不能关闭。"
+    ],
+    "test_data": {
+      "query": "electronic health records",
+      "filters": [
+        "Review",
+        "Last 5 Years"
+      ],
+      "draft_email": "eva_a_multitab@medresearch.test"
+    },
+    "workflow": [
+      "标签一执行固定带筛选查询",
+      "标签二编辑邮箱为草稿，不保存",
+      "前置使会话过期",
+      "在账号页点击保存并完成同一用户认证",
+      "确认草稿恢复并主动保存，按需验证邮件",
+      "切回研究标签刷新并核对原query/filter",
+      "从历史重新运行该研究并保存一篇"
+    ],
+    "expected_result": "重认证既恢复账号草稿也保留独立研究页面状态，最终保存属于同一用户。",
+    "pass_criteria": [
+      "草稿在同用户认证后完整恢复且未被旧服务端邮箱覆盖",
+      "主动保存后邮箱持久化",
+      "研究标签query/filter保持",
+      "历史重执行与最终书签正确",
+      "没有重复用户/错误身份写入"
+    ],
+    "independent_oracle": "双标签截图、会话expiry记录、只读邮箱/历史/书签以及实际邮件捕获记录。"
+  },
+  {
+    "id": "T094",
+    "difficulty": "Expert",
+    "category": "用户隔离与安全",
+    "requirement_ids": [
+      "R007",
+      "R009",
+      "R038",
+      "R040",
+      "R041"
+    ],
+    "task": "会话过期后换另一账号，防止未保存邮箱和研究操作串到新用户。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "A/B独立账号及研究；A账号页未保存草稿仍开着；expiry fixture可用。"
+    ],
+    "test_data": {
+      "a_draft_email": "eva_a_do_not_leak@medresearch.test",
+      "b_email": "eva_b@medresearch.test",
+      "b_collection": "EVA B New Session"
+    },
+    "workflow": [
+      "A在账号页输入草稿但不保存",
+      "使A会话过期",
+      "在重认证流程改用B登录",
+      "查看账号页并核对身份和邮箱",
+      "通过B创建集合并保存一篇真实文献",
+      "退出后重新登录A检查邮箱及研究"
+    ],
+    "expected_result": "同用户草稿保留规则不会把A草稿应用给B；新会话研究写入正确归属。",
+    "pass_criteria": [
+      "B页面不将A邮箱草稿呈现为B的待保存数据",
+      "B服务端邮箱未被A草稿覆盖",
+      "新集合/书签仅属于B",
+      "A邮箱未在未主动保存时改变",
+      "A/B原私有研究无混用"
+    ],
+    "independent_oracle": "两用户前后只读快照、CUA切换截图；不要求跨用户保存A草稿，因为规格只保证同用户恢复。"
+  },
+  {
+    "id": "T095",
+    "difficulty": "Expert",
+    "category": "研究与服务恢复",
+    "requirement_ids": [
+      "R013",
+      "R034",
+      "R036",
+      "R037",
+      "R039",
+      "R046",
+      "R049",
+      "R051"
+    ],
+    "task": "外部PubMed停机期间保持已有研究资料可信，恢复后继续扩展集合。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "eva_a有已存完整真实元数据的两篇书签和集合；此前研究历史存在；FAULT对所有新的PubMed外呼返回503，现有DB不受影响；下载oracle可用。"
+    ],
+    "test_data": {
+      "collection": "EVA Offline Recovery",
+      "saved_records": "冻结两篇真实完整记录",
+      "new_query": "\"cardiac rehabilitation\" AND exercise"
+    },
+    "workflow": [
+      "在故障前打开库及集合核对两篇",
+      "开启上游503故障",
+      "从集合导出已有两篇RIS",
+      "执行新的实时查询并观察明确失败",
+      "重开保存研究核对未受损",
+      "解除故障",
+      "通过历史/搜索重执行新查询，选择一篇新文献加入集合",
+      "重新导出完整集合"
+    ],
+    "expected_result": "外部失败不伪造新结果或损坏持久研究；已有完整元数据引用仍可信，恢复后集合可扩展。",
+    "pass_criteria": [
+      "故障期导出包含原两篇正确元数据",
+      "新查询失败明确且没有虚构替代",
+      "原私人数据完整",
+      "恢复后新文献真实加入，集合恰好三篇",
+      "最终导出三篇准确"
+    ],
+    "independent_oracle": "故障日志、官方恢复响应、只读库/集合及前后RIS文件。"
+  },
+  {
+    "id": "T096",
+    "difficulty": "Expert",
+    "category": "旧数据兼容与引用",
+    "requirement_ids": [
+      "R003",
+      "R004",
+      "R010",
+      "R011",
+      "R031",
+      "R034",
+      "R036",
+      "R037",
+      "R047"
+    ],
+    "task": "使用旧账号继续整理含作者后缀的历史文献并全格式导出。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "LEGACY提供可信Round1兼容记录，SUFFIX后缀官方可核实；保留旧姓名字段与六位凭证；记录初始私有集合和metadata快照。"
+    ],
+    "test_data": {
+      "account": "legacy_eva",
+      "historical_pmid": "manifest.SUFFIX.pmid",
+      "new_collection": "EVA Legacy Continued",
+      "formats": [
+        "APA",
+        "MLA",
+        "Vancouver",
+        "BibTeX",
+        "RIS"
+      ]
+    },
+    "workflow": [
+      "用原短密码登录",
+      "从旧保存库打开含后缀文献",
+      "核对详情后将其加入新集合",
+      "再次通过实时PMID搜索同篇并检查保存状态",
+      "把新集合分别导出五格式",
+      "退出重新登录并查看旧研究及新集合"
+    ],
+    "expected_result": "旧凭证和记录保留；重取同篇不丢作者后缀或产生重复，研究可继续组织并导出。",
+    "pass_criteria": [
+      "旧账号无需补姓名/重设密码即可访问",
+      "旧收藏和集合仍完整",
+      "实时重取后身份/后缀保持",
+      "用户同PMID没有重复书签/不必要出版物重复",
+      "新集合五格式均保留后缀且可用",
+      "重登录后新旧研究均在"
+    ],
+    "independent_oracle": "兼容fixture证据、只读原始/最终数据、官方SUFFIX记录与五格式文件。"
+  },
+  {
+    "id": "T097",
+    "difficulty": "Expert",
+    "category": "真实检索一致性",
+    "requirement_ids": [
+      "R013",
+      "R018",
+      "R020",
+      "R021",
+      "R022",
+      "R023",
+      "R025",
+      "R026",
+      "R027",
+      "R043",
+      "R044",
+      "R049"
+    ],
+    "task": "执行多条件大规模检索并审计排序、全集计数与深分页。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "真实PubMed；预检固定query/filter下结果至少150，目标第3页须在执行时官方合法检索窗口内，否则BLOCKED而非改查询；同次外呼日志和缓存证据可用。"
+    ],
+    "test_data": {
+      "query": "diabetes AND therapy",
+      "date_range": [
+        "2020-01-01",
+        "2025-12-31"
+      ],
+      "filters": [
+        "Review",
+        "English"
+      ],
+      "sort": "Publication Date",
+      "page_size": 50,
+      "target_page": 3
+    },
+    "workflow": [
+      "输入固定query",
+      "设置日期范围、Review、English与Publication Date",
+      "设50条每页",
+      "记录第一页和总数",
+      "翻到第二、第三页",
+      "复制当前URL到新标签并核对状态",
+      "移除Review筛选并比较实际全集查询"
+    ],
+    "expected_result": "复合查询语义、排序、统计与每一页均对应真实上游响应，不限于最初缓存小子集。",
+    "pass_criteria": [
+      "前三页各50篇且各自偏移正确",
+      "总数等于同次官方复合查询计数",
+      "排序真实作用于全集",
+      "URL恢复query/filter及可表达分页状态",
+      "移除Review后的计数/结果对应更宽查询",
+      "请求批量/分页有界且遵守官方速率"
+    ],
+    "independent_oracle": "同次ESearch/批元数据日志、三页PMID清单、URL截图；动态库变化仅依同次证据判断，不用陈旧固定总数；不要求突破NCBI官方检索窗口（包括适用的10000条上限），也不因不可达超上限页判产品失败。"
+  },
+  {
+    "id": "T098",
+    "difficulty": "Expert",
+    "category": "持久化与部署准备",
+    "requirement_ids": [
+      "R014",
+      "R036",
+      "R037",
+      "R039",
+      "R049",
+      "R055",
+      "R058"
+    ],
+    "task": "在配置为PostgreSQL的隔离部署重启服务后继续研究。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "独立PostgreSQL实例与按交付说明启动的应用；可受控停止/启动服务且不清DB；只读DB配置/索引审计；不部署公网、不读写生产库。"
+    ],
+    "test_data": {
+      "account": "eva_a",
+      "collection": "EVA Restart Durable",
+      "query": "diabetes",
+      "pmid": "31452104"
+    },
+    "workflow": [
+      "通过UI登录并搜索BASE保存书签",
+      "创建集合并加入BASE",
+      "执行固定query留下历史",
+      "按交付启动说明由环境辅助重启应用服务，保留数据库",
+      "CUA刷新，按需重新登录",
+      "检查账号、书签、集合、历史并导出引用"
+    ],
+    "expected_result": "服务重启后持久研究完整；生产配置使用持久PostgreSQL，文档足以恢复运行。",
+    "pass_criteria": [
+      "只读连接证据确认PostgreSQL而非临时SQLite",
+      "服务重启不清除用户/书签/集合/历史",
+      "重登录和导出可用",
+      "服务端环境配置可用且不泄露客户端",
+      "与此研究路径相关查找/关联存在合理索引的只读证据"
+    ],
+    "independent_oracle": "启动/重启日志、脱敏DB类型/索引审计、前后只读数据及CUA截图；框架栈/全部架构/源码发布另作工件审计，不凭此一例宣称全覆盖。"
+  },
+  {
+    "id": "T099",
+    "difficulty": "Expert",
+    "category": "API输入与文档",
+    "requirement_ids": [
+      "R032",
+      "R034",
+      "R037",
+      "R043",
+      "R048",
+      "R058"
+    ],
+    "task": "完成研究操作并利用生成API文档核对对应服务及健康检查。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "交付说明能提供API文档/health入口；所有导航由CUA浏览器完成；独立抓包oracle可关联用户动作与API。"
+    ],
+    "test_data": {
+      "query": "31452104",
+      "collection": "EVA API Contract",
+      "required_endpoint_domains": [
+        "Authentication",
+        "Publication search",
+        "Publication details",
+        "Related publications",
+        "Advanced search",
+        "Saved publications",
+        "Collections",
+        "Search history",
+        "Citation export",
+        "User profile",
+        "Health check"
+      ]
+    },
+    "workflow": [
+      "CUA登录、搜索BASE并打开详情和相关区域",
+      "保存BASE并创建集合加入",
+      "导出一份RIS",
+      "在浏览器打开交付提供的生成API文档；若为JSON/YAML文件则由CUA打开或下载，独立只读查看器审计规定API类别",
+      "在浏览器访问health入口",
+      "独立核查刚才实际响应与文档结构"
+    ],
+    "expected_result": "真实工作流使用可用后端；生成文档覆盖规定API，健康检查可用且不泄密，响应组织一致。",
+    "pass_criteria": [
+      "用户保存/集合/引用操作成功",
+      "API文档确为可用生成文档（HTML、JSON、YAML或可下载规范均可），包含全部规定服务类别",
+      "health有可理解成功状态且无秘密",
+      "实际响应与文档结构一致，错误/列表结构无无故混乱",
+      "不把静态功能截图代替后端证据"
+    ],
+    "independent_oracle": "CUA页面/下载证据、文档内容快照及脱敏实际API响应；具体endpoint路径由交付文档取得，不预设实现路径。"
+  },
+  {
+    "id": "T100",
+    "difficulty": "Expert",
+    "category": "移动与无障碍研究流程",
+    "requirement_ids": [
+      "R006",
+      "R015",
+      "R027",
+      "R028",
+      "R030",
+      "R034",
+      "R036",
+      "R037",
+      "R054"
+    ],
+    "task": "在手机尺寸下用键盘完成高级研究、认证回跳、整理和导出。",
+    "preconditions": [
+      "遵守requirements.json中的G0、AUTH、LIVE、VERIFY全局前置；各例独立重置。",
+      "VIEWPORT手机390×844；匿名起始；已存在eva_a；真实查询至少两篇；可下载文件并做语义/焦点独立审计。"
+    ],
+    "test_data": {
+      "query": "(diabetes[Title] OR insulin[Title]) AND therapy[All Fields]",
+      "filter": "Review",
+      "collection": "EVA Mobile Accessible",
+      "format": "RIS"
+    },
+    "workflow": [
+      "通过手机导航进入Advanced Search",
+      "仅用键盘构建或输入固定分组查询并执行",
+      "通过可访问控件应用Review",
+      "打开一篇详情并触发保存认证",
+      "键盘填写eva_a凭证，核对返回原研究页及状态",
+      "保存该文献并创建集合加入",
+      "打开集合选择RIS完整导出",
+      "回到研究页确认可继续操作"
+    ],
+    "expected_result": "移动布局、键盘导航、分组检索、回跳和个人研究整条链路可完成。",
+    "pass_criteria": [
+      "核心步骤无需精确鼠标点击才能操作",
+      "焦点可见且表单/分页/对话框标签语义可理解",
+      "登录回跳保留query/filter及目标文献上下文",
+      "书签和集合归eva_a且元数据真实",
+      "RIS含准确一篇",
+      "手机布局无阻挡主要任务的裁切/遮盖"
+    ],
+    "independent_oracle": "完整CUA键盘日志/手机截图、独立DOM语义、URL、只读研究数据与RIS文件；不以桌面代跑手机例。"
+  }
+]

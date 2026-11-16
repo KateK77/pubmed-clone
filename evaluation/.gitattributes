@@ -1,0 +1,4 @@
+# Preserve frozen evidence bytes so SHA-256 stays identical on every OS.
+final_test_cases_100.json -text
+requirements.json -text
+FINAL_TEST_CASES.md -text

@@ -9,6 +9,8 @@
 
 Search immediately, or create your own account to save articles and collections. No installation required. 打开网站即可检索；注册自己的账号后可以保存文献和收藏夹。
 
+[Search literature](https://medresearch-cljd.onrender.com/search) · [Sign in / create an account](https://medresearch-cljd.onrender.com/profile) · [100-task final evaluation](evaluation/README.md) · [Deployment](docs/deployment.md)
+
 MedResearch searches live biomedical literature from PubMed and gives researchers a personal library for bookmarks, collections, saved searches, and citation exports. It is an independent educational prototype with no affiliation with PubMed, NCBI, NIH, or the National Library of Medicine.
 
 ![MedResearch search interface](docs/images/search.png)
@@ -33,6 +35,28 @@ The repository and its version history are public. To host your own copy, see [d
 - Register, sign in, manage your account email, bookmark articles, manage private collections, and rerun or save searches.
 - Verify registration and email changes with single-use email codes when enabled. Keep existing accounts and their libraries through the upgrade. Profile and password changes have separate forms.
 - Export selected articles, all bookmarks, or an entire collection in APA, MLA, Vancouver, BibTeX, or RIS. Copy a citation from the article page.
+
+## A quick research walkthrough
+
+| Step | Try it in MedResearch |
+| --- | --- |
+| Find a publication | Search `31452104` or a research topic such as `electronic health records`. |
+| Refine the evidence | Combine dates, article types and other filters, or build a Boolean query in Advanced Search. |
+| Read the source | Open a title to inspect its abstract and metadata, then follow its PubMed or publisher link. |
+| Keep your work | Create your own account, save an article and organize it in a private collection. |
+| Cite your sources | Copy a citation or export selected records or a collection as BibTeX, RIS or a supported text style. |
+
+The public website has no shared demo login. Create an individual account for your library; the local demo credentials below are for local setup only.
+
+## Final evaluation
+
+A dedicated evaluation branch prepares **100 specification-based tasks** from the final V3 Description: **30 Easy, 40 Medium, 20 Hard and 10 Expert**. The intended executor uses OpenAI's native computer tool, sees screenshots, and chooses mouse and keyboard actions. Existing CI and earlier Playwright checks are separate evidence and do not count toward this benchmark.
+
+**Native CUA execution has not started; no final pass rate is available.** Paid execution requires explicit budget approval. Missing features remain test targets, and each result will distinguish PASS, FAIL, BLOCKED, ERROR and NOT_RUN.
+
+[Evaluation showcase](evaluation/README.md) · [All 100 tasks](evaluation/FINAL_TEST_CASES.md) · [Results and evidence](evaluation/FINAL_EVALUATION_REPORT.md) · [Cost and execution plan](evaluation/EXECUTION_PLAN.md) · [Frozen specification](evaluation/SPECIFICATION.md)
+
+These evaluation and presentation changes remain on `evaluation/v3-native-cua-100` until the owner approves a merge into `main`.
 
 ## Accounts
 
