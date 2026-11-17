@@ -2,10 +2,6 @@
 
 The following latest requirements override conflicting account requirements in prior rounds. The complete Round 2 prompt, including the original master prompt, is preserved below as the baseline. All fourteen feedback records are saved in manual-feedback.json.
 
-## Latest user instruction
-
-“没什么了，其他都通过，你把我给你的反馈加到之前做账号的prompt里面，然后再重新生成一个版本”
-
 ## Account requirements for this version
 
 - Show password rules directly below the password input, before submission.
