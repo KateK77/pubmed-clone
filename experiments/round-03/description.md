@@ -1,130 +1,43 @@
-# Round 3 — MedResearch 3.0 consolidated prompt
+# MedResearch 3.0 — Complete Product Description
 
-The following latest requirements override conflicting account requirements in prior rounds. The complete Round 2 prompt, including the original master prompt, is preserved below as the baseline. All fourteen feedback records are saved in manual-feedback.json.
+## 0. Development Objective
 
-## Account requirements for this version
+Develop MedResearch 3.0 as a complete biomedical literature search and research management application inspired by PubMed.
 
-- Show password rules directly below the password input, before submission.
-- Use a simple 8–128-character rule. Do not require upper/lowercase, digits or symbols. Do not silently reject common, numeric-only or username-similar passwords.
-- Add Confirm password to registration and password changes. Require an exact match in both browser and API, with a clear correction message. Login does not require confirmation or revalidation against new password rules.
-- Remove First name and Last name from the account UI. Do not require profile completion. Preserve existing database records and login credentials.
-- Keep the account page limited to username, email, password change and sign out.
-- After ordinary registration or sign-in, go directly to search. If a research page prompted authentication, return to that page with its query/filter state. Restrict return destinations to known internal pages.
-- Preserve an unsaved email edit when a session expires and the same user signs in again on the still-open account page.
-- Retain email verification, session protection, private libraries, real PubMed search, filters and citation features. The user reports that the other functions passed.
-- Update code, tests, setup documentation, changelog and round artifacts. Publish the new source and v3.0.0-r3 tag to the existing private GitHub repository without rewriting previous releases.
-- Hosting and external SMTP accounts have not been supplied. Do not claim that a public website or real email delivery has been provisioned.
+This document defines the complete requirements for version 3.0. Implement all specified workflows, including real literature retrieval, accounts, research organization and citation exports.
 
-## Previous consolidated prompt (historical baseline)
-
-# Round 2 — 2.0 specification
-
-The original complete specification follows below and remains the baseline.
-
-The user completed manual acceptance testing and reported the remaining checklist passed. Detailed evidence and unresolved issues are preserved in manual-feedback.json.
-
-Required revisions
-
-- Fix profile saving with empty password inputs, clear conflicting stale success messages, show field-specific errors, and verify saved fields survive refresh and re-login.
-- Handle lost sessions consistently and isolate MedResearch cookies from other local applications.
-- Preserve author name suffixes in article display and all citation formats, including metadata saved in Round 1.
-- Add configurable real email verification for registration. Allow existing accounts to continue using their saved research. Supply explicit local development behavior when email service is unavailable.
-- Prepare the application for public deployment, with persistent PostgreSQL, server-side configuration and a GitHub entry link once an actual deployment URL exists.
-- Keep React/TypeScript/Vite and Django/DRF as specified.
-- Preserve the original repository and Round 1 tag. Test the completed Round 2 source and push the code, documentation and a new tag to GitHub.
-
-Latest user scope
-
-“你现在有了刚才我给你的反馈，你再加上最初的prompt重新写一个这个网页软件即可，最后版本再放到github上”
-
-The user has no deployment or email service account. This round delivers the revised application source to GitHub. Public hosting and real recipient mailbox delivery require subsequent service configuration.
-
-Original instructions
-# CODEX MASTER INSTRUCTION — PUBMED-INSPIRED BIOMEDICAL LITERATURE PLATFORM
-
-## 0. Read This First
-
-You are an autonomous senior full-stack software engineer, biomedical informatics engineer, database architect, and QA engineer.
-
-Your task is to build a complete biomedical literature search and research management application inspired by PubMed.
-
-This is an independent software engineering benchmark project.
-
-You have no previous conversation context.
-
-Do not assume that any existing application, repository, database, or API integration has already been created.
-
-**Build the entire specified application during Round 1.**
-
-Do not stop after building a project scaffold, homepage mockup, or limited MVP.
-
-You may break the implementation into internal tasks, but the required output is one complete, working application.
+Use the existing repository and preserve its users, saved research, source history and previous release tags. Inspect the current implementation before changing it. Do not replace the application with a scaffold, mockup or limited MVP.
 
 ## 1. Project Identity
 
 Project name: MedResearch
 
-Reference website:
-https://pubmed.ncbi.nlm.nih.gov/
+Version: 3.0.0
 
-GitHub owner:
-KateK77
+Reference website: https://pubmed.ncbi.nlm.nih.gov/
 
-Target repository:
-KateK77/pubmed-clone
+GitHub repository: https://github.com/KateK77/pubmed-clone
 
-Preferred local directory:
-D:\AI-Workspace\Personal\pubmed-clone
+Product type: Biomedical Literature Search and Research Management Platform
 
-Repository visibility:
-PRIVATE
+Use the existing project directory and repository. Resolve setup paths relative to the project rather than assuming the shell starts in that directory.
 
-Product type:
-Biomedical Literature Search and Research Management Platform
+This is an independent educational and research prototype. It is not affiliated with PubMed, NCBI, NIH or the National Library of Medicine. Use an original visual identity; do not copy official logos or protected branding.
 
-This is an independent educational and research prototype.
+## 2. Evaluation Scope
 
-It is not affiliated with PubMed, NCBI, NIH, or the National Library of Medicine.
+Deliver a complete, working version 3.0 covering:
 
-Do not copy official logos or protected branding.
+- Functional correctness and reliable account workflows
+- Frontend usability and responsive design
+- Backend architecture and persistent data
+- Real PubMed retrieval and search accuracy
+- Error handling and user-specific authorization
+- Citation metadata fidelity
+- Automated regression tests and separately runnable live API checks
+- Safe upgrade of existing accounts and saved research
 
-Use an original visual identity.
-
-## 2. Experiment Context
-
-This project is one of three independent healthcare software generation experiments.
-
-The experiment evaluates:
-
-- Complete software generation
-- Functional correctness
-- Backend architecture
-- Frontend functionality
-- External API integration
-- Database design
-- Search accuracy
-- Error handling
-- Security
-- Automated testing
-- Improvement across iterative feedback rounds
-
-The experiment permits up to five development rounds.
-
-**This instruction starts Round 1 only.**
-
-Round 1 must produce a complete application.
-
-At the end of this round:
-
-1. Run validation checks.
-2. Save the complete requirements.
-3. Commit the implemented code.
-4. Create a version tag.
-5. Push to GitHub.
-6. Report the results.
-7. Stop and wait for feedback.
-
-Do not automatically start another round.
+Record implementation results separately from this requirements document. Distinguish automated verification, manual acceptance and any later independent benchmark. Do not claim unperformed tests or fabricated success rates.
 
 ## 3. Product Objective
 
@@ -443,6 +356,8 @@ Clearly distinguish free full text, publisher links, and abstract-only records.
 
 Do not bypass publisher paywalls.
 
+Preserve author suffixes supplied by PubMed, including Jr and Sr, in the displayed author names. A valid title, identifier and abstract do not excuse omitted author metadata. Keep electronic and journal publication dates identifiable when provided.
+
 ## 12. Related Articles
 
 Integrate ELink where appropriate.
@@ -497,6 +412,8 @@ Handle:
 - Electronic publication dates
 
 Do not fabricate bibliographic fields.
+
+Preserve author suffixes in source metadata and format them appropriately in every supported citation style, including APA and RIS. Existing saved publications must receive corrected metadata when necessary, without losing their bookmarks or collection membership. Do not silently claim refreshed metadata if the upstream service is unavailable.
 
 ## 14. Saved Articles
 
@@ -569,28 +486,56 @@ History should be displayed chronologically.
 
 ## 17. User Accounts
 
-Implement:
+Implement registration, login, logout and profile management, with persistent saved articles, collections and search history for each user.
 
-- Registration
-- Login
-- Logout
-- Profile management
-- Saved articles
-- Collections
-- Search history
+### Authentication and session handling
 
-Security:
+- Hash passwords; never store plaintext account passwords.
+- Use CSRF protection for account mutations and enforce user-specific authorization.
+- Give MedResearch its own session and CSRF cookie names so other local projects cannot overwrite its cookies.
+- Detect a lost or expired session. Clear stale authenticated UI and show an actionable sign-in prompt instead of a raw authentication exception.
+- Do not show a successful save when the request failed. Clear stale success/error messages as the form changes or a new request begins.
+- Preserve unsaved input during same-user reauthentication where practical; never transfer a draft to another account.
+- Verify that account changes survive refresh, logout and later login.
+- Keep existing users, passwords, bookmarks, collections and history during upgrade. A cookie-name change may require a fresh sign-in, not recreation of the account.
 
-- Password hashing
-- Session security
-- CSRF protection
-- Input validation
-- User-specific authorization
-- Object-level access control
+### Profile and password updates
 
-Create a clearly labeled local demo account.
+- Show field-specific validation errors beside the affected input.
+- Save profile changes independently of optional password changes. An untouched or empty password field must not block a profile-only save.
+- Require the current password for a password change and leave the old password valid if validation fails.
+- Treat username and email as distinct fields; never silently save a username as an invalid email address.
+- Retain ordinary access to research functions without forcing unnecessary profile completion.
 
-Do not expose private user data.
+### Email verification
+
+- Support configurable verification for new registrations and email-address changes using real delivery when an SMTP service is configured.
+- Use expiring, single-use codes with resend cooldowns and bounded verification attempts. Do not reveal codes in normal production API responses or browser pages.
+- Verify a replacement address before applying it when verification is enabled; failed verification must leave the existing address intact.
+- Let existing accounts continue accessing their saved research; do not invalidate their credentials during migration.
+- Provide an explicitly labelled local test-mail mode for development. Do not describe local test messages as real inbox delivery.
+- When a deployment deliberately disables email verification, allow ordinary registration and clearly state that email verification is unavailable. Never imply that a verification message was sent without a delivery attempt.
+
+### Account isolation and demonstration
+
+- Scope all private resources to the authenticated user, including object-level access through guessed identifiers.
+- Provide a clearly labelled local development demo account; document its username and password separately from public-site accounts.
+- Keep production secrets and private account data out of GitHub.
+
+### Registration and password usability
+
+- Display the password rule directly below the password field before submission: 8–128 characters.
+- Do not require uppercase letters, lowercase letters, numbers or symbols. Do not reject a password solely for being common, numeric-only or similar to the username.
+- Add Confirm password to registration and password changes. Require matching values in both the browser and API, with a clear correction message for a missing or mismatched confirmation.
+- Login uses existing credentials; it does not require password confirmation or revalidate an existing password against the new registration policy.
+
+### Minimal account interface
+
+- Remove First name and Last name from the account UI. Do not request name completion after registration or login.
+- Limit the account page to username, email, password change and sign out. Preserve existing database name values without requiring them in the UI.
+- After ordinary registration or sign-in, go directly to Search.
+- When a research page requested authentication, return to that internal page with its query/filter state. Reject external or unsupported return destinations and fall back to Search.
+- Preserve an unsaved email edit when the session expires and the same user signs back in on the still-open account page. Discard the draft when a different user signs in.
 
 ## 18. PubMed API Integration
 
@@ -682,6 +627,8 @@ Avoid unnecessary duplicate publication records.
 
 Store raw external metadata when useful, but normalize frequently queried fields.
 
+Add persistent email-verification state and challenges as needed for registration and email changes. Use additive migrations and back up the local database before upgrade. Preserve existing account identifiers and library ownership. Refresh legacy publication metadata without recreating saved-research relationships.
+
 ## 20. REST API
 
 Implement backend endpoints for:
@@ -705,6 +652,10 @@ Validate query parameters.
 Handle invalid PMIDs and malformed search queries.
 
 Provide generated API documentation.
+
+Include session inspection, email-code requests and verified account updates. Enforce CSRF on registration, login, logout and profile mutations. Profile-only updates must not require a password value. Failed account operations must return actionable field errors without exposing server internals.
+
+Registration and password-change endpoints must validate password_confirmation and the 8–128-character password rule. Login must continue accepting valid existing credentials. Retain compatible legacy name fields at the data/API layer without presenting them as required UI fields.
 
 ## 21. Caching and Performance
 
@@ -745,6 +696,8 @@ Handle:
 Display user-friendly messages.
 
 Do not expose sensitive server details in frontend error messages.
+
+Also handle expired sessions, profile validation failures, invalid or expired email codes, resend limits and email delivery failures. Recover the UI consistently after reauthentication and never display contradictory failure and success messages. A failed save must not be reported as persisted.
 
 ## 23. Accessibility and Responsive Design
 
@@ -840,17 +793,49 @@ The final independent benchmark test suite will be generated after the developme
 
 Do not confuse internal development tests with final benchmark results.
 
-## 25. GitHub Requirements
+### Account, upgrade and metadata regressions
 
-Target repository:
+- Profile save with empty password inputs
+- Optional profile fields and field-specific validation
+- Profile persistence after reload and re-login
+- Expired-session recovery and correct authenticated UI state
+- Isolation from other applications' local session cookies
+- Registration and email-change verification, expired/incorrect/reused codes and resend limits
+- Explicitly disabled verification and local test-mail behavior
+- Existing-account and saved-library preservation during migration
+- Author suffixes in article details, APA, RIS and other export formats
+- Refresh of legacy saved metadata without losing ownership or collection membership
 
-KateK77/pubmed-clone
+### Deployment and setup checks
 
-Create this repository as PRIVATE if it does not already exist.
+- Windows setup invoked from outside the repository directory
+- PostgreSQL configuration and additive migrations
+- Production frontend routes, static assets and API served from the intended origin
+- HTTPS/security-cookie configuration and private resource authorization
+- Clear separation of mocked regression checks from live PubMed retrieval and real email delivery checks
 
-Inspect any existing contents before modification.
+### Version 3 account acceptance
 
-Required project structure:
+- Password requirements visible before a registration attempt
+- Short/long password boundaries and acceptance of otherwise valid common or numeric-only passwords
+- Missing/mismatched confirmation in browser and API
+- Failed password change leaves the existing password usable
+- Ordinary login without confirmation, including previously registered accounts
+- No First name/Last name controls or forced profile-completion step
+- Successful registration/sign-in goes directly to Search
+- Safe return to an internal research page with preserved URL state
+- Rejection of external or unsupported return destinations
+- Same-user email-draft restoration and different-user draft isolation
+
+## 25. GitHub and Deployment Requirements
+
+Use the existing repository:
+
+https://github.com/KateK77/pubmed-clone
+
+Inspect existing contents before modification. Preserve unrelated files, users' work, repository history and earlier version tags.
+
+Maintain this project structure:
 
 - frontend/
 - backend/
@@ -864,35 +849,26 @@ Required project structure:
 - .env.example
 - .gitignore
 
-Create:
+Save this complete version-specific description at experiments/round-03/description.md. Store verification results and release metadata separately in that directory.
 
-experiments/round-01/description.md
-experiments/round-01/results.md
-experiments/round-01/metadata.json
+Record the version, date, implementation commit, available model identifier, test commands, actual results and known limitations. Create and push the v3.0.0-r3 release tag without moving previous tags.
 
-Save the full original instructions in description.md.
+Provide a public-hosting configuration that serves the React frontend and Django API, uses persistent PostgreSQL, keeps credentials server-side and supports HTTPS session/CSRF protection. Keep SQLite available for local development.
 
-Record:
+Visitors must be able to follow the repository's website link to register their own accounts and use saved research when the site is deployed. Publish only a verified working application URL; do not present a local address or a deployment-template button as an already hosted website.
 
-- Date
-- Model identifier, if available
-- Git commit SHA
-- Implemented features
-- Test commands
-- Test results
-- Known limitations
+Make email verification configurable and document the required server-side mail settings. Distinguish an implemented workflow from verified delivery to an external mailbox. Do not claim a deployment or delivery capability that has not actually been verified.
 
-Create Git tag:
+Push the completed source and documentation to GitHub and verify the remote commit. Report a concrete blocker if GitHub authentication or a required deployment service is unavailable.
 
-v0.1.0-r1
+### Public showcase
 
-Push source code, documentation, and tag to GitHub.
-
-Verify the remote commit.
-
-Do not overwrite unrelated files or existing repository history.
-
-If GitHub authentication is unavailable, report the blocker.
+- Publish the MedResearch website entry at https://medresearch-cljd.onrender.com and identify it clearly as the PubMed project.
+- Document intentionally public, ordinary demo accounts in a Username/Password table after verifying fresh login and session persistence on that site.
+- Keep public-site credentials distinct from the local development account and from accounts for other projects.
+- Explain that users sharing a demo login share its research data; provide personal registration for separate libraries.
+- Do not claim that shared-profile or password changes are blocked unless the application actually enforces that behavior.
+- For the showcase configuration without SMTP, explicitly state that registration works without email verification. Keep the configurable verification workflow available for deployments that enable it.
 
 ## 26. README Requirements
 
@@ -915,42 +891,32 @@ The README must include:
 
 A new developer should be able to clone and run the application using the documented instructions.
 
+Include upgrade/backup instructions, project-relative Windows startup commands, the distinction between local and public demo accounts, email-verification configuration, the verified live website link when deployed, and known hosting/API limits. Keep operational status and verification reports separate from the product requirements.
+
 ## 27. Final Deliverables
 
-At the end of Round 1, provide:
+Deliver the complete MedResearch 3.0 application with:
 
-1. Completed feature checklist
-2. Application architecture
-3. GitHub repository URL
-4. Commit SHA
-5. Git tag
-6. Installation instructions
-7. Exact startup commands
-8. Environment variables
-9. Demo account
-10. Test results
-11. Manual testing instructions
-12. Known issues
-13. Missing or incomplete functionality
+1. Feature checklist and architecture
+2. GitHub repository URL and verified commit SHA
+3. Release tag v3.0.0-r3
+4. This complete version-specific description
+5. Installation, upgrade and exact startup commands
+6. Environment-variable and database configuration
+7. Clearly labelled demo-account instructions
+8. Actual automated and live-check results, reported separately
+9. Manual acceptance instructions
+10. Deployment configuration and verified public entry link when available
+11. Known issues, missing capabilities and unverified integrations
 
-Report results accurately.
+Report results accurately. Do not claim complete functionality without implementation and verification.
 
-Do not claim complete functionality without implementation and verification.
+## 28. Completion Criteria
 
-## 28. Execution Instructions
+Complete and verify version 3.0 across the full literature, account, collection, history and citation workflows in this document.
 
-Begin implementing immediately.
+Prioritize real PubMed data, correct metadata, dependable account persistence, clear registration/profile behavior and user-specific data access.
 
-Create the complete biomedical literature search platform.
+Preserve existing research data and prior releases. Run the relevant automated checks, keep live service checks separate, update the documentation, push the version to GitHub and report the actual outcome.
 
-Prioritize functional correctness, real PubMed data integration, and reliable search behavior.
-
-Do not divide the delivery into multiple development phases.
-
-Do not stop after producing a plan.
-
-Do not automatically start Round 2.
-
-After implementing, testing, documenting, and pushing Round 1, stop and wait for my feedback.
-
-**BEGIN ROUND 1: BUILD THE COMPLETE MEDRESEARCH APPLICATION.**
+Do not automatically start another development version or a paid independent benchmark.
